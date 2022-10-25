@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nom');
             $table->string('cognoms');
             $table->string('direccio');
-            $table->int('telefon');
+            $table->integer('telefon');
             $table->timestamps();
         });
     }
