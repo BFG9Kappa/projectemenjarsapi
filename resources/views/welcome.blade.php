@@ -1,7 +1,14 @@
 @extends('template')
 @section('content')
 
-<br>
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum harum, dolores deserunt est magnam exercitationem ex doloremque! Autem voluptatibus sint quae tempora, deleniti ea a debitis quia? Magni, deserunt est.
+<h4>Lorem ipsum</h4>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
 
 @endsection

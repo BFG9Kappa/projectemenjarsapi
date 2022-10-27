@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PlatController;
+use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ClientController;
 
 /*
@@ -19,6 +21,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Clients
+// Plats
+Route::get('/plats',[PlatController::class,'index']);
 
+Route::get('/plats/new',[PlatController::class,'create']);
+
+
+// Ingredients
+Route::get('/ingredients',[IngredientController::class,'index']);
+
+
+// Clients
 Route::get('/clients',[ClientController::class,'index']);
+
+
+// Comandes
