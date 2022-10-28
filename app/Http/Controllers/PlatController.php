@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Client;
+use App\Models\Plat;
 
-class ClientController extends Controller
+class PlatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
-        return view('clients.index', compact('clients'));
+        $plats = Plat::all();
+        return view('plats.index', compact('plats'));
     }
 
     /**
@@ -26,7 +26,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('plats.new');
     }
 
     /**
