@@ -26,7 +26,7 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        //
+        return view('ingredients.new');
     }
 
     /**

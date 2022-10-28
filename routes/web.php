@@ -23,12 +23,11 @@ Route::get('/', function () {
 
 // Plats
 Route::get('/plats',[PlatController::class,'index']);
-
 Route::get('/plats/new',[PlatController::class,'create']);
-
 
 // Ingredients
 Route::get('/ingredients',[IngredientController::class,'index']);
+Route::get('/ingredients/new',[IngredientController::class,'create']);
 
 
 // Clients
