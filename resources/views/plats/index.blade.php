@@ -2,6 +2,7 @@
 @section('content')
 
 <a href="/plats/new">Nou</a>
+<a class="btn btn-primary btn-sm" href="/plats/new">Nou</a>
 
 <div class="table-responsive">
   <table class="table table-striped">
@@ -10,7 +11,7 @@
         <th scope="col">Id</th>
         <th scope="col">Nom</th>
         <th scope="col">Preu</th>
-        <th scope="col" colspan="2">Operacions</th>
+        <th scope="col" colspan="3">Operacions</th>
       </tr>
     </thead>
     <tbody>
@@ -27,7 +28,12 @@
         </td>
         <td>
           <a class="btn btn-primary" href="#" role="button">Ingredients</a>
-          <a class="btn btn-primary" href="#" role="button">Modificar</a>
+        </td>
+        <td>
+          <a class="btn btn-primary" href="plats/update/{{ $plat -> id }}" role="button">Modificar</a>
+        </td>
+        <td>
+          <a class="btn btn-danger" href="/plats/delete/{{ $plat -> id }}" role="button">Esborrar</a>
         </td>
       </tr>
       @endforeach

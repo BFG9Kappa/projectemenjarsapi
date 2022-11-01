@@ -37,7 +37,13 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request -> validate(
+            [ 'nom' => 'required | min:3' ]
+        ); 
+        $ingredients = new Ingredient;
+        $ingredients -> nom = $request -> nom;
+        $ingredients -> save();
+        return redirect('/ingredients');
     }
 
     /**
@@ -59,7 +65,8 @@ class IngredientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ingredient = Ingredient::findOrFail($id);
+        return view('ingredients.update', compact('ingredient'));
     }
 
     /**
@@ -71,7 +78,13 @@ class IngredientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ingredient = Ingredient::findOrFail($id);
+        $request -> validate(
+            [ 'nom' => 'required | min:3' ]
+        ); 
+        $ingredient -> nom = $request -> nom;
+        $ingredient -> save();
+        return redirect('/ingredients');
     }
 
     /**
@@ -82,6 +95,8 @@ class IngredientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ingredient = Ingredient::findOrFail($id);
+        $ingredient -> delete();
+        return redirect('/ingredients');
     }
 }

@@ -24,11 +24,18 @@ Route::get('/', function () {
 // Plats
 Route::get('/plats',[PlatController::class,'index']);
 Route::get('/plats/new',[PlatController::class,'create']);
+Route::post('/plats/save',[PlatController::class,'store']);
+Route::get('/plats/update/{id}',[PlatController::class,'edit']);
+Route::post('/plats/update/{id}',[PlatController::class,'update']);
+Route::get('/plats/delete/{id}',[PlatController::class,'destroy']);
 
 // Ingredients
 Route::get('/ingredients',[IngredientController::class,'index']);
 Route::get('/ingredients/new',[IngredientController::class,'create']);
-
+Route::post('/ingredients/save',[IngredientController::class,'store']);
+Route::get('/ingredients/update/{id}',[IngredientController::class,'edit']);
+Route::post('/ingredients/update/{id}',[IngredientController::class,'update']); 
+Route::get('/ingredients/delete/{id}',[IngredientController::class,'destroy']);
 
 // Clients
 Route::get('/clients',[ClientController::class,'index']);
