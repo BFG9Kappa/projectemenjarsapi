@@ -16,12 +16,12 @@ class PlatSeeder extends Seeder
     public function run()
     {
         $plats = [
-            [                
+            [
                 //'Id'  => 111,
                 'nom' => "Macarrons amb tomaquet",
                 'preu' => 8.45,
             ],
-            [                
+            [
                 //'Id'  => 112,
                 'nom' => "Mandonguilles",
                 'preu' => 12,
