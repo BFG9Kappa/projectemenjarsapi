@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlatController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ComandaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +38,8 @@ Route::get('/ingredients/update/{id}',[IngredientController::class,'edit']);
 Route::post('/ingredients/update/{id}',[IngredientController::class,'update']); 
 Route::get('/ingredients/delete/{id}',[IngredientController::class,'destroy']);
 
+// Comandes
+Route::get('/comandes',[ComandaController::class,'index']);
+
 // Clients
 Route::get('/clients',[ClientController::class,'index']);
-
-
-// Comandes
