@@ -41,6 +41,6 @@
   </table>
 </div>
 
-<!-- Afegir paginacio -->
+{{ $plats -> links('pagination::bootstrap-4') }}
 
 @endsection

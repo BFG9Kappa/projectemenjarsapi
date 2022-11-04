@@ -34,4 +34,6 @@
   </table>
 </div>
 
+{{ $ingredients -> links('pagination::bootstrap-4') }}
+
 @endsection
