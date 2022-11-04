@@ -27,7 +27,7 @@
           <li class="nav-item active">
             <a class="nav-link" href="{{ url('comandes') }}">Comandes</a>
           </li>
-          <li class="nav-item disable">
+          <li class="nav-item disabled">
             <a class="nav-link" href="{{ url('clients') }}">Clients (temp)</a>
           </li>
         </ul>
