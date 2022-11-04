@@ -15,7 +15,8 @@ class PlatController extends Controller
      */
     public function index()
     {
-        $plats = Plat::all();
+        //$plats = Plat::all();
+        $plats = Plat::paginate(5);
         return view('plats.index', compact('plats'));
     }
 
@@ -81,7 +82,16 @@ class PlatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $plat = Plat::findOrFail($id);
+        /*
+        $request -> validate(
+            [ 'nom' => 'required | min:3' ]
+        );
+        */ 
+        $plat -> nom = $request -> nom;
+        $plat -> preu = $request -> preu;
+        $plat -> save();
+        return redirect('/plats');
     }
 
     /**

@@ -15,7 +15,8 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        $ingredients = Ingredient::all();
+        //$ingredients = Ingredient::all();
+        $ingredients = Ingredient::paginate(5);
         return view('ingredients.index', compact('ingredients'));
     }
 

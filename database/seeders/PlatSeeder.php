@@ -23,7 +23,7 @@ class PlatSeeder extends Seeder
             ],
             [
                 //'Id'  => 112,
-                'nom' => "Mandonguilles",
+                'nom' => "Mandonguilles amb salsa",
                 'preu' => 12,
             ],
             [ 
