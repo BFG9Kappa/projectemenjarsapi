@@ -17,25 +17,23 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="{{ url('plats') }}">Plats</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="{{ url('ingredients') }}">Ingredients</a>
           </li>
-          <li class="nav-item disabled">
-            <a class="nav-link" href="#">Comandes</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ url('comandes') }}">Comandes</a>
           </li>
           <li class="nav-item disabled">
             <a class="nav-link" href="{{ url('clients') }}">Clients (temp)</a>
           </li>
-          <!--
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          -->
         </ul>
+        <span class="navbar-text">
+          <a href="#">Login</a>
+        </span>
       </div>
     </nav>
     <br/>
