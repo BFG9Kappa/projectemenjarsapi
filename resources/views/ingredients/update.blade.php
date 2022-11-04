@@ -1,16 +1,12 @@
 @extends('template')
 @section('content')
 
-<form method="POST" action="/plats/save">
+<form method="POST" action="/ingredients/update/{{ $ingredient -> id}}">
 @csrf
-<h4>Afegir plat</h4>
+<h4>Modificar ingredient</h4>
   <div class="form-group">
     <label for="inputNom">Nom</label>
-    <input type="text" class="form-control" id="inputNom" name="nom">
-  </div>
-  <div class="form-group">
-	<label for="inputPreu">Preu</label>
-	<input type="text" class="form-control" id="inputPreu" name="preu">
+    <input type="text" class="form-control" id="inputNom" name="nom" value="{{ old('nom', $ingredient -> nom) }}">
   </div>
   <input class="btn btn-primary" type="submit" value="Guardar">
 </form>

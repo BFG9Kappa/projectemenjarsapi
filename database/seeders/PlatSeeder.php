@@ -15,30 +15,35 @@ class PlatSeeder extends Seeder
      */
     public function run()
     {
-        $plats =[
-                    [                
-                        ‘Id’  => 111,
-                        ‘Nom’ => "Mandonguilles",
-                        ‘Preu’ => 12,
-                    ],
-                    [ 
-                        ‘Id’  => 112,
-                        ‘Nom’ => "Escudella",
-                        ‘Preu’ => 15,
-                    ],
-                    [
-                        ‘Id’  => 113,
-                        ‘Nom’ => "Bacallà a la romana",
-                        ‘Preu’ => 16,
-                    ],
-                    [
-                        ‘Id’  => 114,
-                        ‘Nom’ => "Meló amb pernil",
-                        ‘Preu’ => 14,
-                    ],
-                ];
-
-            Plat::insert($plats);
+        $plats = [
+            [
+                //'Id'  => 111,
+                'nom' => "Macarrons amb tomaquet",
+                'preu' => 8.45,
+            ],
+            [
+                //'Id'  => 112,
+                'nom' => "Mandonguilles",
+                'preu' => 12,
+            ],
+            [ 
+                //'Id'  => 113,
+                'nom' => "Escudella",
+                'preu' => 15,
+            ],
+            [
+                //'Id'  => 114,
+                'nom' => "Bacallà a la romana",
+                'preu' => 16,
+            ],
+            [
+                //'Id'  => 115,
+                'nom' => "Meló amb pernil",
+                'preu' => 14,
+            ],
+        ];
+        
+        Plat::insert($plats);
 
     }
 }

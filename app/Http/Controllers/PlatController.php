@@ -37,7 +37,16 @@ class PlatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*
+        $request -> validate(
+            [ 'nom' => 'required | min:3' ]
+        );
+        */ 
+        $plats = new Plat;
+        $plats -> nom = $request -> nom;
+        $plats -> preu = $request -> preu;
+        $plats -> save();
+        return redirect('/plats');
     }
 
     /**
@@ -59,7 +68,8 @@ class PlatController extends Controller
      */
     public function edit($id)
     {
-        //
+        $plat = Plat::findOrFail($id);
+        return view('plats.update', compact('plat'));
     }
 
     /**
@@ -82,6 +92,8 @@ class PlatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plat = Plat::findOrFail($id);
+        $plat -> delete();
+        return redirect('/plats');
     }
 }
