@@ -59,6 +59,7 @@ class PlatController extends Controller
     public function show($id)
     {
         //
+        return view('plats.show', compact('plat'));
     }
 
     /**
