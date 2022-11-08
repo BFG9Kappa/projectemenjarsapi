@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             IngredientSeeder::class,
         	PlatSeeder::class,
+            IngredientPlatSeeder::class,
          ]);
     }
 }
