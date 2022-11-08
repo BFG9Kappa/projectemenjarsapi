@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('ingredients_plats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ingredients_id')->constrained()->onDelete('cascade');
-            $table->foreignId('plats_id')->constrained()->onDelete('cascade');
-            // Quantitat??
-            $table->unique(['ingredients_id','plats_id']);
+            $table->foreignId('ingredient_id')->constrained()->onDelete('cascade');
+            $table->foreignId('plat_id')->constrained()->onDelete('cascade');
+            //$table->string('quantitat');
+            $table->string('quantitat')->default("");
+            $table->unique(['ingredient_id','plat_id']);
             $table->timestamps();
         });
     }
