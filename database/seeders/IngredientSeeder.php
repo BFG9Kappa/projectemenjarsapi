@@ -24,21 +24,21 @@ class IngredientSeeder extends Seeder
             ['nom' => 'All'],
             ['nom' => 'Tomaquet'],
             ['nom' => 'Macarrons'],
+            ['nom' => 'Brou'],
+            ['nom' => 'Pa torrat'],
+            ['nom' => 'Pebre negre'],
+            ['nom' => 'Pebre vermell'],
+            ['nom' => 'Ceba trinxada'],
+            ['nom' => 'Comi'],
+            ['nom' => 'Vi blanc'],
             ['nom' => 'Carn picada de vedella'],
             ['nom' => 'Carn picada de porc'],
             ['nom' => 'Ou'],
             ['nom' => 'Julivert'],
             ['nom' => 'Llet'],
-            ['nom' => 'Pebre negre'],
-            ['nom' => 'Pebre vermell'],
             ['nom' => 'Pa ratllat'],
             ['nom' => 'Farina'],
-            ['nom' => 'Pebrot verd'],
-            ['nom' => 'Vi blanc'],
-            ['nom' => 'Comi'],
-            ['nom' => 'Ceba trinxada'],
-            ['nom' => 'Pa torrat'],
-            ['nom' => 'Brou']
+            ['nom' => 'Pebrot verd']
         ];
 
         Ingredient::insert($ingredients);

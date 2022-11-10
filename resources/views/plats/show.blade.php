@@ -1,32 +1,20 @@
-@extends('plantilla')
+@extends('template')
 @section('content')
 
-  
-<div>          
-	<a href="{{ route('plats.index') }}"> 
-		Tornar
-	</a>
-</div>
-
-<h2>Fitxa Plats</h2>
-
 <div>
-	<strong>Name:</strong>
-	{{ $plat->Nom }}
+	<strong>Plat:</strong>
+	{{ $plat->nom }}
 </div>
-
 <div>
-	<strong> Ingredients</strong>
-		<ul>
-			@foreach($plat->ingredients as $ingred)
-				<li>{{ $ingred->ingredient}}</li>
-			@endforeach
-		</ul>
-
-
-
+	<strong>Ingredients:</strong>
+	<ul>
+		@foreach($plat->ingredient as $ingredient)
+		<li>
+            {{ $ingredient->nom }}
+			{{ $ingredient->quantitat }}
+        </li>
+        @endforeach
+	</ul>
 </div>
-
-
 
 @endsection

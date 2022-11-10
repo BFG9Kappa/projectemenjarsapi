@@ -26,6 +26,7 @@ Route::get('/', function () {
 Route::get('/plats',[PlatController::class,'index']);
 Route::get('/plats/new',[PlatController::class,'create']);
 Route::post('/plats/save',[PlatController::class,'store']);
+Route::get('/plats/show/{id}',[PlatController::class,'show']);
 Route::get('/plats/update/{id}',[PlatController::class,'edit']);
 Route::post('/plats/update/{id}',[PlatController::class,'update']);
 Route::get('/plats/delete/{id}',[PlatController::class,'destroy']);
