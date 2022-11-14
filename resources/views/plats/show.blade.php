@@ -2,18 +2,11 @@
 @section('content')
 
 <div>
-	<strong>Plat:</strong>
-	{{ $plat->nom }}
-</div>
-<div>
-	<strong>Ingredients:</strong>
-	<ul>
+	<ul class="list-group">
+		<li class="list-group-item active">{{ $plat->nom }}</li>
 		@foreach($plat->ingredient as $ingredient)
-		<li>
-            {{ $ingredient->nom }}
-			{{ $ingredient->quantitat }}
-        </li>
-        @endforeach
+			<li class="list-group-item">{{ $ingredient->nom }}</li>
+		@endforeach
 	</ul>
 </div>
 
