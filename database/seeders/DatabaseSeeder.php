@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             IngredientSeeder::class,
         	PlatSeeder::class,
             IngredientPlatSeeder::class,
+            ClientSeeder::class,
          ]);
     }
 }
