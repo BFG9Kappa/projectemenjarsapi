@@ -58,7 +58,7 @@ class PlatController extends Controller
      */
     public function show($id)
     {
-        //
+        $plat = Plat::findOrFail($id);
         return view('plats.show', compact('plat'));
     }
 

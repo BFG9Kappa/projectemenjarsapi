@@ -27,7 +27,7 @@
           {{ $plat->preu }}€
         </td>
         <td>
-          <a class="btn btn-primary" href="#" role="button">Ingredients</a>
+          <a class="btn btn-primary" href="/plats/show/{{ $plat -> id }}" role="button">Ingredients</a>
         </td>
         <td>
           <a class="btn btn-primary" href="plats/update/{{ $plat -> id }}" role="button">Modificar</a>
