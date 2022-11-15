@@ -41,6 +41,7 @@ Route::get('/ingredients/delete/{id}',[IngredientController::class,'destroy']);
 
 // Comandes
 Route::get('/comandes',[ComandaController::class,'index']);
+Route::get('/comandes/new',[ComandaController::class,'create']);
 
 // Clients
 Route::get('/clients',[ClientController::class,'index']);
