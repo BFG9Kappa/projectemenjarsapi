@@ -1,7 +1,6 @@
 @extends('template')
 @section('content')
 
-<a href="/plats/new">Nou</a>
 <a class="btn btn-primary btn-sm" href="/plats/new">Nou</a>
 
 <div class="table-responsive">

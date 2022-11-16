@@ -15,7 +15,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::paginate(5);
         return view('clients.index', compact('clients'));
     }
 
@@ -26,7 +26,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('clients.new');
     }
 
     /**
@@ -37,7 +37,18 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*
+        $request -> validate(
+            [ 'nom' => 'required | min:3' ]
+        );
+        */ 
+        $clients = new Client;
+        $clients -> nom = $request -> nom;
+        $clients -> cognoms = $request -> cognoms;
+        $clients -> direccio = $request -> direccio;
+        $clients -> telefon = $request -> telefon;
+        $clients -> save();
+        return redirect('/clients');
     }
 
     /**
@@ -59,7 +70,8 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        return view('clients.update', compact('client'));
     }
 
     /**
@@ -71,7 +83,18 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $client = Client::findOrFail($id);
+        /*
+        $request -> validate(
+            [ 'nom' => 'required | min:3' ]
+        );
+        */
+        $client -> nom = $request -> nom;
+        $client -> cognoms = $request -> cognoms;
+        $client -> direccio = $request -> direccio;
+        $client -> telefon = $request -> telefon;
+        $client -> save();
+        return redirect('/clients');
     }
 
     /**
@@ -82,6 +105,8 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        $client -> delete();
+        return redirect('/clients');
     }
 }
