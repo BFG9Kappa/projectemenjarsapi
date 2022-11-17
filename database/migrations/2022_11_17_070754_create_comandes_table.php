@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('comandes', function (Blueprint $table) {
             $table->id();
-            $table->double('preu');
+            $table->string('nom'); // Victor majo cambia esto anda
             $table->timestamps();
         });
     }
