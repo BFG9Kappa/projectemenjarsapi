@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Comanda;
+
 class ComandaController extends Controller
 {
     /**
@@ -13,11 +15,8 @@ class ComandaController extends Controller
      */
     public function index()
     {
-        /*
-        $comandes = Comanda::all();
+        $comandes = Comanda::paginate(5);
         return view('comandes.index', compact('comandes'));
-        */
-        return view('comandes.index');
     }
 
     /**
@@ -27,7 +26,7 @@ class ComandaController extends Controller
      */
     public function create()
     {
-        //
+        return view('comandes.new');
     }
 
     /**
@@ -38,7 +37,11 @@ class ComandaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Afegir validacio
+        $comandes = new Comanda;
+        $comandes -> nom = $request -> nom;
+        $comandes -> save();
+        return redirect('/comandes');
     }
 
     /**

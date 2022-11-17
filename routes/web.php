@@ -41,6 +41,11 @@ Route::get('/ingredients/delete/{id}',[IngredientController::class,'destroy']);
 
 // Comandes
 Route::get('/comandes',[ComandaController::class,'index']);
+Route::get('/comandes/new',[ComandaController::class,'create']);
+Route::post('/comandes/save',[ComandaController::class,'store']);
+Route::get('/comandes/update/{id}',[ComandaController::class,'edit']);
+Route::post('/comandes/update/{id}',[ComandaController::class,'update']);
+Route::get('/comandes/delete/{id}',[ComandaController::class,'destroy']);
 
 // Clients
 Route::get('/clients',[ClientController::class,'index']);
