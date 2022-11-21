@@ -54,3 +54,10 @@ Route::post('/clients/save',[ClientController::class,'store']);
 Route::get('/clients/update/{id}',[ClientController::class,'edit']);
 Route::post('/clients/update/{id}',[ClientController::class,'update']);
 Route::get('/clients/delete/{id}',[ClientController::class,'destroy']);
+
+// Prova Ingredients - Plats
+
+
+Route::get('/superheroes/{superhero}/superpowers', [App\Http\Controllers\SuperheroController::class, 'editSuperpowers'])->name('superheroes.editsuperpowers');
+Route::post('/superheroes/{superhero}/assignsuperpowers', [App\Http\Controllers\SuperheroController::class, 'attachSuperpowers'])->name('superheroes.assignsuperpowers');
+Route::post('/superheroes/{superhero}/detachsuperpowers', [App\Http\Controllers\SuperheroController::class, 'detachSuperpowers'])->name('superheroes.detachsuperpowers');
