@@ -39,7 +39,9 @@ class ComandaController extends Controller
     {
         //Afegir validacio
         $comandes = new Comanda;
-        $comandes -> nom = $request -> nom;
+        $comandes -> id = $request -> id;
+        $comandes -> preu = $request -> preu;
+        $comandes -> estat = $request -> estat;
         $comandes -> save();
         return redirect('/comandes');
     }
@@ -63,7 +65,8 @@ class ComandaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comanda = Comanda::findOrFail($id);
+        return view('comandes.show', compact('comanda'));
     }
 
     /**
