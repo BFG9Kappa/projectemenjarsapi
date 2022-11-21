@@ -58,7 +58,17 @@ class IngredientPlatSeeder extends Seeder
             'quantitat' => ""
         ]);
         DB::table('ingredients_plats')->insert([
+            'ingredient_id' => 3,
+            'plat_id' => 2,
+            'quantitat' => "1 u"
+        ]);
+        DB::table('ingredients_plats')->insert([
             'ingredient_id' => 4,
+            'plat_id' => 2,
+            'quantitat' => "3 u"
+        ]);
+        DB::table('ingredients_plats')->insert([
+            'ingredient_id' => 5,
             'plat_id' => 2,
             'quantitat' => "3 u"
         ]);
@@ -86,17 +96,52 @@ class IngredientPlatSeeder extends Seeder
         DB::table('ingredients_plats')->insert([
             'ingredient_id' => 11,
             'plat_id' => 2,
-            'quantitat' => "1 u"
+            'quantitat' => "1 cullerada"
         ]);
         DB::table('ingredients_plats')->insert([
             'ingredient_id' => 12,
             'plat_id' => 2,
-            'quantitat' => "1 cullerada"
+            'quantitat' => "1 got"
         ]);
         DB::table('ingredients_plats')->insert([
             'ingredient_id' => 13,
             'plat_id' => 2,
-            'quantitat' => "1 got"
+            'quantitat' => "400 gr"
+        ]);
+        DB::table('ingredients_plats')->insert([
+            'ingredient_id' => 14,
+            'plat_id' => 2,
+            'quantitat' => "400 gr"
+        ]);
+        DB::table('ingredients_plats')->insert([
+            'ingredient_id' => 15,
+            'plat_id' => 2,
+            'quantitat' => "3 u"
+        ]);
+        DB::table('ingredients_plats')->insert([
+            'ingredient_id' => 16,
+            'plat_id' => 2,
+            'quantitat' => ""
+        ]);
+        DB::table('ingredients_plats')->insert([
+            'ingredient_id' => 17,
+            'plat_id' => 2,
+            'quantitat' => ""
+        ]);
+        DB::table('ingredients_plats')->insert([
+            'ingredient_id' => 18,
+            'plat_id' => 2,
+            'quantitat' => ""
+        ]);
+        DB::table('ingredients_plats')->insert([
+            'ingredient_id' => 19,
+            'plat_id' => 2,
+            'quantitat' => ""
+        ]);
+        DB::table('ingredients_plats')->insert([
+            'ingredient_id' => 20,
+            'plat_id' => 2,
+            'quantitat' => "1 u"
         ]);
     }
 }
