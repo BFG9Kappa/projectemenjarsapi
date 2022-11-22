@@ -56,8 +56,11 @@ Route::post('/clients/update/{id}',[ClientController::class,'update']);
 Route::get('/clients/delete/{id}',[ClientController::class,'destroy']);
 
 // Prova Ingredients - Plats
-
-
+// Per implementar!
 Route::get('/superheroes/{superhero}/superpowers', [App\Http\Controllers\SuperheroController::class, 'editSuperpowers'])->name('superheroes.editsuperpowers');
 Route::post('/superheroes/{superhero}/assignsuperpowers', [App\Http\Controllers\SuperheroController::class, 'attachSuperpowers'])->name('superheroes.assignsuperpowers');
 Route::post('/superheroes/{superhero}/detachsuperpowers', [App\Http\Controllers\SuperheroController::class, 'detachSuperpowers'])->name('superheroes.detachsuperpowers');
+
+// Auth
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
