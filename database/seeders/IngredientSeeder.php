@@ -28,7 +28,6 @@ class IngredientSeeder extends Seeder
             ['nom' => 'Pa torrat'],
             ['nom' => 'Pebre negre'],
             ['nom' => 'Pebre vermell'],
-            ['nom' => 'Ceba trinxada'],
             ['nom' => 'Comi'],
             ['nom' => 'Vi blanc'],
             ['nom' => 'Carn picada de vedella'],
