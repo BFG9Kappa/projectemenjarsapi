@@ -32,7 +32,7 @@
           </li>
         </ul>
         <span class="navbar-text">
-          <a href="#">Login</a>
+          <a href="/login">Accedir</a>
         </span>
       </div>
     </nav>

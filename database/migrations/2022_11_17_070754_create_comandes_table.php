@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('comandes', function (Blueprint $table) {
             $table->id();
-            $table->integer('preu');
+            $table->double('preu');
             $table->string('estat');
             $table->timestamps();
         });

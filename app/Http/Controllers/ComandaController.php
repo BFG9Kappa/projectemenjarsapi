@@ -39,7 +39,6 @@ class ComandaController extends Controller
     {
         //Afegir validacio
         $comandes = new Comanda;
-        $comandes -> id = $request -> id;
         $comandes -> preu = $request -> preu;
         $comandes -> estat = $request -> estat;
         $comandes -> save();
@@ -66,7 +65,7 @@ class ComandaController extends Controller
     public function edit($id)
     {
         $comanda = Comanda::findOrFail($id);
-        return view('comandes.show', compact('comanda'));
+        return view('comandes.update', compact('comanda'));
     }
 
     /**
@@ -78,7 +77,15 @@ class ComandaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comanda = Comanda::findOrFail($id);
+        /*
+        $request -> validate(
+            [ 'nom' => 'required | min:3' ]
+        );
+        */ 
+        $comanda -> preu = $request -> preu;
+        $comanda -> save();
+        return redirect('/comandes');
     }
 
     /**
@@ -89,6 +96,8 @@ class ComandaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comanda = Comanda::findOrFail($id);
+        $comanda -> delete();
+        return redirect('/comandes');
     }
 }

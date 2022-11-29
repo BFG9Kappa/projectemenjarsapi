@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<a class="btn btn-primary btn-sm" href="/comandes/new">Nou</a>
+<a class="btn btn-primary btn-sm" href="/comandes/new">Nova</a>
 
 <div class="table-responsive">
   <table class="table table-striped">
@@ -17,10 +17,13 @@
       @foreach($comandes as $comanda)
       <tr>
         <td>
-          {{ $comanda->id }}
+          {{ $comanda -> id }}
         </td>
         <td>
-          {{ $comanda->preu }}
+          {{ $comanda -> preu }}
+        </td>
+        <td>
+          {{ $comanda -> estat }}
         </td>
         <td>
           <a class="btn btn-primary" href="/comandes/update/{{ $comanda -> id }}" role="button">Modificar</a>
@@ -34,5 +37,6 @@
   </table>
 </div>
 
+{{ $comandes -> links('pagination::bootstrap-4') }}
 
 @endsection
