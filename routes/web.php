@@ -56,9 +56,6 @@ Route::post('/clients/update/{id}',[ClientController::class,'update']);
 Route::get('/clients/delete/{id}',[ClientController::class,'destroy']);
 
 // Prova Ingredients - Plats
-Route::get('/',);
-Route::post('/',);
-Route::post('/',);
 
 // Per implementar!
 Route::get('/superheroes/{superhero}/superpowers', [App\Http\Controllers\SuperheroController::class, 'editSuperpowers'])->name('superheroes.editsuperpowers');
