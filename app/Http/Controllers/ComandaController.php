@@ -40,6 +40,7 @@ class ComandaController extends Controller
         //Afegir validacio
         $comandes = new Comanda;
         $comandes -> preu = $request -> preu;
+        $comandes -> estat = $request -> estat;
         $comandes -> save();
         return redirect('/comandes');
     }

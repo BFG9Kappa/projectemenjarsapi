@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('comandes', function (Blueprint $table) {
             $table->id();
             $table->double('preu');
-            //Afegir estat
+            $table->string('estat');
             $table->timestamps();
         });
     }

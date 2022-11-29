@@ -7,12 +7,20 @@
   <div class="form-group">
     <label for="inputPreu">Preu</label>
     <input type="text" class="form-control" id="inputPreu" name="preu">
-    <!--
-    Select Estat
-    Select Client
-    -->
+    <label for="inputEstat">Estat</label>
+    <input type="text" class="form-control" id="inputEstat" name="estat">
   </div>
   <input class="btn btn-primary" type="submit" value="Guardar">
 </form>
+
+@if($errors->any())
+	<ul>
+		@foreach($errors->all() as $error)
+		<li>
+			{{ $error }}
+		</li>
+		@endforeach
+	</ul>
+@endif
 
 @endsection
