@@ -27,7 +27,7 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        return view('ingredients.new');
+        return view('ingredients.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class IngredientController extends Controller
         $ingredients = new Ingredient;
         $ingredients -> nom = $request -> nom;
         $ingredients -> save();
-        return redirect('/ingredients');
+        return redirect()->route('ingredients.index')->with('success','Ingredient creat correctament.');
     }
 
     /**
@@ -53,7 +53,7 @@ class IngredientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Ingredient $ingredient)
     {
         //
     }
@@ -64,10 +64,9 @@ class IngredientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Ingredient $ingredient)
     {
-        $ingredient = Ingredient::findOrFail($id);
-        return view('ingredients.update', compact('ingredient'));
+        return view('ingredients.edit', compact('ingredient'));
     }
 
     /**
@@ -77,15 +76,14 @@ class IngredientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Ingredient $ingredient)
     {
-        $ingredient = Ingredient::findOrFail($id);
         $request -> validate(
             [ 'nom' => 'required | min:3' ]
         ); 
         $ingredient -> nom = $request -> nom;
         $ingredient -> save();
-        return redirect('/ingredients');
+        return redirect()->route('ingredients.index')->with('success','Ingredient actualitzat correctament');
     }
 
     /**
@@ -94,10 +92,13 @@ class IngredientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Ingredient $ingredient)
     {
-        $ingredient = Ingredient::findOrFail($id);
-        $ingredient -> delete();
-        return redirect('/ingredients');
+        try {
+            $result = $ingredient->delete();
+        } catch(\Illuminate\Database\QueryException $e) {
+            return redirect()->route('ingredients.index')->with('error','Error esborrant el ingredient');
+        }
+        return redirect()->route('ingredients.index')->with('success','Ingredient esborrat correctament.');
     }
 }

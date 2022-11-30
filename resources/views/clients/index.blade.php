@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<a class="btn btn-primary btn-sm" href="/clients/new">Nou</a>
+<a class="btn btn-primary btn-sm" href="/clients/create">Nou</a>
 
 <div class="table-responsive">
   <table class="table table-striped">
@@ -33,10 +33,10 @@
             {{ $client -> telefon }}
         </td>
         <td>
-          <a class="btn btn-primary" href="/clients/update/{{ $client -> id }}" role="button">Modificar</a>
+          <a class="btn btn-primary" href="/clients/edit/{{ $client -> id }}" role="button">Modificar</a>
         </td>
         <td>
-          <a class="btn btn-danger" href="/clients/delete/{{ $client -> id }}" role="button">Esborrar</a>
+          <a class="btn btn-danger" href="/clients/destroy/{{ $client -> id }}" role="button">Esborrar</a>
         </td>
       </tr>
       @endforeach

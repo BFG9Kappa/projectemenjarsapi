@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<a class="btn btn-primary btn-sm" href="/plats/new">Nou</a>
+<a class="btn btn-primary btn-sm" href="/plats/create">Nou</a>
 
 <div class="table-responsive">
   <table class="table table-striped">
@@ -29,10 +29,10 @@
           <a class="btn btn-primary" href="/plats/show/{{ $plat -> id }}" role="button">Ingredients</a>
         </td>
         <td>
-          <a class="btn btn-primary" href="plats/update/{{ $plat -> id }}" role="button">Modificar</a>
+          <a class="btn btn-primary" href="plats/edit/{{ $plat -> id }}" role="button">Modificar</a>
         </td>
         <td>
-          <a class="btn btn-danger" href="/plats/delete/{{ $plat -> id }}" role="button">Esborrar</a>
+          <a class="btn btn-danger" href="/plats/destroy/{{ $plat -> id }}" role="button">Esborrar</a>
         </td>
       </tr>
       @endforeach

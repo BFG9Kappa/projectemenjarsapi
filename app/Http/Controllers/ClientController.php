@@ -26,7 +26,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('clients.new');
+        return view('clients.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class ClientController extends Controller
         $clients -> direccio = $request -> direccio;
         $clients -> telefon = $request -> telefon;
         $clients -> save();
-        return redirect('/clients');
+        return redirect()->route('clients.index')->with('success','Client creat correctament.');
     }
 
     /**
@@ -57,7 +57,7 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Client $client)
     {
         //
     }
@@ -68,10 +68,9 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        $client = Client::findOrFail($id);
-        return view('clients.update', compact('client'));
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -81,9 +80,8 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Client $client)
     {
-        $client = Client::findOrFail($id);
         /*
         $request -> validate(
             [ 'nom' => 'required | min:3' ]
@@ -94,7 +92,7 @@ class ClientController extends Controller
         $client -> direccio = $request -> direccio;
         $client -> telefon = $request -> telefon;
         $client -> save();
-        return redirect('/clients');
+        return redirect()->route('clients.index')->with('success','Client actualitzat correctament.');
     }
 
     /**
@@ -103,10 +101,13 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        $client = Client::findOrFail($id);
-        $client -> delete();
-        return redirect('/clients');
+        try {
+            $result = $client->delete();
+        } catch(\Illuminate\Database\QueryException $e) {
+            return redirect()->route('clients.index')->with('error','Error esborrant el client.');
+        }
+        return redirect()->route('clients.index')->with('success','Client esborrat correctament.');
     }
 }

@@ -26,7 +26,7 @@ class ComandaController extends Controller
      */
     public function create()
     {
-        return view('comandes.new');
+        return view('comandes.create');
     }
 
     /**
@@ -42,7 +42,7 @@ class ComandaController extends Controller
         $comandes -> preu = $request -> preu;
         $comandes -> estat = $request -> estat;
         $comandes -> save();
-        return redirect('/comandes');
+        return redirect()->route('comandes.index')->with('success','Comanda creada correctament.');
     }
 
     /**
@@ -51,7 +51,7 @@ class ComandaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Comanda $comanda)
     {
         //
     }
@@ -62,10 +62,9 @@ class ComandaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comanda $comanda)
     {
-        $comanda = Comanda::findOrFail($id);
-        return view('comandes.update', compact('comanda'));
+        return view('comandes.edit', compact('comanda'));
     }
 
     /**
@@ -75,17 +74,17 @@ class ComandaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comanda $comanda)
     {
-        $comanda = Comanda::findOrFail($id);
         /*
         $request -> validate(
             [ 'nom' => 'required | min:3' ]
         );
         */ 
         $comanda -> preu = $request -> preu;
+        $comanda -> estat = $request -> estat;
         $comanda -> save();
-        return redirect('/comandes');
+        return redirect()->route('comandes.index')->with('success','Comanda actualitzada correctament.');
     }
 
     /**
@@ -94,10 +93,13 @@ class ComandaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comanda $comanda)
     {
-        $comanda = Comanda::findOrFail($id);
-        $comanda -> delete();
-        return redirect('/comandes');
+        try {
+            $result = $comanda->delete();
+        } catch(\Illuminate\Database\QueryException $e) {
+            return redirect()->route('comandes.index')->with('error','Error esborrant la comanda.');
+        }
+        return redirect()->route('comandes.index')->with('success','Comanda esborrada correctament.');
     }
 }
