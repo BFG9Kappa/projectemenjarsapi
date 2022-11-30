@@ -9,7 +9,8 @@ class Ingredient extends Model
 {
     use HasFactory;
 
-    public function plats() { // La taula no te el nom correcte, tindrie que ser en singular.
+    public function plats()
+    { // La taula no te el nom correcte, tindrie que ser en singular.
         return $this->belongsToMany(
             Plat::class,
             'ingredients_plats');

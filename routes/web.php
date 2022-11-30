@@ -22,6 +22,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Auth
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 // Plats
 Route::get('/plats', [App\Http\Controllers\PlatController::class, 'index'])->name('plats.index');
 Route::get('/plats/create', [App\Http\Controllers\PlatController::class, 'create'])->name('plats.create');
@@ -58,11 +62,12 @@ Route::get('/clients/destroy/{client}', [App\Http\Controllers\ClientController::
 
 // Prova Ingredients - Plats
 Route::get('/plats/{plat}/ingredients', [App\Http\Controllers\PlatController::class, 'editIngredients'])->name('plats.editingredients');
-// Per implementar!
-Route::get('/superheroes/{superhero}/superpowers', [App\Http\Controllers\SuperheroController::class, 'editSuperpowers'])->name('superheroes.editsuperpowers');
-Route::post('/superheroes/{superhero}/assignsuperpowers', [App\Http\Controllers\SuperheroController::class, 'attachSuperpowers'])->name('superheroes.assignsuperpowers');
-Route::post('/superheroes/{superhero}/detachsuperpowers', [App\Http\Controllers\SuperheroController::class, 'detachSuperpowers'])->name('superheroes.detachsuperpowers');
+Route::post('/plats/{plat}/assigningredients', [App\Http\Controllers\PlatController::class, 'attachIngredients'])->name('superheroes.assigningredients');
+Route::post('/plats/{plat}/detachingredients', [App\Http\Controllers\PlatController::class, 'detachIngredients'])->name('superheroes.detachingredients');
 
-// Auth
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/*
+Route::group(['middleware'=>['auth','role:admin']], function() {
+    
+});
+*/

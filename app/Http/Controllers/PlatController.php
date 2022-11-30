@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Plat;
+use App\Models\Ingredient;
 
 class PlatController extends Controller
 {
@@ -112,4 +113,39 @@ class PlatController extends Controller
         }
         return redirect()->route('plats.index')->with('success','Plat esborrat correctament.');
     }
+
+    public function editIngredients(Plat $plat)
+    {
+        $arrayId = $plat->ingredients->pluck('id');
+        $ingredients = Ingredient::whereNotIn('id',$arrayId)->get();
+        return view('plats.showIngredients',compact('plat','ingredients'));
+    }
+
+    public function attachIngredients(Request $request, Plat $plat)
+    {
+        /*
+        $request->validate([
+            'ingredients' => 'exists:ingredients,id',                       
+        ]);
+       $plat->ingredients()->attach($request->ingredients);
+       return redirect()->route('plats.editingredients',$plat->id)
+                        ->with('success','Ingredients assignats correctament');
+        */
+    }
+
+    public function detachIngredients(Request $request, Plat $plat)
+    {
+        /*
+        $request->validate([
+            'powers' => 'exists:superpowers,id',                       
+        ]);
+        // Una llista buida dins detach 
+        // elimina tots els superpoders!
+        if ($request->has('powers'))
+            $superhero->superpowers()->detach($request->powers);
+        return redirect()->route('superheroes.editsuperpowers',$superhero->id)
+                        ->with('success','Superpoders extrets correctament');
+        */
+    }
+
 }

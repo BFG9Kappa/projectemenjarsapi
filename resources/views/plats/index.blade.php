@@ -10,7 +10,7 @@
         <th scope="col">Id</th>
         <th scope="col">Nom</th>
         <th scope="col">Preu</th>
-        <th scope="col" colspan="3">Operacions</th>
+        <th scope="col" colspan="4">Operacions</th>
       </tr>
     </thead>
     <tbody>
@@ -26,7 +26,10 @@
           {{ $plat->preu }}€
         </td>
         <td>
-          <a class="btn btn-primary" href="/plats/show/{{ $plat -> id }}" role="button">Ingredients</a>
+          <a class="btn btn-primary" href="/plats/show/{{ $plat -> id }}" role="button">Mostrar</a>
+        </td>
+        <td>
+          <a class="btn btn-primary" href="/plats/{{ $plat -> id }}/ingredients">Ingredients</a>
         </td>
         <td>
           <a class="btn btn-primary" href="plats/edit/{{ $plat -> id }}" role="button">Modificar</a>
