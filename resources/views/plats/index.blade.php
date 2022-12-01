@@ -29,7 +29,7 @@
           <a class="btn btn-primary" href="/plats/show/{{ $plat -> id }}" role="button">Mostrar</a>
         </td>
         <td>
-          <a class="btn btn-primary" href="/plats/{{ $plat -> id }}/ingredients">Ingredients</a>
+          <a class="btn btn-primary" href="/plats/{{ $plat -> id }}/ingredients" role="button">Ingredients</a>
         </td>
         <td>
           <a class="btn btn-primary" href="plats/edit/{{ $plat -> id }}" role="button">Modificar</a>

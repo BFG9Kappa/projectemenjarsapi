@@ -116,26 +116,29 @@ class PlatController extends Controller
 
     public function editIngredients(Plat $plat)
     {
+        // Per arreglar!!!
         $arrayId = $plat->ingredients->pluck('id');
-        $ingredients = Ingredient::whereNotIn('id',$arrayId)->get();
+        $ingredients = Ingredient::whereNotIn('id', $arrayId)->get();
         return view('plats.showIngredients',compact('plat','ingredients'));
+        
+        // Per veure la vista - no funcione ingredients!!
+        //return view('plats.showIngredients', compact('plat'));
     }
 
     public function attachIngredients(Request $request, Plat $plat)
     {
-        /*
+        // Revisar que estigui bé
         $request->validate([
             'ingredients' => 'exists:ingredients,id',                       
         ]);
        $plat->ingredients()->attach($request->ingredients);
        return redirect()->route('plats.editingredients',$plat->id)
                         ->with('success','Ingredients assignats correctament');
-        */
     }
 
     public function detachIngredients(Request $request, Plat $plat)
     {
-        /*
+        /* per implementar
         $request->validate([
             'powers' => 'exists:superpowers,id',                       
         ]);

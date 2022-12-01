@@ -62,8 +62,8 @@ Route::get('/clients/destroy/{client}', [App\Http\Controllers\ClientController::
 
 // Prova Ingredients - Plats
 Route::get('/plats/{plat}/ingredients', [App\Http\Controllers\PlatController::class, 'editIngredients'])->name('plats.editingredients');
-Route::post('/plats/{plat}/assigningredients', [App\Http\Controllers\PlatController::class, 'attachIngredients'])->name('superheroes.assigningredients');
-Route::post('/plats/{plat}/detachingredients', [App\Http\Controllers\PlatController::class, 'detachIngredients'])->name('superheroes.detachingredients');
+Route::post('/plats/{plat}/assigningredients', [App\Http\Controllers\PlatController::class, 'attachIngredients'])->name('plats.assigningredients');
+Route::post('/plats/{plat}/detachingredients', [App\Http\Controllers\PlatController::class, 'detachIngredients'])->name('plats.detachingredients');
 
 
 /*
