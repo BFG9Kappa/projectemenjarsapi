@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<form method="POST" action="/ingredients/save">
+<form method="POST" action="/ingredients/store">
 @csrf
 <h4>Afegir ingredient</h4>
   <div class="form-group">

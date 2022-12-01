@@ -23,39 +23,41 @@ Route::get('/', function () {
 });
 
 // Plats
-Route::get('/plats',[PlatController::class,'index']);
-Route::get('/plats/new',[PlatController::class,'create']);
-Route::post('/plats/save',[PlatController::class,'store']);
-Route::get('/plats/show/{id}',[PlatController::class,'show']);
-Route::get('/plats/update/{id}',[PlatController::class,'edit']);
-Route::post('/plats/update/{id}',[PlatController::class,'update']);
-Route::get('/plats/delete/{id}',[PlatController::class,'destroy']);
+Route::get('/plats', [App\Http\Controllers\PlatController::class, 'index'])->name('plats.index');
+Route::get('/plats/create', [App\Http\Controllers\PlatController::class, 'create'])->name('plats.create');
+Route::post('/plats/store', [App\Http\Controllers\PlatController::class, 'store'])->name('plats.store');
+Route::get('/plats/show/{plat}', [App\Http\Controllers\PlatController::class, 'show'])->name('plats.show');
+Route::get('/plats/edit/{plat}', [App\Http\Controllers\PlatController::class, 'edit'])->name('plats.edit');
+Route::post('/plats/update/{plat}', [App\Http\Controllers\PlatController::class, 'update'])->name('plats.update');
+Route::get('/plats/destroy/{plat}', [App\Http\Controllers\PlatController::class, 'destroy'])->name('plats.destroy');
 
 // Ingredients
-Route::get('/ingredients',[IngredientController::class,'index']);
-Route::get('/ingredients/new',[IngredientController::class,'create']);
-Route::post('/ingredients/save',[IngredientController::class,'store']);
-Route::get('/ingredients/update/{id}',[IngredientController::class,'edit']);
-Route::post('/ingredients/update/{id}',[IngredientController::class,'update']);
-Route::get('/ingredients/delete/{id}',[IngredientController::class,'destroy']);
+Route::get('/ingredients', [App\Http\Controllers\IngredientController::class, 'index'])->name('ingredients.index');
+Route::get('/ingredients/create', [App\Http\Controllers\IngredientController::class, 'create'])->name('ingredients.create');
+Route::post('/ingredients/store', [App\Http\Controllers\IngredientController::class, 'store'])->name('ingredients.store');
+Route::get('/ingredients/edit/{ingredient}', [App\Http\Controllers\IngredientController::class, 'edit'])->name('ingredients.edit');
+Route::post('/ingredients/update/{ingredient}', [App\Http\Controllers\IngredientController::class, 'update'])->name('ingredients.update');
+Route::get('/ingredients/destroy/{ingredient}', [App\Http\Controllers\IngredientController::class, 'destroy'])->name('ingredients.destroy');
 
 // Comandes
-Route::get('/comandes',[ComandaController::class,'index']);
-Route::get('/comandes/new',[ComandaController::class,'create']);
-Route::post('/comandes/save',[ComandaController::class,'store']);
-Route::get('/comandes/update/{id}',[ComandaController::class,'edit']);
-Route::post('/comandes/update/{id}',[ComandaController::class,'update']);
-Route::get('/comandes/delete/{id}',[ComandaController::class,'destroy']);
+Route::get('/comandes', [App\Http\Controllers\ComandaController::class, 'index'])->name('comandes.index');
+Route::get('/comandes/create', [App\Http\Controllers\ComandaController::class, 'create'])->name('comandes.create');
+Route::post('/comandes/store', [App\Http\Controllers\ComandaController::class, 'store'])->name('comandes.store');
+Route::get('/comandes/edit/{comanda}', [App\Http\Controllers\ComandaController::class, 'edit'])->name('comandes.edit');
+Route::post('/comandes/update/{comanda}', [App\Http\Controllers\ComandaController::class, 'update'])->name('comandes.update');
+Route::get('/comandes/destroy/{comanda}', [App\Http\Controllers\ComandaController::class, 'destroy'])->name('comandes.destroy');
 
 // Clients
-Route::get('/clients',[ClientController::class,'index']);
-Route::get('/clients/new',[ClientController::class,'create']);
-Route::post('/clients/save',[ClientController::class,'store']);
-Route::get('/clients/update/{id}',[ClientController::class,'edit']);
-Route::post('/clients/update/{id}',[ClientController::class,'update']);
-Route::get('/clients/delete/{id}',[ClientController::class,'destroy']);
+Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index'])->name('clients.index');
+Route::get('/clients/create', [App\Http\Controllers\ClientController::class, 'create'])->name('clients.create');
+Route::post('/clients/store', [App\Http\Controllers\ClientController::class, 'store'])->name('clients.store');
+Route::get('/clients/show/{client}', [App\Http\Controllers\ClientController::class, 'show'])->name('clients.show');
+Route::get('/clients/edit/{client}', [App\Http\Controllers\ClientController::class, 'edit'])->name('clients.edit');
+Route::post('/clients/update/{client}', [App\Http\Controllers\ClientController::class, 'update'])->name('clients.update');
+Route::get('/clients/destroy/{client}', [App\Http\Controllers\ClientController::class, 'destroy'])->name('clients.destroy');
 
 // Prova Ingredients - Plats
+Route::get('/plats/{plat}/ingredients', [App\Http\Controllers\PlatController::class, 'editIngredients'])->name('plats.editingredients');
 // Per implementar!
 Route::get('/superheroes/{superhero}/superpowers', [App\Http\Controllers\SuperheroController::class, 'editSuperpowers'])->name('superheroes.editsuperpowers');
 Route::post('/superheroes/{superhero}/assignsuperpowers', [App\Http\Controllers\SuperheroController::class, 'attachSuperpowers'])->name('superheroes.assignsuperpowers');

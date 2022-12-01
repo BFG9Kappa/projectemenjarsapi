@@ -6,7 +6,9 @@
 <h4>Modificar comanda</h4>
   <div class="form-group">
     <label for="inputPreu">Preu</label>
-    <input type="text" class="form-control" id="inputPreu" name="preu" value="{{ old('prue', $comanda -> preu) }}">
+    <input type="text" class="form-control" id="inputPreu" name="preu" value="{{ old('preu', $comanda -> preu) }}">
+	<label for="inputEstat">Estat</label>
+    <input type="text" class="form-control" id="inputEstat" name="estat" value="{{ old('estat', $comanda -> estat) }}">
   </div>
   <input class="btn btn-primary" type="submit" value="Guardar">
 </form>

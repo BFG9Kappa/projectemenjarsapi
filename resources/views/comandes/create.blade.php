@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<form method="POST" action="/comandes/save">
+<form method="POST" action="/comandes/store">
 @csrf
 <h4>Afegir comanda</h4>
   <div class="form-group">

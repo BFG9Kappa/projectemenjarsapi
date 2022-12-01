@@ -27,7 +27,7 @@ class PlatController extends Controller
      */
     public function create()
     {
-        return view('plats.new');
+        return view('plats.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class PlatController extends Controller
         $plats -> nom = $request -> nom;
         $plats -> preu = $request -> preu;
         $plats -> save();
-        return redirect('/plats');
+        return redirect()->route('plats.index')->with('success','Plat creat correctament.');
     }
 
     /**
@@ -56,9 +56,8 @@ class PlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Plat $plat)
     {
-        $plat = Plat::findOrFail($id);
         return view('plats.show', compact('plat'));
     }
 
@@ -68,10 +67,9 @@ class PlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Plat $plat)
     {
-        $plat = Plat::findOrFail($id);
-        return view('plats.update', compact('plat'));
+        return view('plats.edit', compact('plat'));
     }
 
     /**
@@ -81,9 +79,8 @@ class PlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Plat $plat)
     {
-        $plat = Plat::findOrFail($id);
         /*
         $request -> validate(
             [ 'nom' => 'required | min:3' ]
@@ -92,7 +89,7 @@ class PlatController extends Controller
         $plat -> nom = $request -> nom;
         $plat -> preu = $request -> preu;
         $plat -> save();
-        return redirect('/plats');
+        return redirect()->route('plats.index')->with('success','Plat actualitzat correctament.');
     }
 
     /**
@@ -101,10 +98,18 @@ class PlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Plat $plat)
     {
+        /* Metode vell
         $plat = Plat::findOrFail($id);
         $plat -> delete();
         return redirect('/plats');
+        */
+        try {
+            $result = $plat->delete();
+        } catch(\Illuminate\Database\QueryException $e) {
+            return redirect()->route('plats.index')->with('error','Error esborrant el plat.');
+        }
+        return redirect()->route('plats.index')->with('success','Plat esborrat correctament.');
     }
 }
