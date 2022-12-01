@@ -1,6 +1,6 @@
 @extends('template')
 @section('content')
 
-prova
+prova show ing
 
 @endsection
