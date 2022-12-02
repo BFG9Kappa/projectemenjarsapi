@@ -36,23 +36,18 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::get('/plats/edit/{plat}', [App\Http\Controllers\PlatController::class, 'edit'])->name('plats.edit');
     Route::post('/plats/update/{plat}', [App\Http\Controllers\PlatController::class, 'update'])->name('plats.update');
     Route::get('/plats/destroy/{plat}', [App\Http\Controllers\PlatController::class, 'destroy'])->name('plats.destroy');
+    Route::get('/plats/{plat}/ingredients', [App\Http\Controllers\PlatController::class, 'editIngredients'])->name('plats.editingredients');
+    Route::post('/plats/{plat}/assigningredients', [App\Http\Controllers\PlatController::class, 'attachIngredients'])->name('plats.assigningredients');
+    Route::post('/plats/{plat}/detachingredients', [App\Http\Controllers\PlatController::class, 'detachIngredients'])->name('plats.detachingredients');
 });
-
-// Prova Ingredients - Plats - Afegir dintre del middle despres
-Route::get('/plats/{plat}/ingredients', [App\Http\Controllers\PlatController::class, 'editIngredients'])->name('plats.editingredients');
-Route::post('/plats/{plat}/assigningredients', [App\Http\Controllers\PlatController::class, 'attachIngredients'])->name('plats.assigningredients');
-Route::post('/plats/{plat}/detachingredients', [App\Http\Controllers\PlatController::class, 'detachIngredients'])->name('plats.detachingredients');
 
 // Ingredients
 Route::get('/ingredients', [App\Http\Controllers\IngredientController::class, 'index'])->name('ingredients.index');
-
-Route::group(['middleware'=>['auth','role:admin']], function() {
-    Route::get('/ingredients/create', [App\Http\Controllers\IngredientController::class, 'create'])->name('ingredients.create');
-    Route::post('/ingredients/store', [App\Http\Controllers\IngredientController::class, 'store'])->name('ingredients.store');
-    Route::get('/ingredients/edit/{ingredient}', [App\Http\Controllers\IngredientController::class, 'edit'])->name('ingredients.edit');
-    Route::post('/ingredients/update/{ingredient}', [App\Http\Controllers\IngredientController::class, 'update'])->name('ingredients.update');
-    Route::get('/ingredients/destroy/{ingredient}', [App\Http\Controllers\IngredientController::class, 'destroy'])->name('ingredients.destroy');
-});
+Route::get('/ingredients/create', [App\Http\Controllers\IngredientController::class, 'create'])->name('ingredients.create');
+Route::post('/ingredients/store', [App\Http\Controllers\IngredientController::class, 'store'])->name('ingredients.store');
+Route::get('/ingredients/edit/{ingredient}', [App\Http\Controllers\IngredientController::class, 'edit'])->name('ingredients.edit');
+Route::post('/ingredients/update/{ingredient}', [App\Http\Controllers\IngredientController::class, 'update'])->name('ingredients.update');
+Route::get('/ingredients/destroy/{ingredient}', [App\Http\Controllers\IngredientController::class, 'destroy'])->name('ingredients.destroy');
 
 // Comandes
 Route::get('/comandes', [App\Http\Controllers\ComandaController::class, 'index'])->name('comandes.index');
