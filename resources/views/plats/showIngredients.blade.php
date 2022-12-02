@@ -22,7 +22,7 @@
 	     	<div class="form-group">
                 <label>Ingredients afegits:</label>
                 <select multiple size="10" name="ingredients[]" class="form-control">
-	    		@foreach($plat->ingredients as $ingredient) {	
+	    		@foreach($plat->ingredient as $ingredient) {	
                     <option value="{{ $ingredient->id }}">
                         {{ $ingredient->nom }}                              
                     </option>

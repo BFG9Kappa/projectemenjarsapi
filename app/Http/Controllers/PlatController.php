@@ -116,39 +116,31 @@ class PlatController extends Controller
 
     public function editIngredients(Plat $plat)
     {
-        // Per arreglar!!!
-        $arrayId = $plat->ingredients->pluck('id');
+        $arrayId = $plat->ingredient->pluck('id');
         $ingredients = Ingredient::whereNotIn('id', $arrayId)->get();
         return view('plats.showIngredients',compact('plat','ingredients'));
-        
-        // Per veure la vista - no funcione ingredients!!
-        //return view('plats.showIngredients', compact('plat'));
     }
 
     public function attachIngredients(Request $request, Plat $plat)
     {
-        // Revisar que estigui bé
         $request->validate([
             'ingredients' => 'exists:ingredients,id',                       
         ]);
-       $plat->ingredients()->attach($request->ingredients);
-       return redirect()->route('plats.editingredients',$plat->id)
-                        ->with('success','Ingredients assignats correctament');
+       $plat->ingredient()->attach($request->ingredients);
+       return redirect()->route('plats.editingredients',$plat->id)->with('success','Ingredients afegits correctament');
     }
 
     public function detachIngredients(Request $request, Plat $plat)
     {
-        /* per implementar
         $request->validate([
-            'powers' => 'exists:superpowers,id',                       
+            'ingredients' => 'exists:ingredients,id',                       
         ]);
         // Una llista buida dins detach 
         // elimina tots els superpoders!
-        if ($request->has('powers'))
-            $superhero->superpowers()->detach($request->powers);
-        return redirect()->route('superheroes.editsuperpowers',$superhero->id)
+        if ($request->has('ingredients'))
+            $plat->ingredient()->detach($request->ingredients);
+        return redirect()->route('plats.editingredients',$plat->id)
                         ->with('success','Superpoders extrets correctament');
-        */
     }
 
 }
