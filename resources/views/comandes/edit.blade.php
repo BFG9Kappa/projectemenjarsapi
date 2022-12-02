@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<form method="POST" action="/comandes/update/{{ $comanda -> id}}">
+<form method="POST" action="{{ route('comandes.update', $comanda->id) }}">
 @csrf
 <h4>Modificar comanda</h4>
   <div class="form-group">

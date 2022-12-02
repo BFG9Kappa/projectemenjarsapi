@@ -30,7 +30,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/plats', [App\Http\Controllers\PlatController::class, 'index'])->name('plats.index');
 Route::get('/plats/show/{plat}', [App\Http\Controllers\PlatController::class, 'show'])->name('plats.show');
 
-Route::group(['middleware'=>['auth','role:admin']], function() {
+//Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::get('/plats/create', [App\Http\Controllers\PlatController::class, 'create'])->name('plats.create');
     Route::post('/plats/store', [App\Http\Controllers\PlatController::class, 'store'])->name('plats.store');
     Route::get('/plats/edit/{plat}', [App\Http\Controllers\PlatController::class, 'edit'])->name('plats.edit');
@@ -39,7 +39,7 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::get('/plats/{plat}/ingredients', [App\Http\Controllers\PlatController::class, 'editIngredients'])->name('plats.editingredients');
     Route::post('/plats/{plat}/assigningredients', [App\Http\Controllers\PlatController::class, 'attachIngredients'])->name('plats.assigningredients');
     Route::post('/plats/{plat}/detachingredients', [App\Http\Controllers\PlatController::class, 'detachIngredients'])->name('plats.detachingredients');
-});
+//});
 
 // Ingredients
 Route::get('/ingredients', [App\Http\Controllers\IngredientController::class, 'index'])->name('ingredients.index');

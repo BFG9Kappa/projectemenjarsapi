@@ -1,8 +1,7 @@
 @extends('template')
 @section('content')
 
-<a class="btn btn-primary btn-sm" href="/comandes/create">Nova</a>
-
+<a class="btn btn-primary btn-sm" href="{{ route('comandes.create') }}">Nova</a>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -26,10 +25,10 @@
           {{ $comanda -> estat }}
         </td>
         <td>
-          <a class="btn btn-primary" href="/comandes/edit/{{ $comanda -> id }}" role="button">Modificar</a>
+          <a class="btn btn-primary" href="{{ route('comandes.edit', $comanda->id) }}" role="button">Modificar</a>
         </td>
         <td>
-          <a class="btn btn-danger" href="/comandes/destroy/{{ $comanda -> id }}" role="button">Esborrar</a>
+          <a class="btn btn-danger" href="{{ route('comandes.destroy', $comanda->id) }}" role="button">Esborrar</a>
         </td>
       </tr>
       @endforeach

@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<form method="POST" action="/comandes/store">
+<form method="POST" action="{{ route('comandes.store') }}">
 @csrf
 <h4>Afegir comanda</h4>
   <div class="form-group">

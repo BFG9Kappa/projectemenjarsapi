@@ -4,7 +4,7 @@
 <div>    
     <h4>Ingredients de {{ $plat->nom }}</h4>
 </div>
-        
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -22,9 +22,9 @@
 	     	<div class="form-group">
                 <label>Ingredients afegits:</label>
                 <select multiple size="10" name="ingredients[]" class="form-control">
-	    		@foreach($plat->ingredient as $ingredient) {	
+	    		@foreach($plat->ingredient as $ingredient) {
                     <option value="{{ $ingredient->id }}">
-                        {{ $ingredient->nom }}                              
+                        {{ $ingredient->nom }}
                     </option>
 	            @endforeach
                 </select>

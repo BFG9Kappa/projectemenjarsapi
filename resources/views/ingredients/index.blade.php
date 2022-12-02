@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<a class="btn btn-primary btn-sm" href="/ingredients/create">Nou</a>
+<a class="btn btn-primary btn-sm" href="{{ route('ingredients.create') }}">Nou</a>
 
 <div class="table-responsive">
   <table class="table table-striped">
@@ -22,10 +22,10 @@
           {{ $ingredient->nom }}
         </td>
         <td>
-          <a class="btn btn-primary" href="/ingredients/edit/{{ $ingredient -> id }}" role="button">Modificar</a>
+          <a class="btn btn-primary" href="{{ route('ingredients.edit', $ingredient->id) }}" role="button">Modificar</a>
         </td>
         <td>
-          <a class="btn btn-danger" href="/ingredients/destroy/{{ $ingredient -> id }}" role="button">Esborrar</a>
+          <a class="btn btn-danger" href="{{ route('ingredients.destroy', $ingredient->id)}}" role="button">Esborrar</a>
         </td>
       </tr>
       @endforeach

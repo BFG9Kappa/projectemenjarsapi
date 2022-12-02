@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<form method="POST" action="/plats/store">
+<form method="POST" action="{{ route('plats.store') }}">
 @csrf
 <h4>Afegir plat</h4>
   <div class="form-group">
