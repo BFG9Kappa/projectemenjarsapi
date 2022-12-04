@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comandes', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->double('preu')->default(0);
-            $table->string('estat')->default("En proces");
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            // Aquest tipus permetria crear una clau forana
+            $table->unsignedBigInteger('role_id')->default(0);
         });
     }
 
@@ -29,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comandes');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

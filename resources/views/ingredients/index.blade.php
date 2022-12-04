@@ -1,7 +1,9 @@
 @extends('template')
 @section('content')
 
-<a class="btn btn-primary btn-sm" href="/ingredients/create">Nou</a>
+@if(Auth::check() && Auth::user()->is_admin)
+<a class="btn btn-primary btn-sm" href="{{ route('ingredients.create') }}">Nou</a>
+@endif
 
 <div class="table-responsive">
   <table class="table table-striped">
@@ -9,7 +11,9 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Nom</th>
+        @if(Auth::check() && Auth::user()->is_admin)
         <th scope="col" colspan="2">Operacions</th>
+        @endif
       </tr>
     </thead>
     <tbody>
@@ -21,12 +25,14 @@
         <td>
           {{ $ingredient->nom }}
         </td>
+        @if(Auth::check() && Auth::user()->is_admin)
         <td>
-          <a class="btn btn-primary" href="/ingredients/edit/{{ $ingredient -> id }}" role="button">Modificar</a>
+          <a class="btn btn-primary" href="{{ route('ingredients.edit', $ingredient->id) }}" role="button">Modificar</a>
         </td>
         <td>
-          <a class="btn btn-danger" href="/ingredients/destroy/{{ $ingredient -> id }}" role="button">Esborrar</a>
+          <a class="btn btn-danger" href="{{ route('ingredients.destroy', $ingredient->id)}}" role="button">Esborrar</a>
         </td>
+        @endif
       </tr>
       @endforeach
     </tbody>

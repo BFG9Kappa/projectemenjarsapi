@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<form method="POST" action="/plats/update/{{ $plat -> id}}">
+<form method="POST" action="{{ route('plats.update', $plat->id) }}">
 @csrf
 <h4>Modificar plat</h4>
   <div class="form-group">

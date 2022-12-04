@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Plat;
+use App\Models\Ingredient;
 
 class PlatController extends Controller
 {
@@ -112,4 +113,32 @@ class PlatController extends Controller
         }
         return redirect()->route('plats.index')->with('success','Plat esborrat correctament.');
     }
+
+    public function editIngredients(Plat $plat)
+    {
+        $arrayId = $plat->ingredient->pluck('id');
+        $ingredients = Ingredient::whereNotIn('id', $arrayId)->get();
+        return view('plats.showIngredients',compact('plat','ingredients'));
+    }
+
+    public function attachIngredients(Request $request, Plat $plat)
+    {
+        $request->validate([
+            'ingredients' => 'exists:ingredients,id',                       
+        ]);
+       $plat->ingredient()->attach($request->ingredients);
+       return redirect()->route('plats.editingredients',$plat->id)->with('success','Ingredients afegits correctament');
+    }
+
+    public function detachIngredients(Request $request, Plat $plat)
+    {
+        $request->validate([
+            'ingredients' => 'exists:ingredients,id',                       
+        ]);
+        if ($request->has('ingredients'))
+            $plat->ingredient()->detach($request->ingredients);
+        return redirect()->route('plats.editingredients',$plat->id)
+                        ->with('success','Ingredients trets correctament');
+    }
+
 }
