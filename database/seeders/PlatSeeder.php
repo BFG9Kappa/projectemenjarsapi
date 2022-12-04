@@ -17,27 +17,22 @@ class PlatSeeder extends Seeder
     {
         $plats = [
             [
-                //'Id'  => 111,
                 'nom' => "Macarrons amb tomaquet",
                 'preu' => 8.45,
             ],
             [
-                //'Id'  => 112,
                 'nom' => "Mandonguilles amb salsa",
                 'preu' => 12,
             ],
             [ 
-                //'Id'  => 113,
                 'nom' => "Escudella",
                 'preu' => 15,
             ],
             [
-                //'Id'  => 114,
                 'nom' => "Bacallà a la romana",
                 'preu' => 16,
             ],
             [
-                //'Id'  => 115,
                 'nom' => "Meló amb pernil",
                 'preu' => 14,
             ],

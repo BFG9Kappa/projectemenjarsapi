@@ -11,7 +11,7 @@
     <title>Menjars App</title>
   </head>
   <body>
-    <!-- navbar -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
       <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
@@ -27,14 +27,17 @@
               <a class="nav-link" href="{{ url('plats') }}">Plats</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="{{ url('ingredients') }}">Ingredients</a>
+                <a class="nav-link" href="{{ url('ingredients') }}">Ingredients</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="{{ url('comandes') }}">Comandes</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{{ url('clients') }}">Clients</a>
-            </li>
+            <!-- Si esta autenticat i es administrador -->
+            @if(Auth::check() && Auth::user()->is_admin)
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ url('clients') }}">Clients</a>
+              </li>
+            @endif
           </ul>
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ms-auto">

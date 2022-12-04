@@ -1,9 +1,8 @@
 @extends('template')
 @section('content')
 
-<div>    
-    <h4>Ingredients de {{ $plat->nom }}</h4>
-</div>
+<a class="btn btn-primary btn-sm" href="{{ route('plats.index') }}">Tornar</a>
+<h4>Ingredients de {{ $plat->nom }}</h4>
 
 @if ($errors->any())
     <div class="alert alert-danger">

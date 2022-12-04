@@ -9,4 +9,12 @@ class Comanda extends Model
 {
     public $table = "comandes"; // Perque si no agafe el plural de "comanda" com a "comandaS".
     use HasFactory;
+
+    public function plat()
+    {
+        return $this->belongsToMany(
+            Plat::class,
+         'comandes_plats');
+    }
+
 }

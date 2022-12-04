@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            // Aquest tipus permetria crear una clau forana.
-            $table->string('role')->default("normal");
+            // Aquest tipus permetria crear una clau forana
+            $table->unsignedBigInteger('role_id')->default(0);
         });
     }
 

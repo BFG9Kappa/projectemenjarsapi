@@ -7,9 +7,10 @@
     <thead>
       <tr>
         <th scope="col">Id</th>
+        <th scope="col">Nom</th>
         <th scope="col">Preu</th>
         <th scope="col">Estat</th>
-        <th scope="col" colspan="2">Operacions</th>
+        <th scope="col" colspan="4">Operacions</th>
       </tr>
     </thead>
     <tbody>
@@ -19,14 +20,25 @@
           {{ $comanda -> id }}
         </td>
         <td>
+          {{ $comanda -> nom }}
+        </td>
+        <td>
           {{ $comanda -> preu }}
         </td>
         <td>
           {{ $comanda -> estat }}
         </td>
         <td>
+          <a class="btn btn-primary" href="{{ route('comandes.show', $comanda->id) }}" role="button">Mostrar</a>
+        </td>
+        <td>
+          <a class="btn btn-primary" href="{{ route('comandes.editplats', $comanda->id) }}" role="button">Plats</a>
+        </td>
+        @if(Auth::check() && Auth::user()->is_admin)
+        <td>
           <a class="btn btn-primary" href="{{ route('comandes.edit', $comanda->id) }}" role="button">Modificar</a>
         </td>
+        @endif
         <td>
           <a class="btn btn-danger" href="{{ route('comandes.destroy', $comanda->id) }}" role="button">Esborrar</a>
         </td>

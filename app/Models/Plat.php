@@ -15,4 +15,12 @@ class Plat extends Model
        		Ingredient::class,
         	'ingredients_plats');
     }
+
+    public function comanda()
+    {
+   		return $this->belongsToMany(
+       		Comanda::class,
+        	'comandes_plats');
+    }
+
 }

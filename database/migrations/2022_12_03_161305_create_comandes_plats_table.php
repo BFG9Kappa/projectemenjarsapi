@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comandes', function (Blueprint $table) {
+        Schema::create('comandes_plats', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->double('preu')->default(0);
-            $table->string('estat')->default("En proces");
+            $table->foreignId('comanda_id')->on('comandes')->onDelete('cascade');
+            $table->foreignId('plat_id')->constrained()->onDelete('cascade');
+            //$table->double('preu_total');
+            $table->unique(['comanda_id','plat_id']);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comandes');
+        Schema::dropIfExists('comandes_plats');
     }
 };

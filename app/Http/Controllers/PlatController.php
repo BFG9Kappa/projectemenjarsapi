@@ -135,12 +135,10 @@ class PlatController extends Controller
         $request->validate([
             'ingredients' => 'exists:ingredients,id',                       
         ]);
-        // Una llista buida dins detach 
-        // elimina tots els superpoders!
         if ($request->has('ingredients'))
             $plat->ingredient()->detach($request->ingredients);
         return redirect()->route('plats.editingredients',$plat->id)
-                        ->with('success','Superpoders extrets correctament');
+                        ->with('success','Ingredients trets correctament');
     }
 
 }

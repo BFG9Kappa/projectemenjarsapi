@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Comanda;
+use App\Models\Plat;
 
 class ComandaController extends Controller
 {
@@ -39,8 +40,9 @@ class ComandaController extends Controller
     {
         //Afegir validacio
         $comandes = new Comanda;
-        $comandes -> preu = $request -> preu;
-        $comandes -> estat = $request -> estat;
+        $comandes -> nom = $request -> nom;
+        //$comandes -> preu = $request -> preu;
+        //$comandes -> estat = $request -> estat;
         $comandes -> save();
         return redirect()->route('comandes.index')->with('success','Comanda creada correctament.');
     }
@@ -53,7 +55,7 @@ class ComandaController extends Controller
      */
     public function show(Comanda $comanda)
     {
-        //
+        return view('comandes.show', compact('comanda'));
     }
 
     /**
@@ -80,7 +82,8 @@ class ComandaController extends Controller
         $request -> validate(
             [ 'nom' => 'required | min:3' ]
         );
-        */ 
+        */
+        $comanda -> nom = $request -> nom;
         $comanda -> preu = $request -> preu;
         $comanda -> estat = $request -> estat;
         $comanda -> save();
@@ -101,5 +104,31 @@ class ComandaController extends Controller
             return redirect()->route('comandes.index')->with('error','Error esborrant la comanda.');
         }
         return redirect()->route('comandes.index')->with('success','Comanda esborrada correctament.');
+    }
+
+    public function editPlats(Comanda $comanda)
+    {
+        $arrayId = $comanda->plat->pluck('id');
+        $plats = Plat::whereNotIn('id', $arrayId)->get();
+        return view('comandes.showPlats', compact('comanda','plats'));
+    }
+
+    public function attachPlats(Request $request, Comanda $comanda)
+    {
+        $request->validate([
+            'plats' => 'exists:plats,id',                       
+        ]);
+       $comanda->plat()->attach($request->plats);
+       return redirect()->route('comandes.editplats',$comanda->id)->with('success','Plats afegits correctament');
+    }
+
+    public function detachPlats(Request $request, Comanda $comanda)
+    {
+        $request->validate([
+            'plats' => 'exists:plats,id',                       
+        ]);
+        if ($request->has('plats'))
+            $comanda->plat()->detach($request->plats);
+        return redirect()->route('comandes.editplats',$comanda->id)->with('success','Plats trets correctament');
     }
 }

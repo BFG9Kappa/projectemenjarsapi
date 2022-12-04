@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         	PlatSeeder::class,
             IngredientPlatSeeder::class,
             ClientSeeder::class,
+            ComandaSeeder::class,
+            ComandaPlatSeeder::class,
          ]);
     }
 }
