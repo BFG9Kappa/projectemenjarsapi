@@ -71,7 +71,6 @@ Route::group(['middleware'=>['auth','is_admin']], function() {
     Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index'])->name('clients.index');
     Route::get('/clients/create', [App\Http\Controllers\ClientController::class, 'create'])->name('clients.create');
     Route::post('/clients/store', [App\Http\Controllers\ClientController::class, 'store'])->name('clients.store');
-    Route::get('/clients/show/{client}', [App\Http\Controllers\ClientController::class, 'show'])->name('clients.show');
     Route::get('/clients/edit/{client}', [App\Http\Controllers\ClientController::class, 'edit'])->name('clients.edit');
     Route::post('/clients/update/{client}', [App\Http\Controllers\ClientController::class, 'update'])->name('clients.update');
     Route::get('/clients/destroy/{client}', [App\Http\Controllers\ClientController::class, 'destroy'])->name('clients.destroy');
