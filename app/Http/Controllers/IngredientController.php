@@ -38,9 +38,9 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
-        $request -> validate(
-            [ 'nom' => 'required | min:3' ]
-        ); 
+        $request -> validate([
+            'nom' => 'required | min:3'
+        ]);
         $ingredients = new Ingredient;
         $ingredients -> nom = $request -> nom;
         $ingredients -> save();
@@ -78,9 +78,9 @@ class IngredientController extends Controller
      */
     public function update(Request $request, Ingredient $ingredient)
     {
-        $request -> validate(
-            [ 'nom' => 'required | min:3' ]
-        ); 
+        $request -> validate([
+            'nom' => 'required | min:3'
+        ]);
         $ingredient -> nom = $request -> nom;
         $ingredient -> save();
         return redirect()->route('ingredients.index')->with('success','Ingredient actualitzat correctament');

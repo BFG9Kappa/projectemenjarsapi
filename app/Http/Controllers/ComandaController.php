@@ -38,7 +38,9 @@ class ComandaController extends Controller
      */
     public function store(Request $request)
     {
-        //Afegir validacio
+        $request -> validate([
+            'nom' => 'required | min:3'
+        ]);
         $comandes = new Comanda;
         $comandes -> nom = $request -> nom;
         //$comandes -> preu = $request -> preu;
@@ -78,11 +80,10 @@ class ComandaController extends Controller
      */
     public function update(Request $request, Comanda $comanda)
     {
-        /*
-        $request -> validate(
-            [ 'nom' => 'required | min:3' ]
-        );
-        */
+        $request -> validate([
+            'nom' => 'required | min:3',
+            'preu' => 'required | numeric'
+        ]);
         $comanda -> nom = $request -> nom;
         $comanda -> preu = $request -> preu;
         $comanda -> estat = $request -> estat;

@@ -39,11 +39,10 @@ class PlatController extends Controller
      */
     public function store(Request $request)
     {
-        /*
-        $request -> validate(
-            [ 'nom' => 'required | min:3' ]
-        );
-        */ 
+        $request -> validate([
+            'nom' => 'required | min:3',
+            'preu' => 'required | numeric'
+        ]);
         $plats = new Plat;
         $plats -> nom = $request -> nom;
         $plats -> preu = $request -> preu;
@@ -82,11 +81,10 @@ class PlatController extends Controller
      */
     public function update(Request $request, Plat $plat)
     {
-        /*
-        $request -> validate(
-            [ 'nom' => 'required | min:3' ]
-        );
-        */ 
+        $request -> validate([
+            'nom' => 'required | min:3',
+            'preu' => 'required | numeric'
+        ]);
         $plat -> nom = $request -> nom;
         $plat -> preu = $request -> preu;
         $plat -> save();
