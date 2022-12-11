@@ -39,7 +39,7 @@ class ComandaController extends Controller
     public function store(Request $request)
     {
         $request -> validate([
-            'nom' => 'required | min:3'
+            'nom' => 'required | min:3 | max:20'
         ]);
         $comandes = new Comanda;
         $comandes -> nom = $request -> nom;
@@ -81,8 +81,8 @@ class ComandaController extends Controller
     public function update(Request $request, Comanda $comanda)
     {
         $request -> validate([
-            'nom' => 'required | min:3',
-            'preu' => 'required | numeric'
+            'nom' => 'required | min:3 | max:20',
+            'preu' => ['required', 'numeric', 'regex:/^\d{0,4}+(\.\d{1,2})?$/']
         ]);
         $comanda -> nom = $request -> nom;
         $comanda -> preu = $request -> preu;

@@ -38,10 +38,10 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $request -> validate([
-            'nom' => 'required | min:3',
-            'cognoms' => 'required | min:3',
-            'direccio' => 'required | min:3',
-            'telefon' => 'required | numeric | min:9'
+            'nom' => 'required | min:3 | max:50',
+            'cognoms' => 'required | min:3 | max:50',
+            'direccio' => 'required | min:3 | max:200',
+            'telefon' => 'required | numeric | digits_between:9,11'
         ]);
         $clients = new Client;
         $clients -> nom = $request -> nom;
@@ -84,10 +84,10 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
         $request -> validate([
-            'nom' => 'required | min:3',
-            'cognoms' => 'required | min:3',
-            'direccio' => 'required | min:3',
-            'telefon' => 'required | numeric | min:9'
+            'nom' => 'required | min:3 | max:50',
+            'cognoms' => 'required | min:3 | max:50',
+            'direccio' => 'required | min:3 | max:200',
+            'telefon' => 'required | numeric | digits_between:9,11'
         ]);
         $client -> nom = $request -> nom;
         $client -> cognoms = $request -> cognoms;

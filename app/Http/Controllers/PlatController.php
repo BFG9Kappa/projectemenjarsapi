@@ -40,8 +40,8 @@ class PlatController extends Controller
     public function store(Request $request)
     {
         $request -> validate([
-            'nom' => 'required | min:3',
-            'preu' => 'required | numeric'
+            'nom' => 'required | min:3 | max:50',
+            'preu' => ['required', 'numeric', 'regex:/^\d{0,4}+(\.\d{1,2})?$/']
         ]);
         $plats = new Plat;
         $plats -> nom = $request -> nom;
@@ -82,8 +82,8 @@ class PlatController extends Controller
     public function update(Request $request, Plat $plat)
     {
         $request -> validate([
-            'nom' => 'required | min:3',
-            'preu' => 'required | numeric'
+            'nom' => 'required | min:3 | max:50',
+            'preu' => ['required', 'numeric', 'regex:/^\d{0,4}+(\.\d{1,2})?$/']
         ]);
         $plat -> nom = $request -> nom;
         $plat -> preu = $request -> preu;

@@ -39,7 +39,7 @@ class IngredientController extends Controller
     public function store(Request $request)
     {
         $request -> validate([
-            'nom' => 'required | min:3'
+            'nom' => 'required | min:3 | max:30'
         ]);
         $ingredients = new Ingredient;
         $ingredients -> nom = $request -> nom;
@@ -79,7 +79,7 @@ class IngredientController extends Controller
     public function update(Request $request, Ingredient $ingredient)
     {
         $request -> validate([
-            'nom' => 'required | min:3'
+            'nom' => 'required | min:3 | max:30'
         ]);
         $ingredient -> nom = $request -> nom;
         $ingredient -> save();
