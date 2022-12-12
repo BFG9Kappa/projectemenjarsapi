@@ -1,14 +1,11 @@
 @extends('template')
 @section('content')
 
-<h4>Lorem ipsum</h4>
+<h4>Menjars APP</h4>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<p>
+    Aplicacio per la gestio de plats de un restaurant.
 </p>
+<img src="https://i.pinimg.com/564x/84/d1/fe/84d1feac80ae33993a30deedfc1d9e7b.jpg" alt="Meme rana" width="auto" height="auto">
 
 @endsection
