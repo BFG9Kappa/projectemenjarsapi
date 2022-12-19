@@ -25,9 +25,8 @@ class PlatsModuleTest extends TestCase
     /** @test */
     public function loads_plats_show_page()
     {
-        $response = $this->get('/plats/show');
-        $response->assertStatus(404);
-        //$response->assertOk();
+        $response = $this->get('/plats/show/1');
+        $response->assertStatus(200);
     }
 
 }
