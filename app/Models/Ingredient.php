@@ -9,6 +9,10 @@ class Ingredient extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nom'
+    ];
+
     public function plats()
     { // La taula no te el nom correcte, tindrie que ser en singular.
         return $this->belongsToMany(

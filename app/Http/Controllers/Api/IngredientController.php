@@ -44,7 +44,28 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make(
+            $input,
+            [
+                'nom' => 'required | min:3 | max:30'
+            ]
+        );
+        if($validator->fails()) {
+            $response = [
+                'success' => false,
+                'message' => "Error d'alta",
+                'data' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
+        $ingredient = Ingredient::create($input);
+        $response = [
+            'success' => false,
+            'message' => 'Alta correcta',
+            'data' => $ingredient,
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -89,6 +110,29 @@ class IngredientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ingredient = Ingredient::find($id);
+        if($ingredient == null){
+            $response = [
+                'success' => false,
+                'message' => 'Ingredient no recuperat',
+                'data' => [],
+            ];
+            return response()->json($response,404);
+        }
+        try {
+            $ingredient->delete();
+            $response = [
+                'success' => true,
+                'message' => 'Ingredient esborrat',
+                'data' => $ingredient,
+            ];
+            return response()->json($response,200);
+        } catch(\Excepetion $e) {
+            $response = [
+                'success' => false,
+                'message' => 'Error esborrant el ingredient',
+            ];
+            return response()->json($response,400);
+        }
     }
 }

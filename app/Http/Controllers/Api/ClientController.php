@@ -17,10 +17,10 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all(['id','nom']);
+        $clients = Client::all(['id', 'nom', 'cognoms', 'direccio', 'telefon']);
         $response = [
             'success' => true,
-            'message' => "Llistat de comandes recuperada",
+            'message' => "Llistat de clients recuperat",
             'data' => $clients,
         ];
         return response()->json($response, 200);
@@ -44,7 +44,31 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make(
+            $input,
+            [
+                'nom' => 'required | min:3 | max:50',
+                'cognoms' => 'required | min:3 | max:50',
+                'direccio' => 'required | min:3 | max:200',
+                'telefon' => 'required | numeric | digits_between:9,11'
+            ]
+        );
+        if($validator->fails()) {
+            $response = [
+                'success' => false,
+                'message' => "Error d'alta",
+                'data' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
+        $client = Client::create($input);
+        $response = [
+            'success' => false,
+            'message' => 'Alta correcta',
+            'data' => $client,
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -89,6 +113,29 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = Client::find($id);
+        if($client == null){
+            $response = [
+                'success' => false,
+                'message' => 'Client no recuperat',
+                'data' => [],
+            ];
+            return response()->json($response,404);
+        }
+        try {
+            $client->delete();
+            $response = [
+                'success' => true,
+                'message' => 'Client esborrat',
+                'data' => $client,
+            ];
+            return response()->json($response,200);
+        } catch(\Excepetion $e) {
+            $response = [
+                'success' => false,
+                'message' => 'Error esborrant el client',
+            ];
+            return response()->json($response,400);
+        }
     }
 }

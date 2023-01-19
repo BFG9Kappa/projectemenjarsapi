@@ -17,7 +17,7 @@ class PlatController extends Controller
      */
     public function index()
     {
-        $plats = Plat::all(['id','nom']);
+        $plats = Plat::all(['id', 'nom', 'preu']);
         $response = [
             'success' => true,
             'message' => "Llistat de plats recuperat",
@@ -44,7 +44,29 @@ class PlatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make(
+            $input,
+            [
+                'nom' => 'required | min:3 | max:50',
+                'preu' => ['required', 'numeric', 'regex:/^\d{0,4}+(\.\d{1,2})?$/'],
+            ]
+        );
+        if($validator->fails()) {
+            $response = [
+                'success' => false,
+                'message' => "Error d'alta",
+                'data' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
+        $plat = Plat::create($input);
+        $response = [
+            'success' => false,
+            'message' => 'Alta correcta',
+            'data' => $plat,
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -77,8 +99,41 @@ class PlatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    { // REVISAR ESTO!
+        $plat = Plat::find($id);
+        if($plat == null) {
+            $response = [
+                'success' => false,
+                'message' => 'Plat no trobat',
+                'data' => $validator->errors(),
+            ];
+            return response()->json($response,404);
+        }
+        $input = $request->all();
+        $validator = Validator::make(
+            $input,
+            [
+                'nom' => 'required | min:3 | max:50',
+                'preu' => ['required', 'numeric', 'regex:/^\d{0,4}+(\.\d{1,2})?$/'],
+            ]
+        );
+        if($validator->fails()) {
+            $response = [
+                'success' => false,
+                'message' => 'Error de validacio',
+                'data' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
+        $plat->nom = $input->nom;
+        $plat->preu = $input->preu;
+        $plat->save();
+        $response = [
+            'success' => true,
+            'message' => 'Plat actualitzat correctment',
+            'data' => $plat,
+        ];
+        return response()->json($response,200);
     }
 
     /**
@@ -89,6 +144,29 @@ class PlatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plat = Plat::find($id);
+        if($plat == null){
+            $response = [
+                'success' => false,
+                'message' => 'Plat no recuperat',
+                'data' => [],
+            ];
+            return response()->json($response,404);
+        }
+        try {
+            $plat->delete();
+            $response = [
+                'success' => true,
+                'message' => 'Plat esborrat',
+                'data' => $plat,
+            ];
+            return response()->json($response,200);
+        } catch(\Excepetion $e) {
+            $response = [
+                'success' => false,
+                'message' => 'Error esborrant el plat',
+            ];
+            return response()->json($response,400);
+        }
     }
 }

@@ -17,10 +17,10 @@ class ComandesController extends Controller
      */
     public function index()
     {
-        $comandes = Comanda::all(['id','nom']);
+        $comandes = Comanda::all(['id','nom', 'preu']);
         $response = [
             'success' => true,
-            'message' => "Llistat de comandes recuperades",
+            'message' => "Llistat de comandes recuperat",
             'data' => $comandes,
         ];
         return response()->json($response, 200);
@@ -44,7 +44,29 @@ class ComandesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make(
+            $input,
+            [
+                'nom' => 'required | min:3 | max:20',
+                //'preu' => 'required',
+            ]
+        );
+        if($validator->fails()) {
+            $response = [
+                'success' => false,
+                'message' => "Error d'alta",
+                'data' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
+        $comanda = Comanda::create($input);
+        $response = [
+            'success' => false,
+            'message' => 'Alta correcta',
+            'data' => $comanda,
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -55,7 +77,7 @@ class ComandesController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -89,6 +111,29 @@ class ComandesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comanda = Comanda::find($id);
+        if($comanda == null){
+            $response = [
+                'success' => false,
+                'message' => 'Comanda no recuperada',
+                'data' => [],
+            ];
+            return response()->json($response,404);
+        }
+        try {
+            $comanda->delete();
+            $response = [
+                'success' => true,
+                'message' => 'Comanda esborrada',
+                'data' => $comanda,
+            ];
+            return response()->json($response,200);
+        } catch(\Excepetion $e) {
+            $response = [
+                'success' => false,
+                'message' => 'Error esborrant la comanda',
+            ];
+            return response()->json($response,400);
+        }
     }
 }

@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Plat extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'nom', 'preu'
+    ];
 
     public function ingredient()
     {// La taula no te el nom correcte, tindrie que ser en singular.
