@@ -99,13 +99,13 @@ class PlatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { // REVISAR ESTO!
+    {
         $plat = Plat::find($id);
         if($plat == null) {
             $response = [
                 'success' => false,
-                'message' => 'Plat no trobat',
-                'data' => $validator->errors(),
+                'message' => 'Plat no recuperat',
+                'data' => [],
             ];
             return response()->json($response,404);
         }
@@ -114,7 +114,7 @@ class PlatController extends Controller
             $input,
             [
                 'nom' => 'required | min:3 | max:50',
-                'preu' => ['required', 'numeric', 'regex:/^\d{0,4}+(\.\d{1,2})?$/'],
+                'preu' => ['required', 'numeric', 'regex:/^\d{0,4}+(\.\d{1,2})?$/']
             ]
         );
         if($validator->fails()) {
@@ -125,12 +125,12 @@ class PlatController extends Controller
             ];
             return response()->json($response, 400);
         }
-        $plat->nom = $input->nom;
-        $plat->preu = $input->preu;
+        $plat->nom = $input['nom'];
+        $plat->preu = $input['preu'];
         $plat->save();
         $response = [
             'success' => true,
-            'message' => 'Plat actualitzat correctment',
+            'message' => 'Plat actualitzat correctament',
             'data' => $plat,
         ];
         return response()->json($response,200);
