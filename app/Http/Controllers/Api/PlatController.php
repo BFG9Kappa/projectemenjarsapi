@@ -77,7 +77,22 @@ class PlatController extends Controller
      */
     public function show($id)
     {
-        //
+        $plat = Plat::find($id);
+        if($plat == null) {
+            $response = [
+              'success' => false,
+              'message' => 'Plat no trobat',            
+            ];
+            return response()->json($response, 404); 
+        }
+        else {
+            $response = [
+              'success' => true,
+              'message' => 'Plat recuperat',
+              'data'    => $plat,
+            ];
+            return response()->json($response, 200);
+        }
     }
 
     /**

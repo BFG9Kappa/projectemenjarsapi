@@ -76,7 +76,22 @@ class IngredientController extends Controller
      */
     public function show($id)
     {
-        //
+        $ingredient = Ingredient::find($id);
+        if($ingredient == null) {
+            $response = [
+              'success' => false,
+              'message' => 'Ingredient no trobat',            
+            ];
+            return response()->json($response, 404); 
+        }
+        else {
+            $response = [
+              'success' => true,
+              'message' => 'Ingredient recuperat',
+              'data'    => $ingredient,
+            ];
+            return response()->json($response, 200);
+        }
     }
 
     /**

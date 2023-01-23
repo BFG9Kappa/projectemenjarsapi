@@ -78,7 +78,22 @@ class ComandesController extends Controller
      */
     public function show($id)
     {
-
+        $comanda = Comanda::find($id);
+        if($comanda == null) {
+            $response = [
+              'success' => false,
+              'message' => 'Comanda no trobada',            
+            ];
+            return response()->json($response, 404); 
+        }
+        else {
+            $response = [
+              'success' => true,
+              'message' => 'Comanda recuperada',
+              'data'    => $comanda,
+            ];
+            return response()->json($response, 200);
+        }
     }
 
     /**
