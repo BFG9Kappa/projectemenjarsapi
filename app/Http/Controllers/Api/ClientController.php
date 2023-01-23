@@ -79,7 +79,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        // Per implementar
     }
 
     /**
@@ -102,7 +102,46 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $client = Client::find($id);
+        if($client == null) {
+            $response = [
+                'success' => false,
+                'message' => 'Client no recuperat',
+                'data' => [],
+            ];
+            return response()->json($response,404);
+        }
+        $input = $request->all();
+        $validator = Validator::make(
+            $input,
+            [
+                'nom' => 'required | min:3 | max:50',
+                'cognoms' => 'required | min:3 | max:50',
+                'direccio' => 'required | min:3 | max:200',
+                'telefon' => 'required | numeric | digits_between:9,11'
+            ]
+        );
+        if($validator->fails()) {
+            $response = [
+                'success' => false,
+                'message' => 'Error de validacio',
+                'data' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
+        //$client->update($input); // Rapida pero perillosa
+        // Lenta pero segura
+        $client->nom = $input['nom'];
+        $client->cognoms = $input['cognoms'];
+        $client->direccio = $input['direccio'];
+        $client->telefon = $input['telefon'];
+        $client->save();
+        $response = [
+            'success' => true,
+            'message' => 'Client actualitzat correctament',
+            'data' => $client,
+        ];
+        return response()->json($response,200);
     }
 
     /**

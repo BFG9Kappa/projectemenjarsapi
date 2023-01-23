@@ -100,7 +100,40 @@ class ComandesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comanda = Comanda::find($id);
+        if($comanda == null) {
+            $response = [
+                'success' => false,
+                'message' => 'Comanda no recuperada',
+                'data' => [],
+            ];
+            return response()->json($response,404);
+        }
+        $input = $request->all();
+        $validator = Validator::make(
+            $input,
+            [
+                'nom' => 'required | min:3 | max:20',
+                //'preu' => 'required', // pensar
+            ]
+        );
+        if($validator->fails()) {
+            $response = [
+                'success' => false,
+                'message' => 'Error de validacio',
+                'data' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
+        $comanda->nom = $input['nom'];
+        $comanda->preu = $input['preu'];
+        $comanda->save();
+        $response = [
+            'success' => true,
+            'message' => 'Comanda actualitzada correctament',
+            'data' => $comanda,
+        ];
+        return response()->json($response,200);
     }
 
     /**
