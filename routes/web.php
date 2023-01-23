@@ -75,3 +75,20 @@ Route::group(['middleware'=>['auth','is_admin']], function() {
     Route::post('/clients/update/{client}', [App\Http\Controllers\ClientController::class, 'update'])->name('clients.update');
     Route::get('/clients/destroy/{client}', [App\Http\Controllers\ClientController::class, 'destroy'])->name('clients.destroy');
 });
+
+// API
+Route::get('/taulaclients', function () {
+    return view('clients.api.index');
+});
+
+Route::get('/taulaingredients', function () {
+    return view('ingredients.api.index');
+});
+
+Route::get('/taulaplats', function () {
+    return view('plats.api.index');
+});
+
+Route::get('/taulacomandes', function () {
+    return view('comandes.api.index');
+});
