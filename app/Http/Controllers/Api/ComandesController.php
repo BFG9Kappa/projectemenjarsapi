@@ -57,7 +57,7 @@ class ComandesController extends Controller
             $response = [
                 'success' => false,
                 'message' => "Error d'alta",
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             ];
             return response()->json($response, 400);
         }
@@ -82,7 +82,8 @@ class ComandesController extends Controller
         if($comanda == null) {
             $response = [
               'success' => false,
-              'message' => 'Comanda no trobada',            
+              'message' => 'Comanda no trobada',
+              'data' => [],  
             ];
             return response()->json($response, 404); 
         }
