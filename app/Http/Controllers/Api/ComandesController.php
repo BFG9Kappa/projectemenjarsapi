@@ -49,7 +49,7 @@ class ComandesController extends Controller
             $input,
             [
                 'nom' => 'required | min:3 | max:20',
-                //'preu' => 'required',
+                'preu' => ['required', 'numeric', 'regex:/^\d{0,4}+(\.\d{1,2})?$/']
                 //'estat' => 'required',
             ]
         );
@@ -131,7 +131,7 @@ class ComandesController extends Controller
             $input,
             [
                 'nom' => 'required | min:3 | max:20',
-                //'preu' => 'required',
+                'preu' => ['required', 'numeric', 'regex:/^\d{0,4}+(\.\d{1,2})?$/']
                 //'estat' => 'required',
             ]
         );
