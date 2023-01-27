@@ -79,7 +79,22 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        // Per implementar
+        $client = Client::find($id);
+        if($client == null) {
+            $response = [
+              'success' => false,
+              'message' => 'Client no trobat',            
+            ];
+            return response()->json($response, 404); 
+        }
+        else {
+            $response = [
+              'success' => true,
+              'message' => 'Client recuperat',
+              'data'    => $client,
+            ];
+            return response()->json($response, 200);
+        }
     }
 
     /**

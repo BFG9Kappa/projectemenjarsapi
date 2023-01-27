@@ -17,7 +17,7 @@ class ComandesController extends Controller
      */
     public function index()
     {
-        $comandes = Comanda::all(['id','nom', 'preu']);
+        $comandes = Comanda::all(['id','nom', 'preu', 'estat']);
         $response = [
             'success' => true,
             'message' => "Llistat de comandes recuperat",
@@ -50,6 +50,7 @@ class ComandesController extends Controller
             [
                 'nom' => 'required | min:3 | max:20',
                 //'preu' => 'required',
+                //'estat' => 'required',
             ]
         );
         if($validator->fails()) {
@@ -77,7 +78,22 @@ class ComandesController extends Controller
      */
     public function show($id)
     {
-
+        $comanda = Comanda::find($id);
+        if($comanda == null) {
+            $response = [
+              'success' => false,
+              'message' => 'Comanda no trobada',            
+            ];
+            return response()->json($response, 404); 
+        }
+        else {
+            $response = [
+              'success' => true,
+              'message' => 'Comanda recuperada',
+              'data'    => $comanda,
+            ];
+            return response()->json($response, 200);
+        }
     }
 
     /**
@@ -114,7 +130,8 @@ class ComandesController extends Controller
             $input,
             [
                 'nom' => 'required | min:3 | max:20',
-                //'preu' => 'required', // pensar
+                //'preu' => 'required',
+                //'estat' => 'required',
             ]
         );
         if($validator->fails()) {

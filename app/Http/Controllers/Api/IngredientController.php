@@ -76,7 +76,22 @@ class IngredientController extends Controller
      */
     public function show($id)
     {
-        //
+        $ingredient = Ingredient::find($id);
+        if($ingredient == null) {
+            $response = [
+              'success' => false,
+              'message' => 'Ingredient no trobat',            
+            ];
+            return response()->json($response, 404); 
+        }
+        else {
+            $response = [
+              'success' => true,
+              'message' => 'Ingredient recuperat',
+              'data'    => $ingredient,
+            ];
+            return response()->json($response, 200);
+        }
     }
 
     /**
@@ -99,7 +114,38 @@ class IngredientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ingredient = Ingredient::find($id);
+        if($ingredient == null) {
+            $response = [
+                'success' => false,
+                'message' => 'Ingredient no recuperat',
+                'data' => [],
+            ];
+            return response()->json($response,404);
+        }
+        $input = $request->all();
+        $validator = Validator::make(
+            $input,
+            [
+                'nom' => 'required | min:3 | max:30'
+            ]
+        );
+        if($validator->fails()) {
+            $response = [
+                'success' => false,
+                'message' => 'Error de validacio',
+                'data' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
+        $ingredient->nom = $input['nom'];
+        $ingredient->save();
+        $response = [
+            'success' => true,
+            'message' => 'Ingredient actualitzat correctament',
+            'data' => $ingredient,
+        ];
+        return response()->json($response,200);
     }
 
     /**
