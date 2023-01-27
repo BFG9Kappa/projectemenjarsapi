@@ -1,13 +1,19 @@
 @extends('template')
 @section('content')
 
-<!--
+
 <input type="text" id="nameInput">
 <input type="text" id="preuInput">
 <input type="text" id="estatInput">
 <button class="btn btn-primary btn-sm" id="saveButton">Desar</button>
--->
 
+CRUD COMANDAS 
+<!--<div>
+    <input type="text" id="comandaNameInput">
+    <button id="saveButton">Save</button>
+</div>
+-->
+<div id="errors" class="alert alert-danger" role="alert"></div>
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -23,8 +29,11 @@
     </table>
 </div>
 
-<script>
+<script type="text/javascript">
+    //console.log('hola');
     const table = document.getElementById('taula');
+    const divErrors = document.getElementById('errors');
+	//divErrors.style.display = "none"    
 
     const comandaNameInput = document.getElementById('nameInput');
     const comandaPreuInput = document.getElementById('preuInput');
@@ -34,6 +43,19 @@
     saveButton.addEventListener('click', saveData);
     const url = 'http://127.0.0.1:8000/api/comandes/';
 
+    function showErrors(errors) {
+		
+        divErrors.style.display = "block"
+        divErrors.innerHTML = "";
+        const ul = document.createElement("ul")
+        for(const error of errors) {				
+                const li = document.createElement("li");				
+                li.textContent = error;				
+                ul.appendChild(li);			
+        }
+        divErrors.appendChild(ul)
+    }
+    
     async function saveData(event) {
         let newComanda = {
             "nom": comandaNameInput.value,
@@ -53,8 +75,12 @@
             if (response.ok) {
                 addRow(data.data);
             }
-        } catch (error) {
-            //
+            else {
+                showErrors(data.data)
+                }
+            } 
+            catch (error) {
+                error.innerHTML = "S'ha produit un error inesperat" 
         }
     }
 
@@ -65,6 +91,13 @@
         idCell.textContent = row.id;
         const nomCell = document.createElement("td");
         nomCell.textContent = row.nom;
+ 
+        const preuCell = document.createElement("td");
+        preuCell.textContent = row.preu;
+ 
+        const estatCell = document.createElement("td");
+        estatCell.textContent = row.estat;
+ 
         const operationsCell = document.createElement("td");
         const deleteButton = document.createElement("button");
         deleteButton.innerHTML = "Esborrar";
@@ -72,6 +105,10 @@
         operationsCell.appendChild(deleteButton);
         rowElement.appendChild(idCell);
         rowElement.appendChild(nomCell);
+ 
+        rowElement.appendChild(preuCell);
+        rowElement.appendChild(estatCell);
+ 
         rowElement.appendChild(operationsCell);
         table.appendChild(rowElement);
     }
@@ -99,6 +136,7 @@
             const response = await fetch(url);
             const json = await response.json();
             const rows = json.data;
+           
             for (let row of rows) {
                 const rowElement = document.createElement("tr");
                 rowElement.setAttribute('id', row.id);
@@ -106,6 +144,13 @@
                 idCell.textContent = row.id;
                 const nomCell = document.createElement("td");
                 nomCell.textContent = row.nom;
+         
+                const preuCell = document.createElement("td");
+                preuCell.textContent = row.preu;
+         
+                const estatCell = document.createElement("td");
+                estatCell.textContent = row.estat;
+         
                 const operationsCell = document.createElement("td");
                 const deleteButton = document.createElement("button");
                 deleteButton.innerHTML = "Esborrar";
@@ -113,11 +158,15 @@
                 operationsCell.appendChild(deleteButton);
                 rowElement.appendChild(idCell);
                 rowElement.appendChild(nomCell);
+         
+                rowElement.appendChild(preuCell);
+                rowElement.appendChild(estatCell);
+         
                 rowElement.appendChild(operationsCell);
                 table.appendChild(rowElement);
             }
         } catch (error) {
-            //
+            errors.innerHTML = "No es pot accedir a la base de dades"
         }
     }
 
