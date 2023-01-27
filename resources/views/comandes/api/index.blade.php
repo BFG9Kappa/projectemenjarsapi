@@ -33,7 +33,7 @@ CRUD COMANDAS
     //console.log('hola');
     const table = document.getElementById('taula');
     const divErrors = document.getElementById('errors');
-	//divErrors.style.display = "none"    
+	divErrors.style.display = "none"    
 
     const comandaNameInput = document.getElementById('nameInput');
     const comandaPreuInput = document.getElementById('preuInput');
