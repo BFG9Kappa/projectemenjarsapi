@@ -38,6 +38,23 @@
                 <a class="nav-link" href="{{ url('clients') }}">Clients</a>
               </li>
             @endif
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ url('taulacomandes') }}">Taula</a>
+            </li>
+            <!-- Dropdown API -->
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">API</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ url('taulaplats') }}">Taula plats</a>
+                <a class="dropdown-item" href="{{ url('taulaingredients') }}">Taula ingredients</a>
+                <a class="dropdown-item" href="{{ url('taulacomandes') }}">Taula comandes</a>
+                <a class="dropdown-item" href="{{ url('taulaclients') }}">Taula clients</a>
+                <!--
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+                -->
+              </div>
+            </li>
           </ul>
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ms-auto">
