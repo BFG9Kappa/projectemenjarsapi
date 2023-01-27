@@ -1,18 +1,19 @@
 @extends('template')
 @section('content')
 
-
-<input type="text" id="nameInput">
-<input type="text" id="preuInput">
-<input type="text" id="estatInput">
-<button class="btn btn-primary btn-sm" id="saveButton">Desar</button>
-
-CRUD COMANDAS 
-<!--<div>
-    <input type="text" id="comandaNameInput">
-    <button id="saveButton">Save</button>
+<div>
+    <h4>Crud</h4>
+    <label for="nameInput">Nom</label>
+    <input type="text" id="nameInput">
+    <label for="preuInput">Preu</label>
+    <input type="text" id="preuInput">
+    <label for="estatInput">Estat</label>
+    <input type="text" id="estatInput">
+    <button class="btn btn-primary btn-sm" id="saveButton">Desar</button>
+    <br/>
+    <br/>
 </div>
--->
+
 <div id="errors" class="alert alert-danger" role="alert"></div>
 <div class="table-responsive">
     <table class="table table-striped">
@@ -30,10 +31,10 @@ CRUD COMANDAS
 </div>
 
 <script type="text/javascript">
-    //console.log('hola');
+
     const table = document.getElementById('taula');
     const divErrors = document.getElementById('errors');
-	//divErrors.style.display = "none"    
+	divErrors.style.display = "none"    
 
     const comandaNameInput = document.getElementById('nameInput');
     const comandaPreuInput = document.getElementById('preuInput');
@@ -44,7 +45,6 @@ CRUD COMANDAS
     const url = 'http://127.0.0.1:8000/api/comandes/';
 
     function showErrors(errors) {
-		
         divErrors.style.display = "block"
         divErrors.innerHTML = "";
         const ul = document.createElement("ul")
@@ -74,13 +74,11 @@ CRUD COMANDAS
             const data = await response.json();
             if (response.ok) {
                 addRow(data.data);
-            }
-            else {
+            } else {
                 showErrors(data.data)
-                }
-            } 
-            catch (error) {
-                error.innerHTML = "S'ha produit un error inesperat" 
+            }
+        } catch (error) {
+            error.innerHTML = "S'ha produit un error inesperat" 
         }
     }
 
@@ -91,29 +89,29 @@ CRUD COMANDAS
         idCell.textContent = row.id;
         const nomCell = document.createElement("td");
         nomCell.textContent = row.nom;
- 
+
         const preuCell = document.createElement("td");
         preuCell.textContent = row.preu;
- 
+
         const estatCell = document.createElement("td");
         estatCell.textContent = row.estat;
- 
+
         const operationsCell = document.createElement("td");
         const deleteButton = document.createElement("button");
         deleteButton.innerHTML = "Esborrar";
-        deleteButton.addEventListener('click', deleteComanda);
+        deleteButton.addEventListener('click', deleteRow);
         operationsCell.appendChild(deleteButton);
         rowElement.appendChild(idCell);
         rowElement.appendChild(nomCell);
- 
+
         rowElement.appendChild(preuCell);
         rowElement.appendChild(estatCell);
- 
+
         rowElement.appendChild(operationsCell);
         table.appendChild(rowElement);
     }
 
-    async function deleteComanda(event) {
+    async function deleteRow(event) {
         try {
             const id = event.target.closest('tr').id;
             const response = await fetch(url + id, {
@@ -136,7 +134,6 @@ CRUD COMANDAS
             const response = await fetch(url);
             const json = await response.json();
             const rows = json.data;
-           
             for (let row of rows) {
                 const rowElement = document.createElement("tr");
                 rowElement.setAttribute('id', row.id);
@@ -144,24 +141,23 @@ CRUD COMANDAS
                 idCell.textContent = row.id;
                 const nomCell = document.createElement("td");
                 nomCell.textContent = row.nom;
-         
+
                 const preuCell = document.createElement("td");
                 preuCell.textContent = row.preu;
-         
+
                 const estatCell = document.createElement("td");
                 estatCell.textContent = row.estat;
-         
+
                 const operationsCell = document.createElement("td");
                 const deleteButton = document.createElement("button");
                 deleteButton.innerHTML = "Esborrar";
-                deleteButton.addEventListener('click', deleteComanda);
+                deleteButton.addEventListener('click', deleteRow);
                 operationsCell.appendChild(deleteButton);
                 rowElement.appendChild(idCell);
                 rowElement.appendChild(nomCell);
-         
+
                 rowElement.appendChild(preuCell);
                 rowElement.appendChild(estatCell);
-         
                 rowElement.appendChild(operationsCell);
                 table.appendChild(rowElement);
             }

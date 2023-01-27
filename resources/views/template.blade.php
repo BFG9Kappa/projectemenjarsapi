@@ -38,9 +38,6 @@
                 <a class="nav-link" href="{{ url('clients') }}">Clients</a>
               </li>
             @endif
-            <li class="nav-item active">
-              <a class="nav-link" href="{{ url('taulacomandes') }}">Taula</a>
-            </li>
             <!-- Dropdown API -->
             <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">API</a>
