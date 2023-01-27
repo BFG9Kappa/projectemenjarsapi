@@ -58,7 +58,7 @@ class ClientController extends Controller
             $response = [
                 'success' => false,
                 'message' => "Error d'alta",
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             ];
             return response()->json($response, 400);
         }
@@ -83,7 +83,8 @@ class ClientController extends Controller
         if($client == null) {
             $response = [
               'success' => false,
-              'message' => 'Client no trobat',            
+              'message' => 'Client no trobat',
+              'data' => [],         
             ];
             return response()->json($response, 404); 
         }

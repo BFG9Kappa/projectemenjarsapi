@@ -83,7 +83,7 @@ class ComandesController extends Controller
             $response = [
               'success' => false,
               'message' => 'Comanda no trobada',
-              'data' => [],  
+              'data' => [],
             ];
             return response()->json($response, 404); 
         }

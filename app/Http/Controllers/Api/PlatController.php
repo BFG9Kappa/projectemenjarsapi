@@ -56,7 +56,7 @@ class PlatController extends Controller
             $response = [
                 'success' => false,
                 'message' => "Error d'alta",
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             ];
             return response()->json($response, 400);
         }
@@ -89,7 +89,7 @@ class PlatController extends Controller
             $response = [
               'success' => true,
               'message' => 'Plat recuperat',
-              'data'    => $plat,
+              'data' => [], 
             ];
             return response()->json($response, 200);
         }

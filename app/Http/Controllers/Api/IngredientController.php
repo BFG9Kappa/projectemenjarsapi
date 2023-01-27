@@ -55,7 +55,7 @@ class IngredientController extends Controller
             $response = [
                 'success' => false,
                 'message' => "Error d'alta",
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             ];
             return response()->json($response, 400);
         }
@@ -80,7 +80,8 @@ class IngredientController extends Controller
         if($ingredient == null) {
             $response = [
               'success' => false,
-              'message' => 'Ingredient no trobat',            
+              'message' => 'Ingredient no trobat',
+              'data' => [],           
             ];
             return response()->json($response, 404); 
         }
