@@ -98,6 +98,8 @@
 
         const operationsCell = document.createElement("td");
         const deleteButton = document.createElement("button");
+        deleteButton.classList.add('btn', 'btn-danger')
+
         deleteButton.innerHTML = "Esborrar";
         deleteButton.addEventListener('click', deleteRow);
         operationsCell.appendChild(deleteButton);
@@ -150,6 +152,8 @@
 
                 const operationsCell = document.createElement("td");
                 const deleteButton = document.createElement("button");
+                deleteButton.classList.add('btn', 'btn-danger')
+
                 deleteButton.innerHTML = "Esborrar";
                 deleteButton.addEventListener('click', deleteRow);
                 operationsCell.appendChild(deleteButton);
