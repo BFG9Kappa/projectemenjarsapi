@@ -81,7 +81,7 @@ class IngredientController extends Controller
             $response = [
               'success' => false,
               'message' => 'Ingredient no trobat',
-              'data' => [],           
+              'data' => [],
             ];
             return response()->json($response, 404); 
         }
@@ -89,7 +89,7 @@ class IngredientController extends Controller
             $response = [
               'success' => true,
               'message' => 'Ingredient recuperat',
-              'data'    => $ingredient,
+              'data' => $ingredient,
             ];
             return response()->json($response, 200);
         }

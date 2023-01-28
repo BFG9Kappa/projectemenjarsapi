@@ -84,7 +84,7 @@ class ClientController extends Controller
             $response = [
               'success' => false,
               'message' => 'Client no trobat',
-              'data' => [],         
+              'data' => [],
             ];
             return response()->json($response, 404); 
         }
@@ -92,7 +92,7 @@ class ClientController extends Controller
             $response = [
               'success' => true,
               'message' => 'Client recuperat',
-              'data'    => $client,
+              'data' => $client,
             ];
             return response()->json($response, 200);
         }

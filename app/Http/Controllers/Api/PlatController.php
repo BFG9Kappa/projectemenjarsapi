@@ -81,7 +81,7 @@ class PlatController extends Controller
         if($plat == null) {
             $response = [
               'success' => false,
-              'message' => 'Plat no trobat',            
+              'message' => 'Plat no trobat',
             ];
             return response()->json($response, 404); 
         }
@@ -89,7 +89,7 @@ class PlatController extends Controller
             $response = [
               'success' => true,
               'message' => 'Plat recuperat',
-              'data' => [], 
+              'data' => [],
             ];
             return response()->json($response, 200);
         }
