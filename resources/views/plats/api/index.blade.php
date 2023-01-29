@@ -8,11 +8,11 @@
     <label for="preuInput">Preu</label>
     <input type="text" id="preuInput">
     <button class="btn btn-primary btn-sm" id="saveButton">Desar</button>
-    <br/>
-    <br/>
 </div>
+<br/>
 
 <div id="errors" class="alert alert-danger" role="alert"></div>
+
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -28,10 +28,9 @@
 </div>
 
 <script type="text/javascript">
-
     const table = document.getElementById('taula');
     const divErrors = document.getElementById('errors');
-	divErrors.style.display = "none"    
+	divErrors.style.display = "none";
 
     const platNameInput = document.getElementById('nameInput');
     const platPreuInput = document.getElementById('preuInput');
@@ -41,15 +40,15 @@
     const url = 'http://127.0.0.1:8000/api/plats/';
 
     function showErrors(errors) {
-        divErrors.style.display = "block"
+        divErrors.style.display = "block";
         divErrors.innerHTML = "";
-        const ul = document.createElement("ul")
-        for(const error of errors) {				
-                const li = document.createElement("li");				
-                li.textContent = error;				
-                ul.appendChild(li);			
+        const ul = document.createElement("ul");
+        for(const error of errors) {
+                const li = document.createElement("li");	
+                li.textContent = error;
+                ul.appendChild(li);
         }
-        divErrors.appendChild(ul)
+        divErrors.appendChild(ul);
     }
     
     async function saveData(event) {
@@ -70,10 +69,10 @@
             if (response.ok) {
                 addRow(data.data);
             } else {
-                showErrors(data.data)
+                showErrors(data.data);
             }
         } catch (error) {
-            error.innerHTML = "S'ha produit un error inesperat" 
+            error.innerHTML = "S'ha produit un error inesperat";
         }
     }
 
@@ -84,24 +83,17 @@
         idCell.textContent = row.id;
         const nomCell = document.createElement("td");
         nomCell.textContent = row.nom;
-
         const preuCell = document.createElement("td");
         preuCell.textContent = row.preu;
-
-        const estatCell = document.createElement("td");
-        estatCell.textContent = row.estat;
-
         const operationsCell = document.createElement("td");
         const deleteButton = document.createElement("button");
+        deleteButton.classList.add('btn', 'btn-danger');
         deleteButton.innerHTML = "Esborrar";
         deleteButton.addEventListener('click', deleteRow);
         operationsCell.appendChild(deleteButton);
         rowElement.appendChild(idCell);
         rowElement.appendChild(nomCell);
-
         rowElement.appendChild(preuCell);
-        rowElement.appendChild(estatCell);
-
         rowElement.appendChild(operationsCell);
         table.appendChild(rowElement);
     }
@@ -120,7 +112,7 @@
                 console.log('Error esborrant');
             }
         } catch (error) {
-            console.log('error xarxa');
+            console.log('Error xarxa');
         }
     }
 
@@ -136,28 +128,22 @@
                 idCell.textContent = row.id;
                 const nomCell = document.createElement("td");
                 nomCell.textContent = row.nom;
-
                 const preuCell = document.createElement("td");
                 preuCell.textContent = row.preu;
-
-                const estatCell = document.createElement("td");
-                estatCell.textContent = row.estat;
-
                 const operationsCell = document.createElement("td");
                 const deleteButton = document.createElement("button");
+                deleteButton.classList.add('btn', 'btn-danger');
                 deleteButton.innerHTML = "Esborrar";
                 deleteButton.addEventListener('click', deleteRow);
                 operationsCell.appendChild(deleteButton);
                 rowElement.appendChild(idCell);
                 rowElement.appendChild(nomCell);
-
                 rowElement.appendChild(preuCell);
-                rowElement.appendChild(estatCell);
                 rowElement.appendChild(operationsCell);
                 table.appendChild(rowElement);
             }
         } catch (error) {
-            errors.innerHTML = "No es pot accedir a la base de dades"
+            errors.innerHTML = "No es pot accedir a la base de dades";
         }
     }
 
