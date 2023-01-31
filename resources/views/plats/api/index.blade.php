@@ -20,6 +20,7 @@
                 <th>ID</th>
                 <th>Nom</th>
                 <th>Preu</th>
+                <th>Operacions</th>
             </tr>
         </thead>
         <tbody id="taula">
