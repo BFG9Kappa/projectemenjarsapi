@@ -143,6 +143,7 @@
 </script>
 -->
 
+<!-- V2 -->
 <script type="text/javascript">
     var rows = [];
 	var operation = "inserting";
@@ -150,10 +151,11 @@
 	const table = document.getElementById('taula');
 	const divErrors = document.getElementById('errors');
 	divErrors.style.display = "none";
-	const planetNameInput = document.getElementById('planetNameInput');
+	const ingredientNameInput = document.getElementById('nameInput');
 	const saveButton = document.getElementById('saveButton');
 	saveButton.addEventListener('click', onSave);
-	const url = 'http://localhost:8000/api/planets';
+	const url = 'http://localhost:8000/api/ingredients';
+
 	function showErrors(errors) {
 		divErrors.style.display = "block";
 		divErrors.innerHTML = "";
@@ -165,14 +167,15 @@
 		}
 		divErrors.appendChild(ul);
 	}
+
 	function onSave(event) {
-		console.log("ei!!!");
-		if(operation=="inserting") savePlanet();
-		if(operation=="editing") updatePlanet();
+		if(operation=="inserting") saveData();
+		if(operation=="editing") updateData();
 	}
-	async function updatePlanet(event) {
-		var newPlanet = {
-			"name" : planetNameInput.value
+
+	async function updateData(event) { // REVISAR
+		var newIngredient = {
+			"nom" : ingredientNameInput.value
 		}
 		try {
 			const response = await fetch(url+'/'+selectedId,
@@ -182,29 +185,29 @@
                     'Content-type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(newPlanet) //   "{ 'name' : 'mart'}"
+                body: JSON.stringify(newIngredient)
             })
 			
 			const data = await response.json();
 			if(response.ok) {
-				//afegirFila(data.data)
-				const nameid = document.getElementById('name'+data.data.id)
-				const rowid = document.getElementById(data.data.id)
-				nameid.innerHTML = data.data.name;
-				rowid.setAttribute('name',data.data.name);
-				planetNameInput.value = "";
+				const nameid = document.getElementById('nameInput'+data.data.id); // cuadrat input
+				const rowid = document.getElementById(data.data.id);
+				nameid.innerHTML = data.data.nom;
+				rowid.setAttribute('nom',data.data.nom);
+				ingredientNameInput.value = "";
 				operation = "inserting";
 			} else {
                 showErrors(data.data)
 			}
 		} catch(error) {
-            errors.innerHTML = "S'ha produit un error inesperat"
+            errors.innerHTML = "S'ha produit un error inesperat";
 			operation = "inserting";
 		}
 	}
-	async function savePlanet(event) {
-		var newPlanet = {
-			"name" : planetNameInput.value
+
+	async function saveData(event) {
+		var newIngredient = {
+			"nom" : ingredientNameInput.value
 		}
 		try {
 			const response = await fetch(url,
@@ -214,71 +217,74 @@
                     'Content-type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(newPlanet) //   "{ 'name' : 'mart'}"
+                body: JSON.stringify(newIngredient)
             })
-
 			const data = await response.json();
 			if(response.ok) {
-				afegirFila(data.data)
+				afegirFila(data.data);
 			} else {
-                showErrors(data.data)
+                showErrors(data.data);
 			}
 		} catch(error) {
-			errors.innerHTML = "S'ha produit un error inesperat"
+			errors.innerHTML = "S'ha produit un error inesperat";
 		}
 	}
 
 	function afegirFila(row) {
         const rowElement = document.createElement("tr");
-		rowElement.setAttribute('id',row.id)
-		rowElement.setAttribute('name',row.name)
+		rowElement.setAttribute('id',row.id);
+		rowElement.setAttribute('name',row.nom); // pasa update
 		const idCell = document.createElement("td");
 		idCell.textContent = row.id;
 		const nameCell = document.createElement("td");
 		nameCell.setAttribute('id',"name"+row.id);
-		nameCell.textContent = row.name;
-		const operationsCell =  document.createElement("td");
+		nameCell.textContent = row.nom; // mostra taula
+		const operationsCell = document.createElement("td");
+
+        const updateButton = document.createElement("button");
+		updateButton.innerHTML = "Actualitzar";
+        updateButton.classList.add("btn", "btn-primary");
+		updateButton.addEventListener('click', function (event) { editData(event, row) } );
+		operationsCell.appendChild(updateButton);
+
 		const deleteButton = document.createElement("button");
 		deleteButton.innerHTML = "Esborrar";
-		deleteButton.addEventListener('click', deletePlanet);
+		deleteButton.addEventListener('click', deleteData);
+        deleteButton.classList.add('btn', 'btn-danger');
 		operationsCell.appendChild(deleteButton);
-		const updateButton = document.createElement("button");
-		updateButton.innerHTML = "Actualitzar";
-		updateButton.addEventListener('click', function (event) { editPlanet(event, row) } );
-		operationsCell.appendChild(updateButton);
+
 		rowElement.appendChild(idCell);
 		rowElement.appendChild(nameCell);
 		rowElement.appendChild(operationsCell);
 		taula.appendChild(rowElement);
 	}
 
-	async function deletePlanet(event) {
+	async function deleteData(event) { // fino señore
 		try {
 			const id = event.target.closest('tr').id;
 			response = await fetch(url+'/'+id, { method: 'DELETE'});
 			const json = await response.json();
-			if(response.ok) { // codi 200, ....
+			if(response.ok) {
 					const row = document.getElementById(id);
 					row.remove();
                 } else {
 				divErrors.style.display = "block";
-				errors.innerHTML = "No es pot esborrar el planeta";
+				errors.innerHTML = "No es pot esborrar.";
 			}
 		} catch(error) {
 			divErrors.style.display = "block";
-			errors.innerHTML = "No es pot esborrar el planeta";
+			errors.innerHTML = "No es pot esborrar.";
 		}
 	}
 
-	async function editPlanet(event, row) {
+	async function editData(event, row) {
 		operation = "editing";
 		const tr = event.target.closest('tr');
 		const nom = tr.getAttribute('name');
 		selectedId = tr.getAttribute('id');
-		planetNameInput.value = nom;
+		ingredientNameInput.value = nom;
 		console.log('editant....'+ selectedId + ' '+ nom);
-		//console.log(rows)
-		console.log(row)
+		console.log(row);
 	}
 	
 	async function loadIntoTable(url) {
@@ -286,7 +292,7 @@
 			const response = await fetch(url);
 			const json = await response.json();
 			rows = json.data;
-			var i =0
+			var i = 0;
 			for(const row of rows) {				
 				afegirFila(row);
 			}
@@ -299,5 +305,6 @@
 	loadIntoTable(url);
     
 </script>
+
 
 @endsection
