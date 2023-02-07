@@ -92,3 +92,14 @@ Route::get('/taulaplats', function () {
 Route::get('/taulacomandes', function () {
     return view('comandes.api.index');
 });
+
+Route::get('/token', function (Request $request) {
+    if(auth()->check()) {
+        $token = auth()->user()->createToken("prova");
+        return response()->json(['token'=> $token->plainTextToken],200);
+    }
+    else{
+        return response()->jason("Not Autorized, te enteras",405);
+    }
+
+});
