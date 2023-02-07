@@ -190,9 +190,10 @@
 			
 			const data = await response.json();
 			if(response.ok) {
-				const nameid = document.getElementById('nameInput'+data.data.id); // cuadrat input
+				const nameid = document.getElementById('name'+data.data.id); // cuadrat input
 				const rowid = document.getElementById(data.data.id);
-				nameid.innerHTML = data.data.nom;
+                rowid.childNodes[1].innerHTML = data.data.nom;
+				//nameid.innerHTML = data.data.nom;
 				rowid.setAttribute('nom',data.data.nom);
 				ingredientNameInput.value = "";
 				operation = "inserting";
@@ -237,7 +238,7 @@
 		const idCell = document.createElement("td");
 		idCell.textContent = row.id;
 		const nameCell = document.createElement("td");
-		nameCell.setAttribute('id',"name"+row.id);
+		//nameCell.setAttribute('id',"name"+row.id);
 		nameCell.textContent = row.nom; // mostra taula
 		const operationsCell = document.createElement("td");
 
