@@ -28,132 +28,6 @@
     </table>
 </div>
 
-<!--
-<script type="text/javascript">
-    const table = document.getElementById('taula');
-    const divErrors = document.getElementById('errors');
-	divErrors.style.display = "none";
-
-    const platNameInput = document.getElementById('nameInput');
-    const platPreuInput = document.getElementById('preuInput');
-
-    const saveButton = document.getElementById('saveButton');
-    saveButton.addEventListener('click', saveData);
-    const url = 'http://127.0.0.1:8000/api/plats/';
-
-    function showErrors(errors) {
-        divErrors.style.display = "block";
-        divErrors.innerHTML = "";
-        const ul = document.createElement("ul");
-        for(const error of errors) {
-                const li = document.createElement("li");	
-                li.textContent = error;
-                ul.appendChild(li);
-        }
-        divErrors.appendChild(ul);
-    }
-    
-    async function saveData(event) {
-        let newPlat = {
-            "nom": platNameInput.value,
-            "preu": platPreuInput.value
-        }
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(newPlat)
-            });
-            const data = await response.json();
-            if (response.ok) {
-                addRow(data.data);
-            } else {
-                showErrors(data.data);
-            }
-        } catch (error) {
-            error.innerHTML = "S'ha produit un error inesperat";
-        }
-    }
-
-    function addRow(row) {
-        const rowElement = document.createElement("tr");
-        rowElement.setAttribute('id', row.id);
-        const idCell = document.createElement("td");
-        idCell.textContent = row.id;
-        const nomCell = document.createElement("td");
-        nomCell.textContent = row.nom;
-        const preuCell = document.createElement("td");
-        preuCell.textContent = row.preu;
-        const operationsCell = document.createElement("td");
-        const deleteButton = document.createElement("button");
-        deleteButton.classList.add('btn', 'btn-danger');
-        deleteButton.innerHTML = "Esborrar";
-        deleteButton.addEventListener('click', deleteRow);
-        operationsCell.appendChild(deleteButton);
-        rowElement.appendChild(idCell);
-        rowElement.appendChild(nomCell);
-        rowElement.appendChild(preuCell);
-        rowElement.appendChild(operationsCell);
-        table.appendChild(rowElement);
-    }
-
-    async function deleteRow(event) {
-        try {
-            const id = event.target.closest('tr').id;
-            const response = await fetch(url + id, {
-                method: 'DELETE'
-            });
-            const json = await response.json();
-            if (response.ok) { 
-                const row = document.getElementById(id);
-                row.remove();
-            } else {
-                console.log('Error esborrant');
-            }
-        } catch (error) {
-            console.log('Error xarxa');
-        }
-    }
-
-    async function loadIntoTable(url) {
-        try {
-            const response = await fetch(url);
-            const json = await response.json();
-            const rows = json.data;
-            for (let row of rows) {
-                const rowElement = document.createElement("tr");
-                rowElement.setAttribute('id', row.id);
-                const idCell = document.createElement("td");
-                idCell.textContent = row.id;
-                const nomCell = document.createElement("td");
-                nomCell.textContent = row.nom;
-                const preuCell = document.createElement("td");
-                preuCell.textContent = row.preu;
-                const operationsCell = document.createElement("td");
-                const deleteButton = document.createElement("button");
-                deleteButton.classList.add('btn', 'btn-danger');
-                deleteButton.innerHTML = "Esborrar";
-                deleteButton.addEventListener('click', deleteRow);
-                operationsCell.appendChild(deleteButton);
-                rowElement.appendChild(idCell);
-                rowElement.appendChild(nomCell);
-                rowElement.appendChild(preuCell);
-                rowElement.appendChild(operationsCell);
-                table.appendChild(rowElement);
-            }
-        } catch (error) {
-            errors.innerHTML = "No es pot accedir a la base de dades";
-        }
-    }
-
-    loadIntoTable(url);
-
-</script>
--->
-
 <script type="text/javascript">
     var rows = [];
 	var operation = "inserting";
@@ -189,7 +63,7 @@
 	async function updateData(event) {
 		var newPlat = {
 			"nom" : platNameInput.value,
-            "preu" : platPreuInput.value //?
+            "preu" : platPreuInput.value
 		}
 		try {
 			const response = await fetch(url + "/" + selectedId,
@@ -203,14 +77,18 @@
             })
 			const data = await response.json();
 			if(response.ok) {
-				const nameid = document.getElementById("name" + data.data.id); // cuadrat input
+				const nameid = document.getElementById("name" + data.data.id);
 				const rowid = document.getElementById(data.data.id);
 
-                //rowid.childNodes[1].innerHTML = data.data.nom; // Metode alternatiu al de sota
-				nameid.innerHTML = data.data.nom;
-				rowid.setAttribute("nom", data.data.nom);
+                rowid.childNodes[1].innerHTML = data.data.nom;
+                rowid.childNodes[2].innerHTML = data.data.preu;
 
-				ingredientNameInput.value = "";
+				//nameid.innerHTML = data.data.nom;
+				//rowid.setAttribute("nom", data.data.nom);
+
+				platNameInput.value = "";
+                platPreuInput.value = "";
+
 				operation = "inserting";
 			} else {
                 showErrors(data.data)
@@ -224,7 +102,7 @@
 	async function saveData(event) {
 		var newPlat = {
 			"nom" : platNameInput.value,
-            "preu" : platPreuInput.value //?
+            "preu" : platPreuInput.value
 		}
 		try {
 			const response = await fetch(url,
@@ -251,13 +129,18 @@
         const rowElement = document.createElement("tr");
 		rowElement.setAttribute("id", row.id);
 		rowElement.setAttribute("name", row.nom); // pasa update
+        rowElement.setAttribute("preu", row.preu);
+
 		const idCell = document.createElement("td");
 		idCell.textContent = row.id;
-		const nameCell = document.createElement("td");
-		nameCell.setAttribute("id", "name" + row.id); // Comentar si es usa la sintaxis alternativa
-		nameCell.textContent = row.nom; // mostra taula
-		const operationsCell = document.createElement("td");
 
+		const nameCell = document.createElement("td");
+		nameCell.textContent = row.nom;
+        
+        const preuCell = document.createElement("td");
+        preuCell.textContent = row.preu;
+
+		const operationsCell = document.createElement("td");
         const updateButton = document.createElement("button");
 		updateButton.innerHTML = "Actualitzar";
         updateButton.classList.add("btn", "btn-primary");
@@ -272,6 +155,7 @@
 
 		rowElement.appendChild(idCell);
 		rowElement.appendChild(nameCell);
+        rowElement.appendChild(preuCell);
 		rowElement.appendChild(operationsCell);
 		taula.appendChild(rowElement);
 	}
@@ -294,13 +178,15 @@
 		}
 	}
 
-	async function editData(event, row) { // canviar
+	async function editData(event, row) {
 		operation = "editing";
 		const tr = event.target.closest("tr");
 		const nom = tr.getAttribute("name");
+        const preu = tr.getAttribute("preu");
 		selectedId = tr.getAttribute("id");
-		ingredientNameInput.value = nom;
-		console.log("Editant: " + selectedId + " " + nom);
+		platNameInput.value = nom;
+        platPreuInput.value = preu;
+		console.log("Editant: " + selectedId + " " + nom + " " + preu);
 		console.log(row);
 	}
 	
