@@ -11,7 +11,7 @@ class Comanda extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nom', 'preu'
+        'nom', 'preu', 'estat'
     ];
 
     public function plat()
