@@ -40,28 +40,29 @@
     var rows = [];
 	var operation = "inserting";
 	var selectedId;
-    const table = document.getElementById('taula');
-    const divErrors = document.getElementById('errors');
+    const table = document.getElementById("taula");
+    const divErrors = document.getElementById("errors");
 	divErrors.style.display = "none";
-    const comandaNameInput = document.getElementById('nameInput');
-    const comandaPreuInput = document.getElementById('preuInput');
-    const comandaEstatInput = document.getElementById('estatInput');
 
-    const saveButton = document.getElementById('saveButton');
-    saveButton.addEventListener('click', onSave);
-    const url = 'http://127.0.0.1:8000/api/comandes';
+    const comandaNameInput = document.getElementById("nameInput");
+    const comandaPreuInput = document.getElementById("preuInput");
+    const comandaEstatInput = document.getElementById("estatInput");
 
-    function showErrors(errors) {
-        divErrors.style.display = "block";
-        divErrors.innerHTML = "";
-        const ul = document.createElement("ul");
-        for(const error of errors) {
-                const li = document.createElement("li");
-                li.textContent = error;
-                ul.appendChild(li);
-        }
-        divErrors.appendChild(ul);
-    }
+	const saveButton = document.getElementById("saveButton");
+	saveButton.addEventListener("click", onSave);
+    const url = "http://localhost:8000/api/comandes";
+
+	function showErrors(errors) {
+		divErrors.style.display = "block";
+		divErrors.innerHTML = "";
+		const ul = document.createElement("ul");
+		for(const error of errors) {
+            const li = document.createElement("li");
+            li.textContent = error;
+            ul.appendChild(li);
+		}
+		divErrors.appendChild(ul);
+	}
 
 	function onSave(event) {
 		if(operation == "inserting") saveData();
@@ -70,9 +71,9 @@
 
     async function updateData(event) {
 		var newComanda = {
-            "nom": comandaNameInput.value,
-            "preu": comandaPreuInput.value,
-            "estat": comandaEstatInput.value
+            "nom" : comandaNameInput.value,
+            "preu" : comandaPreuInput.value,
+            "estat" : comandaEstatInput.value
 		}
 		try {
 			const response = await fetch(url + "/" + selectedId,
@@ -86,7 +87,7 @@
             })
 			const data = await response.json();
 			if(response.ok) {
-				const nameid = document.getElementById("name" + data.data.id); // cuadrat input
+				const nameid = document.getElementById("name" + data.data.id);
 				const rowid = document.getElementById(data.data.id);
 
                 rowid.childNodes[1].innerHTML = data.data.nom;
