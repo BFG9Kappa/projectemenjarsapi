@@ -17,7 +17,8 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        $ingredients = Ingredient::all(['id','nom']);
+        //$ingredients = Ingredient::all(['id','nom']); // Sense paginar
+        $ingredients = Ingredient::paginate(5); // Per paginar
         $response = [
             'success' => true,
             'message' => "Llistat d'ingredients recuperat",

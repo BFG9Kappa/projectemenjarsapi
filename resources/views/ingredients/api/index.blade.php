@@ -24,6 +24,10 @@
         </tbody>
     </table>
 </div>
+<div>
+	links pagination
+</div>
+
 
 <script type="text/javascript">
     var rows = [];
@@ -35,6 +39,7 @@
 	const ingredientNameInput = document.getElementById("nameInput");
 	const saveButton = document.getElementById("saveButton");
 	saveButton.addEventListener("click", onSave);
+
 	const url = "http://localhost:8000/api/ingredients";
 
 	function showErrors(errors) {
@@ -174,7 +179,8 @@
 		try {
 			const response = await fetch(url);
 			const json = await response.json();
-			rows = json.data;
+			//rows = json.data; // Sense paginar
+			rows = json.data.data; // Per paginar
 			var i = 0;
 			for(const row of rows) {				
 				afegirFila(row);
@@ -207,6 +213,25 @@
         }
     }
     
+	async function provaPaginate() {
+		try {
+			const response = await fetch(url);
+			const json = await response.json();
+			links = json.data.links;
+			for (let index = 0; index < links.length; index++) {
+				const element = links[index];
+				//console.log(element); // tots
+				if(element.active != false) {
+					console.log(element); // actius
+				}
+			}
+		} catch(error) {
+			errors.innerHTML = "No se";
+		}
+	}
+
+	provaPaginate();
+
     //getToken();
     //getUser();
 
