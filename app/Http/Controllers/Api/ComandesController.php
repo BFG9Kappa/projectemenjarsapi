@@ -145,6 +145,7 @@ class ComandesController extends Controller
         }
         $comanda->nom = $input['nom'];
         $comanda->preu = $input['preu'];
+        $comanda->estat = $input['estat'];
         $comanda->save();
         $response = [
             'success' => true,
