@@ -188,7 +188,7 @@
 			rows = json.data.data;
 			const links = json.data.links;
 			var i = 0;
-			for(const row of rows) {				
+			for(const row of rows) {
 				afegirFila(row);
 			}
 			afegirLinks(links);

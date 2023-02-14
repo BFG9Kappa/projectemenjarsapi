@@ -34,10 +34,18 @@
     </table>
 </div>
 
+<nav class="mt-2">
+	<ul id="pagination" class="pagination">
+	</ul>
+</nav>
+
 <script type="text/javascript">
     var rows = [];
 	var operation = "inserting";
 	var selectedId;
+
+	const pagination = document.getElementById("pagination");
+
 	const table = document.getElementById("taula");
 	const divErrors = document.getElementById("errors");
 	divErrors.style.display = "none";
@@ -220,15 +228,41 @@
 		try {
 			const response = await fetch(url);
 			const json = await response.json();
-			rows = json.data;
+			rows = json.data.data;
+			const links = json.data.links;
 			var i = 0;
 			for(const row of rows) {				
 				afegirFila(row);
 			}
+			afegirLinks(links);
 		}
 		catch(error) {
 			errors.innerHTML = "No es pot accedir a la base de dades";
 		}
+	}
+
+	function afegirLinks(links) {
+        for(const link of links) {
+            afegirBoto(link);
+        }
+    }
+
+	function afegirBoto(link) {
+        const pagLi = document.createElement("li");
+        pagLi.classList.add("page-item");
+        const pagAnchor = document.createElement("a");
+        pagAnchor.innerHTML = link.label;
+        pagAnchor.addEventListener("click", function(event) { paginate(link.url) });
+        pagAnchor.classList.add("page-link");
+        pagAnchor.setAttribute("href", "#");
+        pagLi.appendChild(pagAnchor);
+        pagination.appendChild(pagLi);
+	}
+
+	function paginate(url) {
+		pagination.innerHTML = "";
+		taula.innerHTML = "";
+		loadIntoTable(url);
 	}
 
     async function getToken() {
