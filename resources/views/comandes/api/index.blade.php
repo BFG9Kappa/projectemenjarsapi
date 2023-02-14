@@ -8,15 +8,14 @@
     <label for="preuInput">Preu</label>
     <input type="text" id="preuInput">
     <label for="estatInput">Estat</label>
-    <!--<input type="text" id="estatInput"> -->
-    <select class="form-select" aria-label="Default select example" name="estatInput" id="estatInput">
+    <select name="estatInput" id="estatInput">
 		<option value="En proces" >En proces</option>
 		<option value="Enviat" >Enviat</option>
 		<option value="Rebut" >Rebut</option>
 	</select>
     <button class="btn btn-primary btn-sm" id="saveButton">Desar</button>
 </div>
-<br/>
+<br>
 
 <div id="errors" class="alert alert-danger" role="alert"></div>
 
@@ -34,16 +33,12 @@
         <tbody id="taula">
         </tbody>
     </table>
-
-    <nav class="mt-2">
-        <ul id="pagination" class="pagination">
-
-        </ul>
-
-    </nav>
-
-
 </div>
+
+<nav class="mt-2">
+    <ul id="pagination" class="pagination">
+    </ul>
+</nav>
 
 <script type="text/javascript">
     var rows = [];
@@ -221,11 +216,10 @@
 		try {
 			const response = await fetch(url);
 			const json = await response.json();
-			//rows = json.data;
             rows = json.data.data;
             const links= json.data.links;
 			var i = 0;
-			for(const row of rows) {				
+			for(const row of rows) {
 				afegirFila(row);
 			}
 		afegirLinks(links);

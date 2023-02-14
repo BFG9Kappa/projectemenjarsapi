@@ -7,7 +7,7 @@
     <input type="text" id="nameInput">
     <button class="btn btn-primary btn-sm" id="saveButton">Desar</button>
 </div>
-<br/>
+<br>
 
 <div id="errors" class="alert alert-danger" role="alert"></div>
 
@@ -24,7 +24,6 @@
         </tbody>
     </table>
 </div>
-
 
 <nav class="mt-2">
 	<ul id="pagination" class="pagination">
@@ -207,6 +206,12 @@
 	function afegirBoto(link) {
         const pagLi = document.createElement("li");
         pagLi.classList.add("page-item");
+
+		if(link.url == null)
+			pagLi.classList.add("disabled");
+		if(link.active == true)
+			pagLi.classList.add("active");
+
         const pagAnchor = document.createElement("a");
         pagAnchor.innerHTML = link.label;
         pagAnchor.addEventListener("click", function(event) { paginate(link.url) });
@@ -221,27 +226,6 @@
 		taula.innerHTML = "";
 		loadIntoTable(url);
 	}
-
-/*
-	async function provaPaginate() {
-		try {
-			const response = await fetch(url);
-			const json = await response.json();
-			links = json.data.links;
-			for (let index = 0; index < links.length; index++) {
-				const element = links[index];
-				//console.log(element); // tots
-				if(element.url != null) {
-					console.log(element); // no buit
-				}
-			}
-		} catch(error) {
-			errors.innerHTML = "No se";
-		}
-	}
-*/
-
-
 
     async function getToken() {
         try {
