@@ -240,12 +240,11 @@
         const pagLi = document.createElement("li");
         pagLi.classList.add('page-item')
      
-        if(link.url==null) //deshavilitar previous i next
+        if(link.url == null) //deshavilitar previous i next
             pagLi.classList.add('disabled')
-        if(link.active==true) //senyalitza la pàgina on estem
+        if(link.active == true) //senyalitza la pàgina on estem
             pagLi.classList.add('active')
             
-
         const pagAnchor = document.createElement("a");
         pagAnchor.innerHTML =link.label;
         pagAnchor.addEventListener('click',function(event){paginate(link.url)});
@@ -256,16 +255,12 @@
         pagination.appendChild(pagLi);
     }
 
-        function paginate(url){
-            console.log("HOla");
-            console.log(url)
-            pagination.innerHTML = "";
-            taula.innerHTML = "";
-            loadIntoTable(url)
-        }
-
-
-
+    function paginate(url) {
+        //console.log(url)
+        pagination.innerHTML = "";
+        taula.innerHTML = "";
+        loadIntoTable(url);
+    }
 
     async function getToken() {
         try {
@@ -289,8 +284,8 @@
         }
     }
 
-    //getToken();
-    //getUser();
+    getToken();
+    getUser();
 
     loadIntoTable(url);
 

@@ -30,7 +30,6 @@
 	</ul>
 </nav>
 
-
 <script type="text/javascript">
     var rows = [];
 	var operation = "inserting";
@@ -249,8 +248,8 @@
         }
     }
 
-    //getToken();
-    //getUser();
+    getToken();
+    getUser();
 
 	loadIntoTable(url);
     
