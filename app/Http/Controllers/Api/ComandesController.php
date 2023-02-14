@@ -17,7 +17,8 @@ class ComandesController extends Controller
      */
     public function index()
     {
-        $comandes = Comanda::all(['id','nom', 'preu', 'estat']);
+        //$comandes = Comanda::all(['id','nom', 'preu', 'estat']);
+        $comandes = Comanda::paginate(5);
         $response = [
             'success' => true,
             'message' => "Llistat de comandes recuperat",
