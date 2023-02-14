@@ -17,7 +17,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all(['id', 'nom', 'cognoms', 'direccio', 'telefon']);
+        //$clients = Client::all(['id', 'nom', 'cognoms', 'direccio', 'telefon']);
+        $clients = Client::paginate(5);
         $response = [
             'success' => true,
             'message' => "Llistat de clients recuperat",

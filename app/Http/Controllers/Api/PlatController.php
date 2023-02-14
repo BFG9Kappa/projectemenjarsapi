@@ -17,7 +17,8 @@ class PlatController extends Controller
      */
     public function index()
     {
-        $plats = Plat::all(['id', 'nom', 'preu']);
+        //$plats = Plat::all(['id', 'nom', 'preu']);
+        $plats = Plat::paginate(5); // Per paginar
         $response = [
             'success' => true,
             'message' => "Llistat de plats recuperat",

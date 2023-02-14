@@ -245,6 +245,12 @@
     function afegirBoto(link){
         const pagLi = document.createElement("li");
         pagLi.classList.add('page-item')
+     
+        if(link.url==null) //deshavilitar previous i next
+            pagLi.classList.add('disabled')
+        if(link.active==true) //senyalitza la pàgina on estem
+            pagLi.classList.add('active')
+            
 
         const pagAnchor = document.createElement("a");
         pagAnchor.innerHTML =link.label;
