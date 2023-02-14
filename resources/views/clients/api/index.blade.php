@@ -13,7 +13,7 @@
     <input type="text" id="phoneInput">
     <button class="btn btn-primary btn-sm" id="saveButton">Desar</button>
 </div>
-<br/>
+<br>
 
 <div id="errors" class="alert alert-danger" role="alert"></div>
 
@@ -293,8 +293,8 @@
         }
     }
     
-    //getToken();
-    //getUser();
+    getToken();
+    getUser();
 
 	loadIntoTable(url);
     
