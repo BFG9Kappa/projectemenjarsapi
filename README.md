@@ -66,6 +66,8 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Comandes
+
+### Per importar el projecte
 ```sh
 composer install
 cp .env.example .env
@@ -73,4 +75,12 @@ php artisan key:generate
 npm install
 npm run build
 php artisan migrate:fresh --seed
+```
+### Per correr els tests
+```sh
+./vendor/bin/phpunit
+```
+o
+```sh
+php artisan test
 ```
