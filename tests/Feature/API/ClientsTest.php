@@ -6,14 +6,17 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ApiPlatsModuleTest extends TestCase
+class ClientsTest extends TestCase
 {
-
-    /** @test */
-    public function loads_api_plats_list_page()
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_example()
     {
-        $response = $this->get('/api/plats');
+        $response = $this->get('/');
+
         $response->assertStatus(200);
     }
-
 }

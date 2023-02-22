@@ -62,11 +62,11 @@ class IngredientController extends Controller
         }
         $ingredient = Ingredient::create($input);
         $response = [
-            'success' => false,
+            'success' => true,
             'message' => 'Alta correcta',
             'data' => $ingredient,
         ];
-        return response()->json($response, 200);
+        return response()->json($response, 201);
     }
 
     /**
@@ -84,7 +84,7 @@ class IngredientController extends Controller
               'message' => 'Ingredient no trobat',
               'data' => [],
             ];
-            return response()->json($response, 404); 
+            return response()->json($response, 404);
         }
         else {
             $response = [
@@ -174,7 +174,7 @@ class IngredientController extends Controller
                 'message' => 'Ingredient esborrat',
                 'data' => $ingredient,
             ];
-            return response()->json($response,200);
+            return response()->json($response,200); // Tindrie que ser 204, pero no acabe de anar del tot bé.
         } catch(\Excepetion $e) {
             $response = [
                 'success' => false,

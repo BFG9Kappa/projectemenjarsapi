@@ -64,7 +64,7 @@ class ComandesController extends Controller
         }
         $comanda = Comanda::create($input);
         $response = [
-            'success' => false,
+            'success' => true,
             'message' => 'Alta correcta',
             'data' => $comanda,
         ];
@@ -86,7 +86,7 @@ class ComandesController extends Controller
               'message' => 'Comanda no trobada',
               'data' => [],
             ];
-            return response()->json($response, 404); 
+            return response()->json($response, 404);
         }
         else {
             $response = [
