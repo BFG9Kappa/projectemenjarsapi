@@ -68,7 +68,7 @@ class ComandesController extends Controller
             'message' => 'Alta correcta',
             'data' => $comanda,
         ];
-        return response()->json($response, 200);
+        return response()->json($response, 201);
     }
 
     /**

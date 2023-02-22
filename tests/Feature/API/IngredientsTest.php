@@ -17,13 +17,13 @@ class IngredientsTest extends TestCase
      **/
     public function llistat_carregue_correctament()
     {
-        // Crear 5 ingredientes de prueba
+        // Crear ingredientes de prova
         $ingredients = Ingredient::factory()->count(5)->create();
-        // Hacer una petición GET a la API para obtener todos los ingredientes
+        // Fer peticio GET a la API per obtenir tots els ingredients
         $response = $this->get('/api/ingredients');
-        // Comprobar que se devuelve una respuesta exitosa
+        // Comprovar que es torni una resposta exitosa
         $response->assertStatus(200);
-        // Comprobar que se muestran los nombres de todos los ingredientes
+        // Comprovar que es mostrin els noms de tots els ingredients
         foreach ($ingredients as $ingredient) {
             $response->assertJsonFragment([
                 'nom' => $ingredient->nom
@@ -37,13 +37,13 @@ class IngredientsTest extends TestCase
      **/
     public function es_pot_crear_ingredient()
     {
-        // Hacer una petición POST para crear un usuario
+        // Fer una peticio POST per crear un ingredient
         $response = $this->post('/api/ingredients', [
             'nom' => 'Ingredient secret',
         ]);
-        // Comprobar que se devuelve el código de respuesta correcto
+        // Comprovar que es torni una resposta exitosa
         $response->assertStatus(201);
-        // Comprobar que el usuario ha sido creado en la base de datos
+        // Comprovar que el ingredient s’ha creat en la base de dades
         $this->assertDatabaseHas('ingredients', [
             'nom' => 'Ingredient secret',
         ]);
@@ -55,13 +55,13 @@ class IngredientsTest extends TestCase
      **/
     public function es_pot_mostrar_ingredient()
     {
-        // Crear un ingrediente
+        // Crear un ingredient
         $ingredient = Ingredient::factory()->create();
-        // Hacer una petición GET a la ruta para mostrar el ingrediente
+        // Fer una peticio GET a la ruta para mostrar el ingredient
         $response = $this->get('/api/ingredients/' . $ingredient->id);
-        // Verificar que la respuesta tiene el código HTTP 200
+        // Verificar que la resposta te el codi HTTP 200
         $response->assertStatus(200);
-        // Verificar que la respuesta tiene el formato correcto
+        // Verificar que la resposta te el format correcte
         $response->assertJsonStructure([
             'success',
             'message',
@@ -72,7 +72,7 @@ class IngredientsTest extends TestCase
                 'updated_at'
             ]
         ]);
-        // Verificar que la respuesta contiene la información correcta del ingrediente
+        // Verificar que la resposta conte la informacio correcta del ingredient
         $response->assertJson([
             'success' => true,
             'message' => 'Ingredient recuperat',
@@ -91,15 +91,15 @@ class IngredientsTest extends TestCase
      **/
     public function es_pot_actualitzar_ingredient()
     {
-        // Crear un usuario de prueba
+        // Crear un ingredient de prova
         $ingredient = Ingredient::factory()->create();
-        // Hacer una petición PUT para actualizar el usuario
+        // Fer una peticio PUT per actualitzar el ingredient
         $response = $this->put("/api/ingredients/{$ingredient->id}", [
             'nom' => 'Ingredient actualitzat',
         ]);
-        // Comprobar que se devuelve el código de respuesta correcto
+        // Comprovar que es torni una resposta exitosa
         $response->assertStatus(200);
-        // Comprobar que el usuario ha sido actualizado en la base de datos
+        // Comprovar que el ingredient s’ha actualitzat en la base de dades
         $this->assertDatabaseHas('ingredients', [
             'id' => $ingredient->id,
             'nom' => 'Ingredient actualitzat',
@@ -112,15 +112,14 @@ class IngredientsTest extends TestCase
      **/
     public function es_pot_esborrar_ingredient()
     {
-        // Crear un usuario de prueba
+        // Crear un ingredient de prova
         $ingredient = Ingredient::factory()->create();
-        // Hacer una petición DELETE para eliminar el usuario
+        // Fer una peticio DELETE per eliminar el ingredient
         $response = $this->delete("/api/ingredients/{$ingredient->id}");
-        // Comprobar que se devuelve el código de respuesta correcto
+        // Comprovar que es torne el codi de resposta correcte
         $response->assertStatus(200); // Tindrie que ser 204;
-        // Comprobar que el usuario ha sido eliminado de la base de datos
+        // Comprovar que el ingredient s’ha eliminat de la base de dades
         $this->assertDatabaseMissing('ingredients', ['id' => $ingredient->id]);
     }
-
 
 }
