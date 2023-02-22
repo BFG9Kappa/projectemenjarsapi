@@ -76,11 +76,15 @@ npm install
 npm run build
 php artisan migrate:fresh --seed
 ```
-### Per correr els tests
+### Per correr tots els tests
 ```sh
 ./vendor/bin/phpunit
 ```
 o
 ```sh
 php artisan test
+```
+### Per correr els test de la api
+```sh
+php artisan test --group api
 ```
