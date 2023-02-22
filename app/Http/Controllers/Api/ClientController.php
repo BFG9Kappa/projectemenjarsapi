@@ -65,7 +65,7 @@ class ClientController extends Controller
         }
         $client = Client::create($input);
         $response = [
-            'success' => false,
+            'success' => true,
             'message' => 'Alta correcta',
             'data' => $client,
         ];
@@ -87,7 +87,7 @@ class ClientController extends Controller
               'message' => 'Client no trobat',
               'data' => [],
             ];
-            return response()->json($response, 404); 
+            return response()->json($response, 404);
         }
         else {
             $response = [

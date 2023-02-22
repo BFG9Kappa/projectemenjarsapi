@@ -154,7 +154,7 @@
 	async function deleteData(event) {
 		try {
 			const id = event.target.closest("tr").id;
-			response = await fetch(url + '/' + id, { method: 'DELETE'});
+			response = await fetch(url + '/' + id, { method: 'DELETE' });
 			const json = await response.json();
 			if(response.ok) {
 					const row = document.getElementById(id);
@@ -178,7 +178,7 @@
 		console.log("Editant: " + selectedId + " " + nom);
 		console.log(row);
 	}
-	
+
 	async function loadIntoTable(url) {
 		try {
 			const response = await fetch(url);
@@ -252,7 +252,7 @@
     getUser();
 
 	loadIntoTable(url);
-    
+
 </script>
 
 @endsection

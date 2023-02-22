@@ -63,7 +63,7 @@ class PlatController extends Controller
         }
         $plat = Plat::create($input);
         $response = [
-            'success' => false,
+            'success' => true,
             'message' => 'Alta correcta',
             'data' => $plat,
         ];
@@ -84,7 +84,7 @@ class PlatController extends Controller
               'success' => false,
               'message' => 'Plat no trobat',
             ];
-            return response()->json($response, 404); 
+            return response()->json($response, 404);
         }
         else {
             $response = [
