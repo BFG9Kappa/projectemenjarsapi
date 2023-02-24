@@ -69,7 +69,7 @@ class ClientController extends Controller
             'message' => 'Alta correcta',
             'data' => $client,
         ];
-        return response()->json($response, 200);
+        return response()->json($response, 201);
     }
 
     /**
