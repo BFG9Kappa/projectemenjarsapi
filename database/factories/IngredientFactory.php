@@ -17,7 +17,7 @@ class IngredientFactory extends Factory
     public function definition()
     {
         return [
-            'nom' => $this->faker->unique()->word(3),
+            'nom' => $this->faker->unique()->word(3, 30),
         ];
     }
 }

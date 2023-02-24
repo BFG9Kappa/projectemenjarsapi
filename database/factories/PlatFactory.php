@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comanda>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Plat>
  */
-class ComandaFactory extends Factory
+class PlatFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +17,8 @@ class ComandaFactory extends Factory
     public function definition()
     {
         return [
-            'nom' => $this->faker->word(3, 20),
+            'nom' => $this->faker->word(3, 50),
             'preu' => $this->faker->randomFloat(2, 0, 100),
-            'estat' => $this->faker->randomElement(['En proces', 'Enviat', 'Rebut']),
         ];
     }
 }

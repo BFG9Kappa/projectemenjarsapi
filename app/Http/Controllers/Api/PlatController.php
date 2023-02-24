@@ -67,7 +67,7 @@ class PlatController extends Controller
             'message' => 'Alta correcta',
             'data' => $plat,
         ];
-        return response()->json($response, 200);
+        return response()->json($response, 201);
     }
 
     /**
@@ -83,6 +83,7 @@ class PlatController extends Controller
             $response = [
               'success' => false,
               'message' => 'Plat no trobat',
+              'data' => [],
             ];
             return response()->json($response, 404);
         }
@@ -90,7 +91,7 @@ class PlatController extends Controller
             $response = [
               'success' => true,
               'message' => 'Plat recuperat',
-              'data' => [],
+              'data' => $plat,
             ];
             return response()->json($response, 200);
         }
