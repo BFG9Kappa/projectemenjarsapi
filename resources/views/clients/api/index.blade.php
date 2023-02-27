@@ -25,8 +25,8 @@
                 <th>Nom</th>
                 <th>Cognoms</th>
                 <th>Direcció</th>
-                <th>Teléfon</th>  
-                <th>Operacions</th> 
+                <th>Teléfon</th>
+                <th>Operacions</th>
             </tr>
         </thead>
         <tbody id="taula">
@@ -49,7 +49,7 @@
 	const table = document.getElementById("taula");
 	const divErrors = document.getElementById("errors");
 	divErrors.style.display = "none";
-    
+
 	const clientNameInput = document.getElementById("nameInput");
     const clientSurnameInput = document.getElementById("lastnameInput");
     const clientAdressInput = document.getElementById("adressInput");
@@ -223,7 +223,7 @@
 		console.log("Editant: " + selectedId + " " + nom + " " + cognoms + " " + direccio + " " + telefon);
 		console.log(row);
 	}
-	
+
 	async function loadIntoTable(url) {
 		try {
 			const response = await fetch(url);
@@ -231,7 +231,7 @@
 			rows = json.data.data;
 			const links = json.data.links;
 			var i = 0;
-			for(const row of rows) {				
+			for(const row of rows) {
 				afegirFila(row);
 			}
 			afegirLinks(links);
@@ -278,7 +278,7 @@
             window.localStorage.setItem("token", json.token);
             console.log(json);
         } catch (error) {
-            console.log("error");
+            console.log(error);
         }
     }
 
@@ -289,15 +289,15 @@
             window.localStorage.setItem("token", json.token);
             console.log(json);
         } catch (error) {
-            console.log("error");
+            console.log(error);
         }
     }
-    
+
     getToken();
-    getUser();
+    //getUser();
 
 	loadIntoTable(url);
-    
+
 </script>
 
 @endsection

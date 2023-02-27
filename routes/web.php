@@ -96,10 +96,9 @@ Route::get('/taulacomandes', function () {
 Route::get('/token', function (Request $request) {
     if(auth()->check()) {
         $token = auth()->user()->createToken("prova");
-        return response()->json(['token'=> $token->plainTextToken],200);
+        return response()->json(['token'=> $token->plainTextToken], 200);
     }
     else{
-        return response()->jason("Not Autorized, te enteras",405);
+        return response()->json("Not autorized", 405);
     }
-
 });
