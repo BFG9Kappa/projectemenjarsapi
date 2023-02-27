@@ -294,7 +294,7 @@
     }
 
     getToken();
-    //getUser();
+    getUser();
 
 	loadIntoTable(url);
 
