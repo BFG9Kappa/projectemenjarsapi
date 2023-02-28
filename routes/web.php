@@ -99,7 +99,7 @@ Route::get('/token', function (Request $request) {
         return response()->json(['token'=> $token->plainTextToken],200);
     }
     else{
-        return response()->jason("Not Autorized, te enteras",405);
+        return response()->json("Not Autorized, te enteras",405);
     }
 
 });
