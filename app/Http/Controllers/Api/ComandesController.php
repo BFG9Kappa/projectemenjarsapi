@@ -19,6 +19,7 @@ class ComandesController extends Controller
     {
         //$comandes = Comanda::all(['id','nom', 'preu', 'estat']);
         $comandes = Comanda::paginate(5);
+        $comandes->load('plats');
         $response = [
             'success' => true,
             'message' => "Llistat de comandes recuperat",
