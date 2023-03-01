@@ -273,18 +273,7 @@
 
     async function getToken() {
         try {
-            const response = await fetch("http://localhost:8000/token");
-            const json = await response.json();
-            window.localStorage.setItem("token", json.token);
-            console.log(json);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async function getUser() {
-        try {
-            const response = await fetch("http://localhost:8000/api/user");
+            const response = await fetch("http://127.0.0.1:8000/token");
             const json = await response.json();
             window.localStorage.setItem("token", json.token);
             console.log(json);
@@ -296,12 +285,23 @@
     /*
     async function getUser() {
         try {
+            const response = await fetch("http://localhost:8000/api/user");
+            const json = await response.json();
+            window.localStorage.setItem("token", json.token);
+            console.log(json);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+*/
+
+    async function getUser() {
+        try {
             const token = window.localStorage.getItem("token");
-            const response = await fetch("http://localhost:8000/api/user", {
+            const response = await fetch("http://localhost:8000/api/clients", {
                 headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
                 }
             });
             const json = await response.json();
@@ -310,7 +310,7 @@
             console.log(error);
         }
     }
-    */
+
 
     getToken();
     getUser();

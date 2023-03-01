@@ -42,14 +42,17 @@
             <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">API</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ url('api/plats') }}">Plats</a>
+                <a class="dropdown-item" href="{{ url('api/ingredients') }}">Igredients</a>
+                <a class="dropdown-item" href="{{ url('api/comandes') }}">Comandes</a>
+                <a class="dropdown-item" href="{{ url('api/clients') }}">Clients</a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ url('taulaplats') }}">Taula plats</a>
                 <a class="dropdown-item" href="{{ url('taulaingredients') }}">Taula ingredients</a>
                 <a class="dropdown-item" href="{{ url('taulacomandes') }}">Taula comandes</a>
                 <a class="dropdown-item" href="{{ url('taulaclients') }}">Taula clients</a>
-                <!--
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-                -->
+                <a class="dropdown-item" href="{{ url('token') }}">Token</a>
               </div>
             </li>
           </ul>
@@ -89,7 +92,7 @@
       </div>
     </nav>
     <br/>
-    <div class="container"> 
+    <div class="container">
       @yield('content')
     </div>
     <!-- Optional JavaScript -->
