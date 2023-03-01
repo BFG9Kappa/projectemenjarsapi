@@ -94,11 +94,17 @@ Route::get('/taulacomandes', function () {
 });
 
 Route::get('/token', function (Request $request) {
-    if(auth()->check()) {
-        $token = auth()->user()->createToken("prova");
-        return response()->json(['token'=> $token->plainTextToken], 200);
-    }
-    else{
-        return response()->json("Not autorized", 405);
-    }
+	if(auth()->check()) {
+		//auth()->user()->tokens()->delete();
+		$token = auth()->user()->createToken('prova');
+		return response()->json(['token' => $token->plainTextToken], 200);
+	} else {
+		return response()->json('Not authorized', 405);
+	}
 });
+
+/*
+Route::get("/prova", function() {
+	return "Estas autentificat!";
+})->middleware("auth");
+*/

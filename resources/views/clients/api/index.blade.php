@@ -293,6 +293,25 @@
         }
     }
 
+    /*
+    async function getUser() {
+        try {
+            const token = window.localStorage.getItem("token");
+            const response = await fetch("http://localhost:8000/api/user", {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                }
+            });
+            const json = await response.json();
+            console.log(json);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    */
+
     getToken();
     getUser();
 
