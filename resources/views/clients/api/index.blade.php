@@ -190,23 +190,30 @@
 		taula.appendChild(rowElement);
 	}
 
-	async function deleteData(event) {
-		try {
-			const id = event.target.closest("tr").id;
-			response = await fetch(url + '/' + id, { method: 'DELETE'});
-			const json = await response.json();
-			if(response.ok) {
-					const row = document.getElementById(id);
-					row.remove();
-                } else {
-				divErrors.style.display = "block";
-				errors.innerHTML = "No es pot esborrar";
-			}
-		} catch(error) {
-			divErrors.style.display = "block";
-			errors.innerHTML = "No es pot esborrar";
-		}
-	}
+    async function deleteData(event) {
+        try {
+            const id = event.target.closest("tr").id;
+            const token = window.localStorage.getItem("token");
+            const response = await fetch(url + '/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const json = await response.json();
+            if (response.ok) {
+                const row = document.getElementById(id);
+                row.remove();
+            } else {
+                divErrors.style.display = "block";
+                errors.innerHTML = "No es pot esborrar";
+            }
+        } catch (error) {
+            divErrors.style.display = "block";
+            errors.innerHTML = "No es pot esborrar";
+        }
+    }
 
 	async function editData(event, row) {
 		operation = "editing";
