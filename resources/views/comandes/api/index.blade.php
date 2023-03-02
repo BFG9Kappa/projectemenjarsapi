@@ -9,9 +9,9 @@
     <input type="text" id="preuInput">
     <label for="estatInput">Estat</label>
     <select name="estatInput" id="estatInput">
-		<option value="En proces" >En proces</option>
-		<option value="Enviat" >Enviat</option>
-		<option value="Rebut" >Rebut</option>
+		<option value="En proces">En proces</option>
+		<option value="Enviat">Enviat</option>
+		<option value="Rebut">Rebut</option>
 	</select>
     <button class="btn btn-primary btn-sm" id="saveButton">Desar</button>
 </div>
@@ -126,7 +126,7 @@
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
                 },
                 body: JSON.stringify(newComanda)
             });
