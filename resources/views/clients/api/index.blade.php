@@ -232,7 +232,8 @@
                     "Accept": "application/json",
                     "Access-Control-Request-Headers": "*",
                     "Authorization": `Bearer ${token}`
-                }});
+                }
+            });
 			const json = await response.json();
 			rows = json.data.data;
 			const links = json.data.links;

@@ -44,9 +44,9 @@
     var rows = [];
 	var operation = "inserting";
 	var selectedId;
-   
+
     const pagination = document.getElementById('pagination');
-   
+
     const table = document.getElementById("taula");
     const divErrors = document.getElementById("errors");
 	divErrors.style.display = "none";
@@ -104,7 +104,7 @@
 				comandaNameInput.value = "";
                 comandaPreuInput.value = "";
                 comandaEstatInput.value = "";
-				
+
                 operation = "inserting";
 			} else {
                 showErrors(data.data)
@@ -147,7 +147,7 @@
         rowElement.setAttribute("name", row.nom);
         rowElement.setAttribute("preu", row.preu);
         rowElement.setAttribute("estat", row.estat);
-        
+
         const idCell = document.createElement("td");
         idCell.textContent = row.id;
 
@@ -159,7 +159,7 @@
 
         const estatCell = document.createElement("td");
         estatCell.textContent = row.estat;
- 
+
         const operationsCell = document.createElement("td");
         const updateButton = document.createElement("button");
 		updateButton.innerHTML = "Actualitzar";
@@ -213,8 +213,15 @@
 	}
 
     async function loadIntoTable(url) {
-		try {
-			const response = await fetch(url);
+        try {
+            const token = window.localStorage.getItem("token");
+			const response = await fetch(url, {
+                headers: {
+                    "Accept": "application/json",
+                    "Access-Control-Request-Headers": "*",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
 			const json = await response.json();
             rows = json.data.data;
             const links= json.data.links;
@@ -239,18 +246,18 @@
     function afegirBoto(link){
         const pagLi = document.createElement("li");
         pagLi.classList.add('page-item')
-     
+
         if(link.url == null) //deshavilitar previous i next
             pagLi.classList.add('disabled')
         if(link.active == true) //senyalitza la pàgina on estem
             pagLi.classList.add('active')
-            
+
         const pagAnchor = document.createElement("a");
         pagAnchor.innerHTML =link.label;
         pagAnchor.addEventListener('click',function(event){paginate(link.url)});
         pagAnchor.classList.add('page-link');
         pagAnchor.setAttribute('href',"#");
-       
+
         pagLi.appendChild(pagAnchor);
         pagination.appendChild(pagLi);
     }
@@ -264,30 +271,38 @@
 
     async function getToken() {
         try {
-            const response = await fetch("http://localhost:8000/token");
+            const response = await fetch("http://127.0.0.1:8000/token");
             const json = await response.json();
             window.localStorage.setItem("token", json.token);
             console.log(json);
         } catch (error) {
-            console.log("error");
+            console.log(error);
         }
     }
 
     async function getUser() {
         try {
-            const response = await fetch("http://localhost:8000/api/user");
+            const token = window.localStorage.getItem("token");
+            const response = await fetch("http://127.0.0.1:8000/api/comandes", {
+                headers: {
+                    "Accept": "application/json",
+                    "Access-Control-Request-Headers": "*",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
             const json = await response.json();
-            window.localStorage.setItem("token", json.token);
             console.log(json);
         } catch (error) {
-            console.log("error");
+            console.log(error);
         }
     }
 
-    getToken();
-    getUser();
+    async function getInfo() {
+       await getToken();
+       await loadIntoTable(url);
+    }
 
-    loadIntoTable(url);
+    getInfo();
 
 </script>
 
