@@ -44,9 +44,9 @@
     var rows = [];
 	var operation = "inserting";
 	var selectedId;
-   
+
     const pagination = document.getElementById('pagination');
-   
+
     const table = document.getElementById("taula");
     const divErrors = document.getElementById("errors");
 	divErrors.style.display = "none";
@@ -104,7 +104,7 @@
 				comandaNameInput.value = "";
                 comandaPreuInput.value = "";
                 comandaEstatInput.value = "";
-				
+
                 operation = "inserting";
 			} else {
                 showErrors(data.data)
@@ -147,7 +147,7 @@
         rowElement.setAttribute("name", row.nom);
         rowElement.setAttribute("preu", row.preu);
         rowElement.setAttribute("estat", row.estat);
-        
+
         const idCell = document.createElement("td");
         idCell.textContent = row.id;
 
@@ -159,13 +159,21 @@
 
         const estatCell = document.createElement("td");
         estatCell.textContent = row.estat;
- 
+
         const operationsCell = document.createElement("td");
+
         const updateButton = document.createElement("button");
 		updateButton.innerHTML = "Actualitzar";
         updateButton.classList.add("btn", "btn-primary");
 		updateButton.addEventListener("click", function (event) { editData(event, row) } );
 		operationsCell.appendChild(updateButton);
+
+        const platsButton = document.createElement("a");
+		platsButton.innerHTML = "Plats";
+        platsButton.classList.add("btn", "btn-primary");
+        platsButton.href='/comandesplats';
+
+        operationsCell.appendChild(platsButton);
 
 		const deleteButton = document.createElement("button");
         deleteButton.innerHTML = "Esborrar";
@@ -178,7 +186,10 @@
         rowElement.appendChild(estatCell);
         rowElement.appendChild(operationsCell);
         table.appendChild(rowElement);
+
     }
+
+
 
 	async function deleteData(event) {
 		try {
@@ -239,18 +250,18 @@
     function afegirBoto(link){
         const pagLi = document.createElement("li");
         pagLi.classList.add('page-item')
-     
+
         if(link.url == null) //deshavilitar previous i next
             pagLi.classList.add('disabled')
         if(link.active == true) //senyalitza la pàgina on estem
             pagLi.classList.add('active')
-            
+
         const pagAnchor = document.createElement("a");
         pagAnchor.innerHTML =link.label;
         pagAnchor.addEventListener('click',function(event){paginate(link.url)});
         pagAnchor.classList.add('page-link');
         pagAnchor.setAttribute('href',"#");
-       
+
         pagLi.appendChild(pagAnchor);
         pagination.appendChild(pagLi);
     }
@@ -284,8 +295,8 @@
         }
     }
 
-    getToken();
-    getUser();
+    //getToken();
+    //getUser();
 
     loadIntoTable(url);
 
