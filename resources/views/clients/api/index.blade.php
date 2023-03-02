@@ -43,6 +43,7 @@
     var rows = [];
 	var operation = "inserting";
 	var selectedId;
+    var token;
 
 	const pagination = document.getElementById("pagination");
 
@@ -76,7 +77,7 @@
 		if(operation == "editing") updateData();
 	}
 
-	async function updateData(event) { // canviar
+	async function updateData(event) {
 		var newClient = {
 			"nom" : clientNameInput.value,
             "cognoms" : clientSurnameInput.value,
@@ -84,15 +85,17 @@
             "telefon" : clientPhoneInput.value
 		}
 		try {
-			const response = await fetch(url + "/" + selectedId,
+            const token = window.localStorage.getItem("token");
+			const response = await fetch(url + '/' + selectedId,
             {
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(newClient)
-            })
+            });
 			const data = await response.json();
 			if(response.ok) {
 				const nameid = document.getElementById("name" + data.data.id);
@@ -129,12 +132,14 @@
             "telefon" : clientPhoneInput.value
 		}
 		try {
+            const token = window.localStorage.getItem("token");
 			const response = await fetch(url,
             {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(newClient)
             })
@@ -144,7 +149,7 @@
 			} else {
                 showErrors(data.data);
 			}
-		} catch(error) {
+		} catch (error) {
 			errors.innerHTML = "S'ha produit un error inesperat";
 		}
 	}
