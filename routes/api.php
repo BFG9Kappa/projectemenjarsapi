@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\ClientController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,4 +28,5 @@ Route::middleware('auth:sanctum')->group( function () {
 Route::resource('/plats', App\Http\Controllers\Api\PlatController::class);
 Route::resource('/ingredients', App\Http\Controllers\Api\IngredientController::class);
 Route::resource('/comandes', App\Http\Controllers\Api\ComandesController::class);
+
 

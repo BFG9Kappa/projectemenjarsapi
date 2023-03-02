@@ -93,16 +93,6 @@ Route::get('/taulacomandes', function () {
     return view('comandes.api.index');
 });
 
-/*
-Route::get('/taulaclients', function () {
-    if(auth()->check()) {
-        return view('/clients.api.index');
-    } else {
-        return response()->json('Not authorized', 405);
-    }
-});
-*/
-
 Route::get('/token', function (Request $request) {
 	if(auth()->check()) {
 		auth()->user()->tokens()->delete();

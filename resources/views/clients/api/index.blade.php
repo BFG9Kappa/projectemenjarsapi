@@ -226,7 +226,13 @@
 
 	async function loadIntoTable(url) {
 		try {
-			const response = await fetch(url);
+            const token = window.localStorage.getItem("token");
+			const response = await fetch(url, {
+                headers: {
+                    "Accept": "application/json",
+                    "Access-Control-Request-Headers": "*",
+                    "Authorization": `Bearer ${token}`
+                }});
 			const json = await response.json();
 			rows = json.data.data;
 			const links = json.data.links;
@@ -282,25 +288,13 @@
         }
     }
 
-    /*
-    async function getUser() {
-        try {
-            const response = await fetch("http://localhost:8000/api/user");
-            const json = await response.json();
-            window.localStorage.setItem("token", json.token);
-            console.log(json);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-*/
-
     async function getUser() {
         try {
             const token = window.localStorage.getItem("token");
-            const response = await fetch("http://localhost:8000/api/clients", {
+            const response = await fetch("http://127.0.0.1:8000/api/clients", {
                 headers: {
                     "Accept": "application/json",
+                    "Access-Control-Request-Headers": "*",
                     "Authorization": `Bearer ${token}`
                 }
             });
@@ -311,11 +305,14 @@
         }
     }
 
+    async function getInfo() {
+       await getToken();
+       await loadIntoTable(url);
+       //await  getUser();
+    }
 
-    getToken();
-    getUser();
+    getInfo();
 
-	loadIntoTable(url);
 
 </script>
 
