@@ -43,7 +43,7 @@
 	const table = document.getElementById("taula");
 	const divErrors = document.getElementById("errors");
 	divErrors.style.display = "none";
-    
+
 	const platNameInput = document.getElementById("nameInput");
     const platPreuInput = document.getElementById("preuInput");
 
@@ -144,7 +144,7 @@
 
 		const nameCell = document.createElement("td");
 		nameCell.textContent = row.nom;
-        
+
         const preuCell = document.createElement("td");
         preuCell.textContent = row.preu;
 
@@ -197,7 +197,7 @@
 		console.log("Editant: " + selectedId + " " + nom + " " + preu);
 		console.log(row);
 	}
-	
+
 	async function loadIntoTable(url) {
 		try {
 			const response = await fetch(url);
@@ -245,33 +245,8 @@
 		loadIntoTable(url);
 	}
 
-    async function getToken() {
-        try {
-            const response = await fetch("http://localhost:8000/token");
-            const json = await response.json();
-            window.localStorage.setItem("token", json.token);
-            console.log(json);
-        } catch (error) {
-            console.log("error");
-        }
-    }
-
-    async function getUser() {
-        try {
-            const response = await fetch("http://localhost:8000/api/user");
-            const json = await response.json();
-            window.localStorage.setItem("token", json.token);
-            console.log(json);
-        } catch (error) {
-            console.log("error");
-        }
-    }
-    
-    //getToken();
-    //getUser();
-
 	loadIntoTable(url);
-    
+
 </script>
 
 @endsection
