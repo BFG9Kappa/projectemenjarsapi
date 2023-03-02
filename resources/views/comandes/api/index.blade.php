@@ -300,6 +300,7 @@
     async function getInfo() {
        await getToken();
        await loadIntoTable(url);
+       //await getUser();
     }
 
     getInfo();
