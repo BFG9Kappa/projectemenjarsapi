@@ -168,9 +168,10 @@
 		updateButton.addEventListener("click", function (event) { editData(event, row) } );
 		operationsCell.appendChild(updateButton);
 
-        const platsButton = document.createElement("button");
+        const platsButton = document.createElement("a");
 		platsButton.innerHTML = "Plats";
         platsButton.classList.add("btn", "btn-primary");
+        platsButton.href='/comandesplats';
 
         operationsCell.appendChild(platsButton);
 
@@ -294,8 +295,8 @@
         }
     }
 
-    getToken();
-    getUser();
+    //getToken();
+    //getUser();
 
     loadIntoTable(url);
 
