@@ -161,11 +161,19 @@
         estatCell.textContent = row.estat;
 
         const operationsCell = document.createElement("td");
+
         const updateButton = document.createElement("button");
 		updateButton.innerHTML = "Actualitzar";
         updateButton.classList.add("btn", "btn-primary");
 		updateButton.addEventListener("click", function (event) { editData(event, row) } );
 		operationsCell.appendChild(updateButton);
+
+        const platsButton = document.createElement("a");
+		platsButton.innerHTML = "Plats";
+        platsButton.classList.add("btn", "btn-primary");
+        platsButton.href='/comandesplats';
+
+        operationsCell.appendChild(platsButton);
 
 		const deleteButton = document.createElement("button");
         deleteButton.innerHTML = "Esborrar";
@@ -178,7 +186,10 @@
         rowElement.appendChild(estatCell);
         rowElement.appendChild(operationsCell);
         table.appendChild(rowElement);
+
     }
+
+
 
 	async function deleteData(event) {
 		try {

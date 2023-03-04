@@ -93,6 +93,11 @@ Route::get('/taulacomandes', function () {
     return view('comandes.api.index');
 });
 
+Route::get('/comandesplats', function () {
+    return view('comandes.api.showPlats');
+});
+
+
 Route::get('/token', function (Request $request) {
 	if(auth()->check()) {
 		auth()->user()->tokens()->delete();

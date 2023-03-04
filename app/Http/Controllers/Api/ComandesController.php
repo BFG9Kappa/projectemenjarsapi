@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Comanda;
+use App\Models\Plat;
 use Validator;
 
 class ComandesController extends Controller
@@ -19,6 +20,7 @@ class ComandesController extends Controller
     {
         //$comandes = Comanda::all(['id','nom', 'preu', 'estat']);
         $comandes = Comanda::paginate(5);
+        //$comandes->load('plats');
         $response = [
             'success' => true,
             'message' => "Llistat de comandes recuperat",
@@ -188,5 +190,19 @@ class ComandesController extends Controller
             ];
             return response()->json($response,400);
         }
+    }
+
+
+    public function editPlats($id)
+    {
+        $comanda = Comanda::find($id);
+        $arrayId = $comanda->plat->pluck('id');
+        $plats = Plat::whereNotIn('id', $arrayId)->get();
+        $response = [
+            'success' => true,
+            'comanda' => $comanda,
+            'plats'=>$plats
+        ];
+        return response()->json($response,200);
     }
 }
