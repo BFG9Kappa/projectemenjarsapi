@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Laravel\Sanctum\HasApiTokens;
+
 class Comanda extends Model
 {
     public $table = "comandes"; // Perque si no agafe el plural de "comanda" com a "comandaS".
-    use HasFactory;
+    use HasFactory, HasApiTokens;
 
     protected $fillable = [
         'nom', 'preu', 'estat'

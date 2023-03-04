@@ -9,9 +9,9 @@
     <input type="text" id="preuInput">
     <label for="estatInput">Estat</label>
     <select name="estatInput" id="estatInput">
-		<option value="En proces" >En proces</option>
-		<option value="Enviat" >Enviat</option>
-		<option value="Rebut" >Rebut</option>
+		<option value="En proces">En proces</option>
+		<option value="Enviat">Enviat</option>
+		<option value="Rebut">Rebut</option>
 	</select>
     <button class="btn btn-primary btn-sm" id="saveButton">Desar</button>
 </div>
@@ -126,7 +126,7 @@
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
                 },
                 body: JSON.stringify(newComanda)
             });
@@ -194,7 +194,14 @@
 	async function deleteData(event) {
 		try {
 			const id = event.target.closest("tr").id;
-			response = await fetch(url + '/' + id, { method: 'DELETE'});
+            const token = window.localStorage.getItem("token");
+            const response = await fetch(url + '/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
 			const json = await response.json();
 			if(response.ok) {
 					const row = document.getElementById(id);
@@ -224,8 +231,15 @@
 	}
 
     async function loadIntoTable(url) {
-		try {
-			const response = await fetch(url);
+        try {
+            const token = window.localStorage.getItem("token");
+			const response = await fetch(url, {
+                headers: {
+                    "Accept": "application/json",
+                    "Access-Control-Request-Headers": "*",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
 			const json = await response.json();
             rows = json.data.data;
             const links= json.data.links;
@@ -240,8 +254,7 @@
 		}
 	}
 
-    function afegirLinks(links){
-        console.log(links);
+    function afegirLinks(links) {
         for (const link of links){
             afegirBoto(link)
         }
@@ -275,30 +288,39 @@
 
     async function getToken() {
         try {
-            const response = await fetch("http://localhost:8000/token");
+            const response = await fetch("http://127.0.0.1:8000/token");
             const json = await response.json();
             window.localStorage.setItem("token", json.token);
             console.log(json);
         } catch (error) {
-            console.log("error");
+            console.log(error);
         }
     }
 
     async function getUser() {
         try {
-            const response = await fetch("http://localhost:8000/api/user");
+            const token = window.localStorage.getItem("token");
+            const response = await fetch("http://127.0.0.1:8000/api/comandes", {
+                headers: {
+                    "Accept": "application/json",
+                    "Access-Control-Request-Headers": "*",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
             const json = await response.json();
-            window.localStorage.setItem("token", json.token);
             console.log(json);
         } catch (error) {
-            console.log("error");
+            console.log(error);
         }
     }
 
-    //getToken();
-    //getUser();
+    async function getInfo() {
+       await getToken();
+       await loadIntoTable(url);
+       //await getUser();
+    }
 
-    loadIntoTable(url);
+    getInfo();
 
 </script>
 

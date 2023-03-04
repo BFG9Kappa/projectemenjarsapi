@@ -99,12 +99,11 @@ Route::get('/comandesplats', function () {
 
 
 Route::get('/token', function (Request $request) {
-    if(auth()->check()) {
-        $token = auth()->user()->createToken("prova");
-        return response()->json(['token'=> $token->plainTextToken],200);
-    }
-    else{
-        return response()->json("Not Autorized, te enteras",405);
-    }
-
+	if(auth()->check()) {
+		auth()->user()->tokens()->delete();
+		$token = auth()->user()->createToken('prova');
+		return response()->json(['token' => $token->plainTextToken], 200);
+	} else {
+		return response()->json('Not authorized', 405);
+	}
 });

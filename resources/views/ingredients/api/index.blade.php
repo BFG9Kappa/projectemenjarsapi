@@ -226,31 +226,6 @@
 		loadIntoTable(url);
 	}
 
-    async function getToken() {
-        try {
-            const response = await fetch("http://localhost:8000/token");
-            const json = await response.json();
-            window.localStorage.setItem("token", json.token);
-            console.log(json);
-        } catch (error) {
-            console.log("error");
-        }
-    }
-
-    async function getUser() {
-        try {
-            const response = await fetch("http://localhost:8000/api/user");
-            const json = await response.json();
-            window.localStorage.setItem("token", json.token);
-            console.log(json);
-        } catch (error) {
-            console.log("error");
-        }
-    }
-
-    getToken();
-    getUser();
-
 	loadIntoTable(url);
 
 </script>

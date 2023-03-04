@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\ComandaController;
+use App\Http\Controllers\Api\ClientController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,9 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth:sanctum')->group( function () {
+    // Afegir rutes a protegir
+    Route::resource('/comandes', App\Http\Controllers\Api\ComandesController::class);
+    Route::resource('/clients', App\Http\Controllers\Api\ClientController::class);
+});
+
 Route::resource('/plats', App\Http\Controllers\Api\PlatController::class);
 Route::resource('/ingredients', App\Http\Controllers\Api\IngredientController::class);
-Route::resource('/comandes', App\Http\Controllers\Api\ComandesController::class);
-Route::resource('/clients', App\Http\Controllers\Api\ClientController::class);
 
 Route::get('/comandes/{id}/plats', [App\Http\Controllers\Api\ComandesController::class, 'editPlats']);

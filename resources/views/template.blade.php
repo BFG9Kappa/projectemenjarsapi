@@ -42,14 +42,17 @@
             <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">API</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ url('api/plats') }}">Plats</a>
+                <a class="dropdown-item" href="{{ url('api/ingredients') }}">Igredients</a>
+                <a class="dropdown-item" href="{{ url('api/comandes') }}">Comandes</a>
+                <a class="dropdown-item" href="{{ url('api/clients') }}">Clients</a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ url('taulaplats') }}">Taula plats</a>
                 <a class="dropdown-item" href="{{ url('taulaingredients') }}">Taula ingredients</a>
                 <a class="dropdown-item" href="{{ url('taulacomandes') }}">Taula comandes</a>
                 <a class="dropdown-item" href="{{ url('taulaclients') }}">Taula clients</a>
-                <!--
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-                -->
+                <a class="dropdown-item" href="{{ url('token') }}">Token</a>
               </div>
             </li>
           </ul>
@@ -59,12 +62,12 @@
             @guest
               @if (Route::has('login'))
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                  <a class="nav-link" href="{{ route('login') }}">{{ __('Accedir') }}</a>
                 </li>
               @endif
               @if (Route::has('register'))
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                  <a class="nav-link" href="{{ route('register') }}">{{ __('Enregistrar') }}</a>
                 </li>
               @endif
               @else
@@ -76,7 +79,7 @@
                     <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();">
-                      {{ __('Logout') }}
+                      {{ __('Sortir') }}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
@@ -89,7 +92,7 @@
       </div>
     </nav>
     <br/>
-    <div class="container"> 
+    <div class="container">
       @yield('content')
     </div>
     <!-- Optional JavaScript -->

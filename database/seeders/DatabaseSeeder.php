@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             ComandaSeeder::class,
             ComandaPlatSeeder::class,
+            UsuarisSeeder::class,
          ]);
     }
 }

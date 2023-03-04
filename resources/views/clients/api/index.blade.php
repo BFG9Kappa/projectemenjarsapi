@@ -25,8 +25,8 @@
                 <th>Nom</th>
                 <th>Cognoms</th>
                 <th>Direcció</th>
-                <th>Teléfon</th>  
-                <th>Operacions</th> 
+                <th>Teléfon</th>
+                <th>Operacions</th>
             </tr>
         </thead>
         <tbody id="taula">
@@ -43,13 +43,14 @@
     var rows = [];
 	var operation = "inserting";
 	var selectedId;
+    var token;
 
 	const pagination = document.getElementById("pagination");
 
 	const table = document.getElementById("taula");
 	const divErrors = document.getElementById("errors");
 	divErrors.style.display = "none";
-    
+
 	const clientNameInput = document.getElementById("nameInput");
     const clientSurnameInput = document.getElementById("lastnameInput");
     const clientAdressInput = document.getElementById("adressInput");
@@ -76,7 +77,7 @@
 		if(operation == "editing") updateData();
 	}
 
-	async function updateData(event) { // canviar
+	async function updateData(event) {
 		var newClient = {
 			"nom" : clientNameInput.value,
             "cognoms" : clientSurnameInput.value,
@@ -84,15 +85,17 @@
             "telefon" : clientPhoneInput.value
 		}
 		try {
-			const response = await fetch(url + "/" + selectedId,
+            const token = window.localStorage.getItem("token");
+			const response = await fetch(url + '/' + selectedId,
             {
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(newClient)
-            })
+            });
 			const data = await response.json();
 			if(response.ok) {
 				const nameid = document.getElementById("name" + data.data.id);
@@ -129,12 +132,14 @@
             "telefon" : clientPhoneInput.value
 		}
 		try {
+            const token = window.localStorage.getItem("token");
 			const response = await fetch(url,
             {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(newClient)
             })
@@ -144,7 +149,7 @@
 			} else {
                 showErrors(data.data);
 			}
-		} catch(error) {
+		} catch (error) {
 			errors.innerHTML = "S'ha produit un error inesperat";
 		}
 	}
@@ -190,23 +195,30 @@
 		taula.appendChild(rowElement);
 	}
 
-	async function deleteData(event) {
-		try {
-			const id = event.target.closest("tr").id;
-			response = await fetch(url + '/' + id, { method: 'DELETE'});
-			const json = await response.json();
-			if(response.ok) {
-					const row = document.getElementById(id);
-					row.remove();
-                } else {
-				divErrors.style.display = "block";
-				errors.innerHTML = "No es pot esborrar";
-			}
-		} catch(error) {
-			divErrors.style.display = "block";
-			errors.innerHTML = "No es pot esborrar";
-		}
-	}
+    async function deleteData(event) {
+        try {
+            const id = event.target.closest("tr").id;
+            const token = window.localStorage.getItem("token");
+            const response = await fetch(url + '/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const json = await response.json();
+            if (response.ok) {
+                const row = document.getElementById(id);
+                row.remove();
+            } else {
+                divErrors.style.display = "block";
+                errors.innerHTML = "No es pot esborrar";
+            }
+        } catch (error) {
+            divErrors.style.display = "block";
+            errors.innerHTML = "No es pot esborrar";
+        }
+    }
 
 	async function editData(event, row) {
 		operation = "editing";
@@ -223,15 +235,22 @@
 		console.log("Editant: " + selectedId + " " + nom + " " + cognoms + " " + direccio + " " + telefon);
 		console.log(row);
 	}
-	
+
 	async function loadIntoTable(url) {
 		try {
-			const response = await fetch(url);
+            const token = window.localStorage.getItem("token");
+			const response = await fetch(url, {
+                headers: {
+                    "Accept": "application/json",
+                    "Access-Control-Request-Headers": "*",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
 			const json = await response.json();
 			rows = json.data.data;
 			const links = json.data.links;
 			var i = 0;
-			for(const row of rows) {				
+			for(const row of rows) {
 				afegirFila(row);
 			}
 			afegirLinks(links);
@@ -273,31 +292,41 @@
 
     async function getToken() {
         try {
-            const response = await fetch("http://localhost:8000/token");
+            const response = await fetch("http://127.0.0.1:8000/token");
             const json = await response.json();
             window.localStorage.setItem("token", json.token);
             console.log(json);
         } catch (error) {
-            console.log("error");
+            console.log(error);
         }
     }
 
     async function getUser() {
         try {
-            const response = await fetch("http://localhost:8000/api/user");
+            const token = window.localStorage.getItem("token");
+            const response = await fetch("http://127.0.0.1:8000/api/clients", {
+                headers: {
+                    "Accept": "application/json",
+                    "Access-Control-Request-Headers": "*",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
             const json = await response.json();
-            window.localStorage.setItem("token", json.token);
             console.log(json);
         } catch (error) {
-            console.log("error");
+            console.log(error);
         }
     }
-    
-    getToken();
-    getUser();
 
-	loadIntoTable(url);
-    
+    async function getInfo() {
+       await getToken();
+       await loadIntoTable(url);
+       //await  getUser();
+    }
+
+    getInfo();
+
+
 </script>
 
 @endsection
