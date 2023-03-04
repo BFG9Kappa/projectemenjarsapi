@@ -15,6 +15,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <br>
+                    <a class="btn btn-primary btn-sm" href="{{ url('/') }}">Tornar</a>
                 </div>
             </div>
         </div>

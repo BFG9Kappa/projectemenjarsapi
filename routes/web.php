@@ -102,9 +102,3 @@ Route::get('/token', function (Request $request) {
 		return response()->json('Not authorized', 405);
 	}
 });
-
-/*
-Route::get("/prova", function() {
-	return "Estas autentificat!";
-})->middleware("auth");
-*/
