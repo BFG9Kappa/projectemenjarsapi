@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use App\Models\Plat;
 
-class PlatsTest extends TestCase
+class PlatsApiTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @test
      * @group api
@@ -19,7 +19,7 @@ class PlatsTest extends TestCase
     {
         $plats = Plat::factory()->count(5)->create();
         $response = $this->get('/api/plats');
-        $response->assertStatus(200);
+        $response->assertOk();
         foreach ($plats as $plat) {
             $response->assertJsonFragment([
                 'nom' => $plat->nom,

@@ -3,15 +3,15 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Models\User;
 
+use App\Models\User;
 use App\Models\Client;
 
-class ClientsTest extends TestCase
+class ClientsApiTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @test
      * @group api
@@ -19,8 +19,8 @@ class ClientsTest extends TestCase
     public function llistat_carregue_correctament()
     {
         $clients = Client::factory()->count(5)->create();
-        $user = User::factory()->create(); // Crear un usuario de prueba
-        $response = $this->actingAs($user)->get('/api/clients'); // Autenticar al usuario de prueba
+        $user = User::factory()->create(); // Crear un usuari de prova
+        $response = $this->actingAs($user)->get('/api/clients'); // Autenticar al usuari de prova
         $response->assertStatus(200);
         foreach ($clients as $client) {
             $response->assertJsonFragment([

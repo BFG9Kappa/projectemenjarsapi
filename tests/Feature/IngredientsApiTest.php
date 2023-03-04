@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use App\Models\Ingredient;
 
-class IngredientsTest extends TestCase
+class IngredientsApiTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @test
      * @group api
