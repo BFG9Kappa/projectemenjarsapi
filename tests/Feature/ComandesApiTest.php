@@ -3,14 +3,15 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use App\Models\User;
 use App\Models\Comanda;
 
-class ComandesTest extends TestCase
+class ComandesApiTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @test
      * @group api
@@ -18,7 +19,8 @@ class ComandesTest extends TestCase
     public function llistat_carregue_correctament()
     {
         $comandes = Comanda::factory()->count(5)->create();
-        $response = $this->get('/api/comandes');
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->get('/api/comandes');
         $response->assertStatus(200);
         foreach ($comandes as $comanda) {
             $response->assertJsonFragment([
@@ -35,7 +37,8 @@ class ComandesTest extends TestCase
      **/
     public function es_pot_crear_comanda()
     {
-        $response = $this->post('/api/comandes', [
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->post('/api/comandes', [
             'nom' => 'Comanda secreta',
             'preu' => 200,
             'estat' => 'Rebut',
@@ -55,7 +58,8 @@ class ComandesTest extends TestCase
     public function es_pot_mostrar_comanda()
     {
         $comanda = Comanda::factory()->create();
-        $response = $this->get('/api/comandes/' . $comanda->id);
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->get('/api/comandes/' . $comanda->id);
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'success',
@@ -90,7 +94,8 @@ class ComandesTest extends TestCase
     public function es_pot_actualitzar_comanda()
     {
         $comanda = Comanda::factory()->create();
-        $response = $this->put("/api/comandes/{$comanda->id}", [
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->put("/api/comandes/{$comanda->id}", [
             'nom' => 'Comanda actualitzada',
             'preu' => 100,
             'estat' => 'En proces',
@@ -111,7 +116,8 @@ class ComandesTest extends TestCase
     public function es_pot_esborrar_ingredient()
     {
         $comanda = Comanda::factory()->create();
-        $response = $this->delete("/api/comandes/{$comanda->id}");
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->delete("/api/comandes/{$comanda->id}");
         $response->assertStatus(200); // Tindrie que ser 204;
         $this->assertDatabaseMissing('comandes', ['id' => $comanda->id]);
     }

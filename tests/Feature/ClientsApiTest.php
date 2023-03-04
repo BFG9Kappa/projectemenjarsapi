@@ -3,14 +3,15 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use App\Models\User;
 use App\Models\Client;
 
-class ClientsTest extends TestCase
+class ClientsApiTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @test
      * @group api
@@ -18,7 +19,8 @@ class ClientsTest extends TestCase
     public function llistat_carregue_correctament()
     {
         $clients = Client::factory()->count(5)->create();
-        $response = $this->get('/api/clients');
+        $user = User::factory()->create(); // Crear un usuari de prova
+        $response = $this->actingAs($user)->get('/api/clients'); // Autenticar al usuari de prova
         $response->assertStatus(200);
         foreach ($clients as $client) {
             $response->assertJsonFragment([
@@ -36,7 +38,8 @@ class ClientsTest extends TestCase
      **/
     public function es_pot_crear_client()
     {
-        $response = $this->post('/api/clients', [
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->post('/api/clients', [
             'nom' => 'Client',
             'cognoms' => 'Secret',
             'direccio' => 'Calle Falsa 123',
@@ -57,8 +60,10 @@ class ClientsTest extends TestCase
      **/
     public function es_pot_mostrar_client()
     {
+
         $client = Client::factory()->create();
-        $response = $this->get('/api/clients/' . $client->id);
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->get('/api/clients/' . $client->id);
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'success',
@@ -95,7 +100,8 @@ class ClientsTest extends TestCase
     public function es_pot_actualitzar_client()
     {
         $client = Client::factory()->create();
-        $response = $this->put("/api/clients/{$client->id}", [
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->put("/api/clients/{$client->id}", [
             'nom' => 'Client',
             'cognoms' => 'actualitzat',
             'direccio' => 'Calle real 123',
@@ -117,7 +123,8 @@ class ClientsTest extends TestCase
     public function es_pot_esborrar_client()
     {
         $client = Client::factory()->create();
-        $response = $this->delete("/api/clients/{$client->id}");
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->delete("/api/clients/{$client->id}");
         $response->assertStatus(200); // Tindrie que ser 204;
         $this->assertDatabaseMissing('clients', ['id' => $client->id]);
     }
