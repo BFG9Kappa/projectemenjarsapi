@@ -83,12 +83,14 @@
             "estat" : comandaEstatInput.value
 		}
 		try {
+            const token = window.localStorage.getItem("token");
 			const response = await fetch(url + "/" + selectedId,
             {
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(newComanda)
             })
@@ -122,11 +124,13 @@
             "estat": comandaEstatInput.value
         }
         try {
+            const token = window.localStorage.getItem("token");
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
                     'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(newComanda)
             });
@@ -188,8 +192,6 @@
         table.appendChild(rowElement);
 
     }
-
-
 
 	async function deleteData(event) {
 		try {
@@ -280,7 +282,6 @@
     }
 
     function paginate(url) {
-        //console.log(url)
         pagination.innerHTML = "";
         taula.innerHTML = "";
         loadIntoTable(url);
