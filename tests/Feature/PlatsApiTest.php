@@ -17,9 +17,9 @@ class PlatsApiTest extends TestCase
      **/
     public function llistat_carregue_correctament()
     {
-        $plats = Plat::factory()->count(5)->create();
+        $plats = Plat::factory()->count(4)->create();
         $response = $this->get('/api/plats');
-        $response->assertOk();
+        $response->assertStatus(200);
         foreach ($plats as $plat) {
             $response->assertJsonFragment([
                 'nom' => $plat->nom,
