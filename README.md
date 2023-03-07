@@ -78,11 +78,15 @@ php artisan migrate:fresh --seed
 ```
 ### Per correr tots els tests
 ```sh
-./vendor/bin/phpunit
+php artisan test
 ```
 o
 ```sh
-php artisan test
+./vendor/bin/phpunit
+```
+### Per correr els test de la app
+```sh
+php artisan test --group app
 ```
 ### Per correr els test de la api
 ```sh
