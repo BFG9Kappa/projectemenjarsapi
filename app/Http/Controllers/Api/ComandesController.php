@@ -196,12 +196,13 @@ class ComandesController extends Controller
     public function editPlats($id)
     {
         $comanda = Comanda::find($id);
-        $arrayId = $comanda->plat->pluck('id');
-        $plats = Plat::whereNotIn('id', $arrayId)->get();
+        // $arrayId = $comanda->plat->pluck('id');
+        // $plats = Plat::whereNotIn('id', $arrayId)->get();
+        $comanda->load('plat');
         $response = [
             'success' => true,
             'comanda' => $comanda,
-            'plats'=>$plats
+            'plats' => $comanda->plat
         ];
         return response()->json($response,200);
     }
