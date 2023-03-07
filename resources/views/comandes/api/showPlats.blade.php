@@ -82,7 +82,7 @@ async function loadIntoContainer() {
             //nom.innerText= plats.nom;
 
             const llistat = document.getElementById("llistat");
-                comanda.plats.forEach(plat=> {
+                plats.forEach(plat=> {
                     llistat.innerText += '#' + plat.nom
                 });
 
