@@ -99,7 +99,7 @@ Route::get('/comandesplats', function () {
 
 
 Route::get('/token', function (Request $request) {
-	if(auth()->check()) {
+	if(auth()->check() && auth()->user()->role_id === 1) { // Autenticat i administrador
 		auth()->user()->tokens()->delete();
 		$token = auth()->user()->createToken('prova');
 		return response()->json(['token' => $token->plainTextToken], 200);
