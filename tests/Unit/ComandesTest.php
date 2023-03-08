@@ -17,7 +17,7 @@ class ComandesTest extends TestCase
      * @test
      * @group app
      **/
-    public function carregue_llistat()
+    public function no_carregue_llistat()
     {
         $response = $this->get('/comandes');
         $response->assertStatus(302);
