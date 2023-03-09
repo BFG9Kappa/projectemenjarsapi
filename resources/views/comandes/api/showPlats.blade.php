@@ -34,8 +34,7 @@
              @csrf
       		<div class="form-group">
     		<label>Llista plats:</label>
-    		<select multiple class="form-control" size="20" name="plats[]">
-
+    		<select multiple id="platsAtac" class="form-control" size="20" name="plats[]">
     		</select>
     		</div>
     		<input class="btn btn-primary" type="submit" value="Afegir plats">
@@ -59,7 +58,7 @@
     const id = window.location.pathname.slice(window.location.pathname.lastIndexOf('/')+1);
     console.log(id)
     const url = 'http://localhost:8000/api/comandes/'+id+'/plats'
-
+    const url2 = 'http://localhost:8000/api/plats'
 
 
 //var async = require('asyncawait/async');
@@ -86,6 +85,13 @@ async function loadIntoContainer() {
                     llistat.innerText += '#' + plat.nom
                 });
 
+            //els noms dels plats
+			const responsePlats = await fetch(url2);
+            const totsPlatPlats = await fetch('url platos')
+			const json2 = await responsePlats.json2();
+            console.log("funciona");
+            const plats2= json2.plats2;
+            console.log(plats2);
 
         }
 		catch(error) {
