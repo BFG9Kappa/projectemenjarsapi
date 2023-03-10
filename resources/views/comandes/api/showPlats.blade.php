@@ -22,8 +22,7 @@
             @csrf
 	     	<div class="form-group">
                 <label>Plats afegits:</label>
-                <select multiple size="10" name="plats[]" class="form-control">
-
+                <select multiple id="platsDetac" size="10" name="plats[]" class="form-control">
                 </select>
 	    	</div>
 	    	<input class="btn btn-primary" type="submit" value="Treure plats">
@@ -35,7 +34,7 @@
       		<div class="form-group">
     		<label>Llista plats:</label>
     		<select multiple id="platsAtac" class="form-control" size="20" name="plats[]">
-    		</select>
+            </select>
     		</div>
     		<input class="btn btn-primary" type="submit" value="Afegir plats">
     	</form>
@@ -57,8 +56,10 @@
 <script type="text/javascript">
     const id = window.location.pathname.slice(window.location.pathname.lastIndexOf('/')+1);
     console.log(id)
+
     const url = 'http://localhost:8000/api/comandes/'+id+'/plats'
     const url2 = 'http://localhost:8000/api/plats'
+    const url3 = 'http://localhost:8000/api/comandes/'+id+'/plats'
 
 
 //var async = require('asyncawait/async');
@@ -85,13 +86,53 @@ async function loadIntoContainer() {
                     llistat.innerText += '#' + plat.nom
                 });
 
+        }
+		catch(error) {
+			error.innerHTML = "No es pot accedir a la base de dades";
+		}
+	}
+
+    async function loadIntoContainer2() {
+		try {
+
             //els noms dels plats
-			const responsePlats = await fetch(url2);
-            const totsPlatPlats = await fetch('url platos')
-			const json2 = await responsePlats.json2();
-            console.log("funciona");
-            const plats2= json2.plats2;
-            console.log(plats2);
+            const response = await fetch(url2);
+            // const totsElsPlats = await fetch('url platos2')
+            const json = await response.json();
+            const plats= json.data.data;
+
+            console.log(plats)
+
+            const platsAtac = document.getElementById("platsAtac");
+                plats.forEach(plat=> {
+                    platsAtac.innerHTML += `<option value="${plat.id}">${plat.nom}</option>`
+                    //La misma instrucción pero con diferente sintaxis
+                    //platsAtac.innerHTML += '<option value="' + plat.id+'">'+plat.nom+'</option>'
+                });
+
+        }
+		catch(error) {
+			error.innerHTML = "No es pot accedir a la base de dades";
+		}
+	}
+
+    async function loadIntoContainer3() {
+		try {
+
+            //els noms dels plats
+            const response = await fetch(url3);
+            // const totsElsPlats = await fetch('url platos2')
+            const json = await response.json();
+            const plats2= json.plats2;
+
+            console.log(plats)
+
+            const platsDetac = document.getElementById("platsDetac");
+                plats2.forEach(plat=> {
+                    platsDetac.innerHTML += `<option value="${plat.id}">${plat.nom}</option>`
+                    //La misma instrucción pero con diferente sintaxis
+                    //platsAtac.innerHTML += '<option value="' + plat.id+'">'+plat.nom+'</option>'
+                });
 
         }
 		catch(error) {
@@ -100,6 +141,8 @@ async function loadIntoContainer() {
 	}
 
     loadIntoContainer()
+    loadIntoContainer2()
+    loadIntoContainer3()
 
 </script>
 
