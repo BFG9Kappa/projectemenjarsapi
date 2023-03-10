@@ -59,7 +59,7 @@
 
     const url = 'http://localhost:8000/api/comandes/'+id+'/plats'
     const url2 = 'http://localhost:8000/api/plats'
-    const url3 = 'http://localhost:8000/api/comandes/'+id+'/plats'
+    //const url3 = 'http://localhost:8000/api/comandes/'+id+'/plats'
 
 
 //var async = require('asyncawait/async');
@@ -120,7 +120,7 @@ async function loadIntoContainer() {
 		try {
 
             //els noms dels plats
-            const response = await fetch(url3);
+            const response = await fetch(url);
             // const totsElsPlats = await fetch('url platos2')
             const json = await response.json();
             const plats2= json.plats2;
