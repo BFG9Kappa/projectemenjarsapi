@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<div>
+<div id="crud" style="display: none;">
     <h4>Crud</h4>
     <label for="nameInput">Nom</label>
     <input type="text" id="nameInput">
@@ -45,6 +45,19 @@
 	saveButton.addEventListener("click", onSave);
 
 	const url = "http://localhost:8000/api/ingredients";
+
+    // Comprovar si esta autenticat, i si es admin
+    var isAdmin = <?php echo (auth()->check() && auth()->user()->role_id === 1) ? 'true' : 'false'; ?>;
+
+    // Amagar crud si no es admin
+    const crudDiv = document.getElementById("crud");
+    crudDiv.style.display = isAdmin ? "block" : "none";
+
+    // Amagar operacions si no es admin
+    if (!isAdmin) {
+        const operacionsHeader = document.querySelector("th:nth-child(3)");
+        operacionsHeader.style.display = "none";
+    }
 
 	function showErrors(errors) {
 		divErrors.style.display = "block";
@@ -147,7 +160,9 @@
 
 		rowElement.appendChild(idCell);
 		rowElement.appendChild(nameCell);
-		rowElement.appendChild(operationsCell);
+        if(isAdmin) { // Amagar columna operacion si no es admin
+            rowElement.appendChild(operationsCell);
+        }
 		taula.appendChild(rowElement);
 	}
 
