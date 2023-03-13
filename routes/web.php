@@ -77,8 +77,10 @@ Route::group(['middleware'=>['auth','is_admin']], function() {
 });
 
 // API
-Route::get('/taulaclients', function () {
-    return view('clients.api.index');
+Route::group(['middleware'=>['auth','is_admin']], function() {
+    Route::get('/taulaclients', function () {
+        return view('clients.api.index');
+    });
 });
 
 Route::get('/taulaingredients', function () {
