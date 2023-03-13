@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
 
-<div>
+<div id="crud" style="display: none;">
     <h4>Crud</h4>
     <label for="nameInput">Nom</label>
     <input type="text" id="nameInput">
@@ -28,6 +28,7 @@
     </table>
 </div>
 
+
 <nav class="mt-2">
 	<ul id="pagination" class="pagination">
 	</ul>
@@ -49,7 +50,21 @@
 
 	const saveButton = document.getElementById("saveButton");
 	saveButton.addEventListener("click", onSave);
+
 	const url = "http://localhost:8000/api/plats";
+
+    // Comprovar si esta autenticat, i si es admin
+    var isAdmin = <?php echo (auth()->check() && auth()->user()->role_id === 1) ? 'true' : 'false'; ?>;
+
+    // Amagar crud si no es admin
+    const crudDiv = document.getElementById("crud");
+    crudDiv.style.display = isAdmin ? "block" : "none";
+
+    // Amagar operacions si no es admin
+    if (!isAdmin) {
+        const operacionsHeader = document.querySelector("th:nth-child(4)");
+        operacionsHeader.style.display = "none";
+    }
 
 	function showErrors(errors) {
 		divErrors.style.display = "block";
@@ -149,22 +164,25 @@
         preuCell.textContent = row.preu;
 
 		const operationsCell = document.createElement("td");
-        const updateButton = document.createElement("button");
-		updateButton.innerHTML = "Actualitzar";
-        updateButton.classList.add("btn", "btn-primary");
-		updateButton.addEventListener("click", function (event) { editData(event, row) } );
-		operationsCell.appendChild(updateButton);
 
-		const deleteButton = document.createElement("button");
-		deleteButton.innerHTML = "Esborrar";
-		deleteButton.addEventListener("click", deleteData);
+        const updateButton = document.createElement("button");
+        updateButton.innerHTML = "Actualitzar";
+        updateButton.classList.add("btn", "btn-primary");
+        updateButton.addEventListener("click", function (event) { editData(event, row) } );
+        operationsCell.appendChild(updateButton);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Esborrar";
+        deleteButton.addEventListener("click", deleteData);
         deleteButton.classList.add("btn", "btn-danger");
-		operationsCell.appendChild(deleteButton);
+        operationsCell.appendChild(deleteButton);
 
 		rowElement.appendChild(idCell);
 		rowElement.appendChild(nameCell);
         rowElement.appendChild(preuCell);
-		rowElement.appendChild(operationsCell);
+        if(isAdmin) { // Amagar columna operacion si no es admin
+            rowElement.appendChild(operationsCell);
+        }
 		taula.appendChild(rowElement);
 	}
 
@@ -224,12 +242,10 @@
 	function afegirBoto(link) {
         const pagLi = document.createElement("li");
         pagLi.classList.add("page-item");
-
         if(link.url==null) //deshavilitar previous i next
             pagLi.classList.add('disabled')
         if(link.active==true) //senyalitza la pàgina on estem
             pagLi.classList.add('active')
-
         const pagAnchor = document.createElement("a");
         pagAnchor.innerHTML = link.label;
         pagAnchor.addEventListener("click", function(event) { paginate(link.url) });
