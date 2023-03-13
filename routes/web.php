@@ -93,7 +93,7 @@ Route::get('/taulacomandes', function () {
     return view('comandes.api.index');
 });
 
-Route::get('/comandesplats', function () {
+Route::get('/comandesplats/{id}', function () {
     return view('comandes.api.showPlats');
 });
 

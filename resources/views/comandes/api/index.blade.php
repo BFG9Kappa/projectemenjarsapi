@@ -175,7 +175,7 @@
         const platsButton = document.createElement("a");
 		platsButton.innerHTML = "Plats";
         platsButton.classList.add("btn", "btn-primary");
-        platsButton.href='/comandesplats';
+        platsButton.href='/comandesplats/'+row.id;
 
         operationsCell.appendChild(platsButton);
 
