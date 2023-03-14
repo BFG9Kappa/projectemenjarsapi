@@ -77,8 +77,10 @@ Route::group(['middleware'=>['auth','is_admin']], function() {
 });
 
 // API
-Route::get('/taulaclients', function () {
-    return view('clients.api.index');
+Route::group(['middleware'=>['auth','is_admin']], function() {
+    Route::get('/taulaclients', function () {
+        return view('clients.api.index');
+    });
 });
 
 Route::get('/taulaingredients', function () {
@@ -93,10 +95,9 @@ Route::get('/taulacomandes', function () {
     return view('comandes.api.index');
 });
 
-Route::get('/comandesplats', function () {
+Route::get('/comandesplats/{id}', function () {
     return view('comandes.api.showPlats');
 });
-
 
 Route::get('/token', function (Request $request) {
 	if(auth()->check() && auth()->user()->role_id === 1) { // Autenticat i administrador
