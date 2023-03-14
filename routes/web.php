@@ -99,7 +99,6 @@ Route::get('/comandesplats/{id}', function () {
     return view('comandes.api.showPlats');
 });
 
-
 Route::get('/token', function (Request $request) {
 	if(auth()->check() && auth()->user()->role_id === 1) { // Autenticat i administrador
 		auth()->user()->tokens()->delete();
