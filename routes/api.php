@@ -32,4 +32,4 @@ Route::resource('/comandes', App\Http\Controllers\Api\ComandesController::class)
 
 Route::get('/comandes/{id}/plats', [App\Http\Controllers\Api\ComandesController::class, 'editPlats']);
 Route::post('/comandes/{comanda}/assignplats', [App\Http\Controllers\Api\ComandesController::class, 'attachPlats'])->name('comandes.assignplats');
-Route::post('/comandes/{id}/detachplats', [App\Http\Controllers\Api\ComandesController::class, 'detachPlats'])->name('comandes.detachplats');
+Route::post('/comandes/{comanda}/detachplats', [App\Http\Controllers\Api\ComandesController::class, 'detachPlats'])->name('comandes.detachplats');

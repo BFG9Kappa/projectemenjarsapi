@@ -196,10 +196,8 @@ class ComandesController extends Controller
     {
         $comanda = Comanda::find($id);
         $comanda->load('plat');
-
         $arrayId = $comanda->plat->pluck('id');
         $plats = Plat::whereNotIn('id', $arrayId)->get();
-
         $response = [
             'success' => true,
             'comanda' => $comanda,
@@ -216,7 +214,6 @@ class ComandesController extends Controller
         ]);
         $comanda->plat()->attach($request->plats);
         return response()->json($request->plats,200);
-       //
        //return redirect()->route('comandes.editplats',$comanda->id)->with('success','Plats afegits correctament');
     }
 
@@ -225,9 +222,11 @@ class ComandesController extends Controller
         $request->validate([
             'plats' => 'exists:plats,id',
         ]);
-        if ($request->has('plats'))
+        if ($request->has('plats')) {
             $comanda->plat()->detach($request->plats);
-        return redirect()->route('comandes.editplats',$comanda->id)->with('success','Plats trets correctament');
+            return response()->json($request->plats,200);
+        //return redirect()->route('comandes.editplats',$comanda->id)->with('success','Plats trets correctament');
+        }
     }
 
 }
